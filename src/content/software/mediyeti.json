@@ -1,0 +1,62 @@
+{
+  "name": "MediYeti",
+  "slug": "mediyeti",
+  "website": "https://mediyeti.com",
+  "logo": "/images/software/mediyeti-logo.png",
+  "description": "Modular, customizable EHR and billing system designed for ketamine and mental health practices with strong billing automation and Utah-based support.",
+  "pricing": {
+    "model": "custom",
+    "starting_price": null,
+    "currency": "USD",
+    "has_free_trial": false,
+    "billing_cycle": "monthly",
+    "notes": "Tailored pricing based on practice requirements - contact for quote"
+  },
+  "ketamine_features": {
+    "iv_protocols": true,
+    "im_protocols": true,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": true,
+    "treatment_series_tracking": true
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Customizable templates", "available": true },
+    { "category": "Clinical", "feature": "GAD-7 and PHQ-9 integration", "available": true },
+    { "category": "Clinical", "feature": "Automatic time-stamping", "available": true },
+    { "category": "Clinical", "feature": "Authorization tracking", "available": true },
+    { "category": "Scheduling", "feature": "Integrated calendar system", "available": true },
+    { "category": "Scheduling", "feature": "Color-coded appointments", "available": true },
+    { "category": "Scheduling", "feature": "Insurance verification tracking", "available": true },
+    { "category": "Scheduling", "feature": "Appointment reminders", "available": true },
+    { "category": "Billing", "feature": "Electronic claim submission", "available": true },
+    { "category": "Billing", "feature": "Remittance advices", "available": true },
+    { "category": "Billing", "feature": "Denial management", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure payment collection", "available": true },
+    { "category": "Telehealth", "feature": "Video visits via text/email", "available": true },
+    { "category": "Telehealth", "feature": "Time-stamped image capture", "available": true },
+    { "category": "Analytics", "feature": "Practice analytics dashboard", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "UHIN (Utah Health Information Network)"
+  ],
+  "pros": [
+    "Strong billing and claims management features",
+    "Modular system - customize to your practice needs",
+    "Utah-based support team in same time zone",
+    "Practice analytics for operational visibility",
+    "Telehealth with image capture integration"
+  ],
+  "cons": [
+    "No mobile app available",
+    "English only - no multilingual support",
+    "No API for custom integrations",
+    "Pricing requires contact - not transparent"
+  ],
+  "ideal_for": "Ketamine and mental health practices prioritizing billing automation and wanting US-based, same-timezone support.",
+  "last_verified": "2025-01-23",
+  "data_source": "MediYeti.com, Software Finder"
+}

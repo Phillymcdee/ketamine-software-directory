@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+const ketamineSpecific = allSoftware.filter(
+  (s) =>
+    s.data.ketamine_features.iv_protocols ||
+    s.data.ketamine_features.im_protocols ||
+    s.data.ketamine_features.ketamine_consent_forms
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'How to Choose an EHR for Your Ketamine Clinic',
+  description: 'A comprehensive guide to evaluating EHR and practice management software for ketamine and psychedelic therapy practices.',
+  author: {
+    '@type': 'Organization',
+    name: 'Ketamine Software Directory',
+  },
+};
+---
+
+<BaseLayout
+  title="How to Choose an EHR for Your Ketamine Clinic | Buyer's Guide"
+  description="A comprehensive guide to evaluating EHR and practice management software for ketamine and psychedelic therapy practices. Learn what features matter most."
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/guides/" class="text-gray-500 hover:text-gray-700">Guides</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900">Choosing a Ketamine EHR</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <header>
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          How to Choose an EHR for Your Ketamine Clinic
+        </h1>
+        <p class="mt-4 text-lg text-gray-600">
+          A comprehensive guide to evaluating EHR and practice management software for ketamine and psychedelic therapy practices.
+        </p>
+        <div class="mt-6 flex items-center gap-4 text-sm text-gray-500">
+          <span>12 min read</span>
+          <span>·</span>
+          <span>Last updated: January 2025</span>
+        </div>
+      </header>
+
+      <!-- Table of Contents -->
+      <nav class="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-6">
+        <h2 class="text-sm font-semibold text-gray-900">Table of Contents</h2>
+        <ol class="mt-4 space-y-2 text-sm">
+          <li><a href="#why-ketamine-specific" class="text-emerald-600 hover:text-emerald-700">1. Why Ketamine-Specific Features Matter</a></li>
+          <li><a href="#must-have-features" class="text-emerald-600 hover:text-emerald-700">2. Must-Have Features</a></li>
+          <li><a href="#nice-to-have" class="text-emerald-600 hover:text-emerald-700">3. Nice-to-Have Features</a></li>
+          <li><a href="#pricing-models" class="text-emerald-600 hover:text-emerald-700">4. Understanding Pricing Models</a></li>
+          <li><a href="#implementation" class="text-emerald-600 hover:text-emerald-700">5. Implementation Considerations</a></li>
+          <li><a href="#questions-to-ask" class="text-emerald-600 hover:text-emerald-700">6. Questions to Ask Vendors</a></li>
+          <li><a href="#recommendations" class="text-emerald-600 hover:text-emerald-700">7. Our Recommendations</a></li>
+        </ol>
+      </nav>
+
+      <!-- Content -->
+      <div class="prose prose-gray mt-12 max-w-none">
+        <h2 id="why-ketamine-specific">Why Ketamine-Specific Features Matter</h2>
+        <p>
+          Running a ketamine clinic isn't like running a typical outpatient practice. You have unique workflow requirements that general-purpose EHRs weren't designed to handle:
+        </p>
+        <ul>
+          <li><strong>Multi-session treatment series</strong> - Patients typically complete 4-6 initial infusions over 2-3 weeks, then maintenance sessions</li>
+          <li><strong>Real-time vital monitoring</strong> - IV and IM administrations require documented vital sign tracking during sessions</li>
+          <li><strong>Outcome measurement</strong> - Tracking PHQ-9, GAD-7, and other scales over time to demonstrate treatment efficacy</li>
+          <li><strong>SPRAVATO® compliance</strong> - If you offer esketamine, you need REMS-compliant documentation workflows</li>
+          <li><strong>Controlled substance handling</strong> - ePrescribing for Schedule III substances with PDMP integration</li>
+        </ul>
+        <p>
+          A general behavioral health EHR can work, but you'll spend significant time building custom templates and workarounds. A ketamine-specific solution saves that time and reduces compliance risk.
+        </p>
+
+        <h2 id="must-have-features">Must-Have Features</h2>
+        <p>
+          Regardless of which software you choose, ensure it includes these essential capabilities:
+        </p>
+
+        <h3>Clinical Documentation</h3>
+        <ul>
+          <li><strong>ePrescribing for controlled substances (EPCS)</strong> - Essential for prescribing ketamine troches, nasal spray, or other take-home formulations</li>
+          <li><strong>PDMP integration</strong> - Required in most states to check prescription drug monitoring databases</li>
+          <li><strong>Customizable note templates</strong> - You'll need to document infusion protocols, vital signs, and patient responses</li>
+        </ul>
+
+        <h3>Patient Rating Scales</h3>
+        <ul>
+          <li><strong>PHQ-9</strong> - Depression severity</li>
+          <li><strong>GAD-7</strong> - Anxiety severity</li>
+          <li><strong>PCL-5</strong> - PTSD symptoms (if treating trauma patients)</li>
+          <li><strong>Visual Analog Scale</strong> - Pain assessment (if treating chronic pain)</li>
+        </ul>
+        <p>
+          The best systems auto-score these assessments and graph trends over time.
+        </p>
+
+        <h3>Billing & Insurance</h3>
+        <ul>
+          <li><strong>Insurance claim submission</strong> - For practices billing insurance (note: many ketamine treatments are cash-pay)</li>
+          <li><strong>Payment processing</strong> - Credit card integration for patient payments</li>
+          <li><strong>Superbill generation</strong> - For patients seeking out-of-network reimbursement</li>
+        </ul>
+
+        <h3>Compliance & Security</h3>
+        <ul>
+          <li><strong>HIPAA compliance</strong> - Non-negotiable for any healthcare software</li>
+          <li><strong>Audit trails</strong> - Documentation of who accessed what records and when</li>
+          <li><strong>Secure messaging</strong> - Encrypted communication with patients</li>
+        </ul>
+
+        <h2 id="nice-to-have">Nice-to-Have Features</h2>
+        <p>
+          These features aren't essential but can significantly improve your workflow:
+        </p>
+        <ul>
+          <li><strong>IV/IM protocol templates</strong> - Pre-built documentation for ketamine infusions and injections</li>
+          <li><strong>Treatment series tracking</strong> - Automatic scheduling and tracking of multi-session protocols</li>
+          <li><strong>Ketamine-specific consent forms</strong> - Pre-built informed consent documents</li>
+          <li><strong>Inventory tracking</strong> - Monitor ketamine stock levels and expiration dates</li>
+          <li><strong>AI-assisted documentation</strong> - Auto-generate notes from session recordings</li>
+          <li><strong>Integrated telehealth</strong> - For intake consultations and follow-ups</li>
+          <li><strong>Patient portal</strong> - Self-service scheduling, paperwork, and messaging</li>
+        </ul>
+
+        <h2 id="pricing-models">Understanding Pricing Models</h2>
+        <p>
+          Healthcare software pricing varies significantly. Here's what to expect:
+        </p>
+
+        <h3>Per-Clinician Pricing</h3>
+        <p>
+          Most common model. You pay a monthly fee for each provider (MD, NP, PA) using the system. Typical range: $99-300/clinician/month.
+        </p>
+        <p>
+          <strong>Watch out for:</strong> Some vendors count nurse practitioners and physician assistants as full clinicians, significantly increasing costs.
+        </p>
+
+        <h3>Flat-Rate Pricing</h3>
+        <p>
+          A single monthly fee regardless of team size. Better for larger practices with multiple providers. Typical range: $200-500/month.
+        </p>
+
+        <h3>Per-Encounter Pricing</h3>
+        <p>
+          Pay based on how many patient encounters you bill. Good for low-volume practices or startups.
+        </p>
+
+        <h3>Hidden Costs to Ask About</h3>
+        <ul>
+          <li>ePrescribing add-on fees</li>
+          <li>PDMP integration fees</li>
+          <li>Implementation and training costs</li>
+          <li>Data migration fees</li>
+          <li>Text message reminder fees</li>
+          <li>API access fees</li>
+          <li>Additional user fees for staff</li>
+        </ul>
+
+        <h2 id="implementation">Implementation Considerations</h2>
+
+        <h3>Data Migration</h3>
+        <p>
+          If you're switching from another EHR, ask about data migration. Some vendors include it; others charge thousands of dollars. Consider:
+        </p>
+        <ul>
+          <li>Can you export patient demographics, insurance info, and clinical notes?</li>
+          <li>Will historical outcome measurements transfer?</li>
+          <li>What's the timeline for migration?</li>
+        </ul>
+
+        <h3>Training</h3>
+        <p>
+          Even "intuitive" software requires training. Ask:
+        </p>
+        <ul>
+          <li>Is training included in the subscription?</li>
+          <li>Is it live or self-paced?</li>
+          <li>What about training for new hires?</li>
+        </ul>
+
+        <h3>Support</h3>
+        <p>
+          When something breaks on a busy clinic day, you need help fast. Compare:
+        </p>
+        <ul>
+          <li>Support hours (24/7 vs. business hours only)</li>
+          <li>Support channels (phone, chat, email)</li>
+          <li>Average response time</li>
+          <li>US-based vs. offshore support</li>
+        </ul>
+
+        <h2 id="questions-to-ask">Questions to Ask Vendors</h2>
+        <p>
+          Before committing, ask these questions:
+        </p>
+        <ol>
+          <li>Do you have other ketamine clinics using your software? Can I speak with references?</li>
+          <li>What ketamine-specific templates or workflows are included?</li>
+          <li>How do you handle treatment series tracking and scheduling?</li>
+          <li>Can I customize outcome measure questionnaires?</li>
+          <li>What's included in the base price vs. add-ons?</li>
+          <li>What's the contract length? Can I cancel monthly?</li>
+          <li>Is there a free trial to evaluate before committing?</li>
+          <li>How long does implementation typically take?</li>
+          <li>What happens to my data if I leave?</li>
+        </ol>
+
+        <h2 id="recommendations">Our Recommendations</h2>
+        <p>
+          Based on our research, here's how we'd categorize the options:
+        </p>
+
+        <h3>Best for Ketamine-Only Practices</h3>
+        <p>
+          If ketamine therapy is your primary or only service, consider <strong>ketamine-specific</strong> solutions:
+        </p>
+        <ul>
+          {ketamineSpecific.map((s) => (
+            <li>
+              <a href={`/software/${s.data.slug}/`} class="text-emerald-600 hover:text-emerald-700">
+                {s.data.name}
+              </a>
+              {' '}- {s.data.ideal_for}
+            </li>
+          ))}
+        </ul>
+
+        <h3>Best for Multi-Service Practices</h3>
+        <p>
+          If you offer ketamine alongside traditional psychiatry or therapy, a broader behavioral health EHR with strong customization may work better. Consider Valant, TherapyNotes, or PracticeQ.
+        </p>
+
+        <h3>Best for Budget-Conscious Startups</h3>
+        <p>
+          If you're just starting out and need to minimize costs, consider Charm Health (free tier available) or SimplePractice ($49/month starter plan).
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 rounded-xl border border-emerald-200 bg-emerald-50 p-6">
+        <h3 class="text-lg font-semibold text-gray-900">Ready to Compare?</h3>
+        <p class="mt-2 text-gray-600">
+          Use our comparison tool to evaluate software options side-by-side.
+        </p>
+        <a
+          href="/compare/"
+          class="mt-4 inline-flex items-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+        >
+          Compare Software
+          <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

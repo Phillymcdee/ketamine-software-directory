@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ComparisonTable from '../../components/ComparisonTable.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const software = await getCollection('software');
+  const paths = [];
+
+  // Generate all possible comparisons
+  for (let i = 0; i < software.length; i++) {
+    for (let j = i + 1; j < software.length; j++) {
+      const slugA = software[i].data.slug;
+      const slugB = software[j].data.slug;
+
+      // Generate both directions
+      paths.push({
+        params: { slugs: `${slugA}-vs-${slugB}` },
+        props: {
+          softwareA: software[i].data,
+          softwareB: software[j].data,
+        },
+      });
+      paths.push({
+        params: { slugs: `${slugB}-vs-${slugA}` },
+        props: {
+          softwareA: software[j].data,
+          softwareB: software[i].data,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+interface Props {
+  softwareA: {
+    name: string;
+    slug: string;
+    website: string;
+    description: string;
+    pricing: {
+      model: string;
+      starting_price: number | null;
+      currency: string;
+      has_free_trial: boolean;
+      notes: string;
+    };
+    ketamine_features: Record<string, boolean>;
+    pros: string[];
+    cons: string[];
+    ideal_for: string;
+  };
+  softwareB: {
+    name: string;
+    slug: string;
+    website: string;
+    description: string;
+    pricing: {
+      model: string;
+      starting_price: number | null;
+      currency: string;
+      has_free_trial: boolean;
+      notes: string;
+    };
+    ketamine_features: Record<string, boolean>;
+    pros: string[];
+    cons: string[];
+    ideal_for: string;
+  };
+}
+
+const { softwareA, softwareB } = Astro.props;
+
+function countKetamineFeatures(features: Record<string, boolean>): number {
+  return Object.values(features).filter(Boolean).length;
+}
+
+const aFeatureCount = countKetamineFeatures(softwareA.ketamine_features);
+const bFeatureCount = countKetamineFeatures(softwareB.ketamine_features);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: `${softwareA.name} vs ${softwareB.name} Comparison`,
+  description: `Compare ${softwareA.name} and ${softwareB.name} for ketamine clinics. Side-by-side comparison of features, pricing, and capabilities.`,
+};
+---
+
+<BaseLayout
+  title={`${softwareA.name} vs ${softwareB.name} | Ketamine Clinic Software Comparison`}
+  description={`Compare ${softwareA.name} and ${softwareB.name} for your ketamine clinic. See pricing, features, ketamine-specific capabilities, pros and cons side-by-side.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li>
+          <a href="/compare/" class="text-gray-500 hover:text-gray-700">Compare</a>
+        </li>
+        <li class="text-gray-400">/</li>
+        <li class="text-gray-900">{softwareA.name} vs {softwareB.name}</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          {softwareA.name} vs {softwareB.name}
+        </h1>
+        <p class="mt-4 text-lg text-gray-600">
+          Compare features, pricing, and ketamine-specific capabilities
+        </p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="mt-10 grid grid-cols-2 gap-4 md:gap-8">
+        <div class="rounded-xl border border-gray-200 bg-white p-6 text-center">
+          <p class="text-sm text-gray-500">Ketamine Features</p>
+          <p class="mt-2 text-4xl font-bold text-emerald-600">{aFeatureCount}</p>
+          <p class="mt-1 text-sm text-gray-500">out of 7</p>
+          <p class="mt-3 font-semibold text-gray-900">{softwareA.name}</p>
+        </div>
+        <div class="rounded-xl border border-gray-200 bg-white p-6 text-center">
+          <p class="text-sm text-gray-500">Ketamine Features</p>
+          <p class="mt-2 text-4xl font-bold text-emerald-600">{bFeatureCount}</p>
+          <p class="mt-1 text-sm text-gray-500">out of 7</p>
+          <p class="mt-3 font-semibold text-gray-900">{softwareB.name}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <ComparisonTable softwareA={softwareA} softwareB={softwareB} />
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="text-2xl font-bold text-gray-900">Summary</h2>
+
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        <div class="rounded-xl border border-gray-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-gray-900">Choose {softwareA.name} if you...</h3>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600">
+            {softwareA.pros.slice(0, 3).map((pro) => (
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {pro}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/software/${softwareA.slug}/`}
+            class="mt-6 inline-flex text-sm font-medium text-emerald-600 hover:text-emerald-700"
+          >
+            View full {softwareA.name} review →
+          </a>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 bg-white p-6">
+          <h3 class="text-lg font-semibold text-gray-900">Choose {softwareB.name} if you...</h3>
+          <ul class="mt-4 space-y-2 text-sm text-gray-600">
+            {softwareB.pros.slice(0, 3).map((pro) => (
+              <li class="flex items-start gap-2">
+                <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                {pro}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={`/software/${softwareB.slug}/`}
+            class="mt-6 inline-flex text-sm font-medium text-emerald-600 hover:text-emerald-700"
+          >
+            View full {softwareB.name} review →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Comparisons CTA -->
+  <section class="border-t border-gray-200 bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-xl font-bold text-gray-900">Compare Other Software</h2>
+      <p class="mt-2 text-gray-600">
+        Not finding what you need? Browse more comparison options.
+      </p>
+      <a
+        href="/compare/"
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-3 text-base font-medium text-white hover:bg-emerald-700"
+      >
+        View All Comparisons
+      </a>
+    </div>
+  </section>
+</BaseLayout>

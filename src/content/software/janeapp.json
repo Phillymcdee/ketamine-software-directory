@@ -1,0 +1,65 @@
+{
+  "name": "Jane App",
+  "slug": "janeapp",
+  "website": "https://jane.app",
+  "logo": "/images/software/janeapp-logo.png",
+  "description": "Canadian practice management platform for allied health, wellness, and mental health clinics with 96% user satisfaction, AI Scribe, and robust telehealth capabilities.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 54,
+    "currency": "CAD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Balance plan CAD $54/mo. Practice and Thrive tiers for higher volume. Add-ons: AI Scribe, group telehealth, insurance billing. USD pricing approximately $40/mo."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": false,
+    "spravato_workflows": false,
+    "patient_rating_scales": false,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "AI Scribe (voice to SOAP notes)", "available": true },
+    { "category": "Clinical", "feature": "1000+ customizable charting templates", "available": true },
+    { "category": "Clinical", "feature": "Mental health specialty templates", "available": true },
+    { "category": "Clinical", "feature": "Image and audiovisual documentation", "available": true },
+    { "category": "Scheduling", "feature": "Online booking", "available": true },
+    { "category": "Scheduling", "feature": "Automated waitlist management", "available": true },
+    { "category": "Scheduling", "feature": "SMS and email reminders", "available": true },
+    { "category": "Billing", "feature": "Insurance billing (add-on)", "available": true },
+    { "category": "Billing", "feature": "Credit card processing (2.75% online, 2.5% in-person)", "available": true },
+    { "category": "Billing", "feature": "Store cards on file", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient mobile app", "available": true },
+    { "category": "Patient Engagement", "feature": "Gift cards", "available": true },
+    { "category": "Telehealth", "feature": "1:1 video sessions (HIPAA compliant)", "available": true },
+    { "category": "Telehealth", "feature": "Group telehealth (add-on)", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "PIPEDA compliant (Canada)", "available": true },
+    { "category": "Compliance", "feature": "GDPR compliant", "available": true }
+  ],
+  "integrations": [
+    "Credit card processors",
+    "Insurance clearinghouses",
+    "Calendar sync (limited)"
+  ],
+  "pros": [
+    "96% user satisfaction rating (619 reviews)",
+    "AI Scribe turns voice notes into SOAP notes",
+    "Excellent for Canadian clinics (PIPEDA compliant)",
+    "Beautiful, intuitive interface",
+    "Strong scheduling and waitlist management"
+  ],
+  "cons": [
+    "Not ketamine-specific - no outcome tracking or rating scales",
+    "Limited calendar sync options",
+    "Billing customization limitations",
+    "Pricing in CAD - may fluctuate for US clinics",
+    "No ePrescribing for controlled substances"
+  ],
+  "ideal_for": "Allied health and wellness clinics, especially in Canada, wanting user-friendly practice management with strong scheduling and telehealth.",
+  "last_verified": "2025-01-23",
+  "data_source": "Jane.app, Capterra, SelectHub, Medesk"
+}

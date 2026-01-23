@@ -1,0 +1,57 @@
+{
+  "name": "CliniFusion",
+  "slug": "clinifusion",
+  "website": "https://clinifusion.com",
+  "logo": "/images/software/clinifusion-logo.png",
+  "description": "Web-based ketamine EMR developed by anesthesiologists, specializing in IV infusion clinics with integrated vital signs monitoring and outcome documentation.",
+  "pricing": {
+    "model": "custom",
+    "starting_price": null,
+    "currency": "USD",
+    "has_free_trial": false,
+    "billing_cycle": "monthly",
+    "notes": "Contact for pricing - custom quotes based on clinic size"
+  },
+  "ketamine_features": {
+    "iv_protocols": true,
+    "im_protocols": true,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": true,
+    "treatment_series_tracking": true
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "IV infusion charting", "available": true },
+    { "category": "Clinical", "feature": "Vital signs integration (Caretaker Medical)", "available": true },
+    { "category": "Clinical", "feature": "Dosing standardization tools", "available": true },
+    { "category": "Clinical", "feature": "Patient outcome documentation", "available": true },
+    { "category": "Scheduling", "feature": "Appointment scheduling", "available": true },
+    { "category": "Billing", "feature": "Practice management", "available": true },
+    { "category": "Billing", "feature": "Billing integration", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "Cloud-based security", "available": true },
+    { "category": "Platform", "feature": "iOS compatible", "available": true },
+    { "category": "Platform", "feature": "Windows compatible", "available": true },
+    { "category": "Platform", "feature": "Web-based access", "available": true }
+  ],
+  "integrations": [
+    "Caretaker Medical (vital signs monitoring)",
+    "Hospital IT infrastructure"
+  ],
+  "pros": [
+    "Founded by board-certified anesthesiologists who understand ketamine dosing",
+    "First-to-market EMR specifically for ketamine clinics (2017)",
+    "Automatic vital signs transfer from monitoring equipment",
+    "Focus on standardizing ketamine dosing and best practices",
+    "Works with existing hospital/medical office IT infrastructure"
+  ],
+  "cons": [
+    "Pricing not publicly available - requires contact",
+    "Less focus on mental health features vs. infusion clinic operations",
+    "Primarily deployed in Southwest US - may have limited support elsewhere"
+  ],
+  "ideal_for": "IV ketamine infusion clinics run by anesthesiologists seeking specialized infusion charting and vital signs integration.",
+  "last_verified": "2025-01-23",
+  "data_source": "CliniFusion.com, Caretaker Medical partnership announcements"
+}

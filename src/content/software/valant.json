@@ -1,0 +1,68 @@
+{
+  "name": "Valant",
+  "slug": "valant",
+  "website": "https://www.valant.io",
+  "logo": "/images/software/valant-logo.png",
+  "description": "Behavioral health EHR built by psychiatrists with 80+ outcome measures, AI-assisted notes, and specialized templates for evidence-based therapies.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 120,
+    "currency": "USD",
+    "has_free_trial": false,
+    "billing_cycle": "monthly",
+    "notes": "Pricing starts at $120/user/month. Custom packages available - contact for quote."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": true
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "AI Notes Assist", "available": true },
+    { "category": "Clinical", "feature": "80+ outcome measures (auto-scored)", "available": true },
+    { "category": "Clinical", "feature": "100+ clinical templates (DBT, CBT, TMS)", "available": true },
+    { "category": "Clinical", "feature": "Treatment planning", "available": true },
+    { "category": "Clinical", "feature": "ePrescribing (Dr. First integration)", "available": true },
+    { "category": "Clinical", "feature": "PDMP integration", "available": true },
+    { "category": "Clinical", "feature": "eLabs", "available": true },
+    { "category": "Clinical", "feature": "Group therapy software", "available": true },
+    { "category": "Scheduling", "feature": "Multi-provider calendars", "available": true },
+    { "category": "Scheduling", "feature": "Attendance tracking", "available": true },
+    { "category": "Billing", "feature": "Insurance billing", "available": true },
+    { "category": "Billing", "feature": "Integrated credit card processing", "available": true },
+    { "category": "Patient Engagement", "feature": "Intake automation", "available": true },
+    { "category": "Patient Engagement", "feature": "eSignature", "available": true },
+    { "category": "Patient Engagement", "feature": "Prospective patient management", "available": true },
+    { "category": "Telehealth", "feature": "Video visits", "available": true },
+    { "category": "Analytics", "feature": "Performance reporting", "available": true },
+    { "category": "Analytics", "feature": "Outcome graphs in notes", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "Dr. First (ePrescribing)",
+    "Labs",
+    "PDMP",
+    "Credit card processors"
+  ],
+  "pros": [
+    "Built by psychiatrists - understands mental health workflows",
+    "80+ built-in outcome measures with auto-scoring and graphing",
+    "AI-assisted note writing saves documentation time",
+    "Strong ePrescribing for controlled substances",
+    "Comprehensive templates for evidence-based therapies"
+  ],
+  "cons": [
+    "No free trial available to evaluate before purchase",
+    "Some users report bugs and slow performance during updates",
+    "Higher learning curve - interface described as clunky",
+    "Mac compatibility issues reported",
+    "4.1/5 rating - lower than some competitors"
+  ],
+  "ideal_for": "Psychiatry practices and behavioral health groups needing comprehensive outcome tracking and evidence-based therapy templates.",
+  "last_verified": "2025-01-23",
+  "data_source": "Valant.io, Capterra, GetApp, Software Finder"
+}

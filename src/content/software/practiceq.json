@@ -1,0 +1,61 @@
+{
+  "name": "PracticeQ",
+  "slug": "practiceq",
+  "website": "https://www.practiceq.com",
+  "logo": "/images/software/practiceq-logo.png",
+  "description": "Customizable practice management and EHR with specific ketamine clinic features including intake templates, inventory tracking, and ePrescribing for controlled substances.",
+  "pricing": {
+    "model": "flat",
+    "starting_price": null,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "14-day free trial. Transparent flat-rate pricing with no surprise charges. Telehealth included for all tiers."
+  },
+  "ketamine_features": {
+    "iv_protocols": true,
+    "im_protocols": true,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": true,
+    "treatment_series_tracking": true
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Ketamine-specific intake forms", "available": true },
+    { "category": "Clinical", "feature": "Customizable treatment plans", "available": true },
+    { "category": "Clinical", "feature": "Visit and discharge summaries", "available": true },
+    { "category": "Clinical", "feature": "E-Prescribing (controlled substances)", "available": true },
+    { "category": "Clinical", "feature": "PDMP integration", "available": true },
+    { "category": "Clinical", "feature": "Formulary information", "available": true },
+    { "category": "Clinical", "feature": "Labs integration", "available": true },
+    { "category": "Inventory", "feature": "Ketamine stock tracking", "available": true },
+    { "category": "Scheduling", "feature": "Online booking", "available": true },
+    { "category": "Scheduling", "feature": "Auto-send intake forms by service type", "available": true },
+    { "category": "Billing", "feature": "No-fee insurance claims", "available": true },
+    { "category": "Billing", "feature": "Integrated payment processing", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure patient portal", "available": true },
+    { "category": "Telehealth", "feature": "Video visits (all tiers)", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "Payment processors",
+    "Labs",
+    "PDMP (Prescription Drug Monitoring Program)"
+  ],
+  "pros": [
+    "Ketamine-specific features (inventory tracking, specialized forms)",
+    "No-fee insurance claim submission",
+    "Telehealth included in all pricing tiers",
+    "14-day free trial to evaluate",
+    "Transparent pricing with no surprise charges"
+  ],
+  "cons": [
+    "Interface described as 'not the prettiest' - may need customization",
+    "General practice management tool vs. ketamine-specific",
+    "Specific pricing not publicly listed"
+  ],
+  "ideal_for": "Multi-specialty clinics offering ketamine alongside other mental health services who want flexible, customizable practice management.",
+  "last_verified": "2025-01-23",
+  "data_source": "PracticeQ.com, independent reviews"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "SimplePractice",
+  "slug": "simplepractice",
+  "website": "https://www.simplepractice.com",
+  "logo": "/images/software/simplepractice-logo.png",
+  "description": "Popular practice management platform serving 225,000+ practitioners with intuitive interface, integrated telehealth, and comprehensive billing tools.",
+  "pricing": {
+    "model": "flat",
+    "starting_price": 49,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Starter $49/mo, Essential $79/mo, Plus $99/mo. Add clinicians for $59/mo. ePrescribe add-on $49/mo + $89 setup. 30-day free trial."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "SOAP and DAP note templates", "available": true },
+    { "category": "Clinical", "feature": "Custom template builder (drag-and-drop)", "available": true },
+    { "category": "Clinical", "feature": "Wiley Treatment Planners (1000+ interventions)", "available": true },
+    { "category": "Clinical", "feature": "ePrescribe (add-on)", "available": true },
+    { "category": "Clinical", "feature": "AI Note Taker (add-on $35/mo)", "available": true },
+    { "category": "Scheduling", "feature": "Online booking", "available": true },
+    { "category": "Scheduling", "feature": "Calendar sync", "available": true },
+    { "category": "Scheduling", "feature": "Automated reminders", "available": true },
+    { "category": "Billing", "feature": "Insurance claim submission", "available": true },
+    { "category": "Billing", "feature": "Credit card processing", "available": true },
+    { "category": "Billing", "feature": "Superbill generation", "available": true },
+    { "category": "Patient Engagement", "feature": "Client portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Intake forms", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Video sessions (all plans)", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "Wiley Treatment Planners",
+    "Google Calendar",
+    "iCal",
+    "Stripe",
+    "Insurance clearinghouses"
+  ],
+  "pros": [
+    "Intuitive, user-friendly interface",
+    "Large user community (225,000+ practitioners)",
+    "30-day free trial to evaluate",
+    "Telehealth included in all plans",
+    "Drag-and-drop template customization"
+  ],
+  "cons": [
+    "Not ketamine-specific - general mental health focus",
+    "Essential features pushed to higher tiers after Vista Equity acquisition",
+    "ePrescribe requires additional $49/mo + setup fee",
+    "Users report declining customer support quality",
+    "Rising costs over time"
+  ],
+  "ideal_for": "Solo therapists and small mental health practices wanting an easy-to-use, general-purpose EHR with strong telehealth.",
+  "last_verified": "2025-01-23",
+  "data_source": "SimplePractice.com, Capterra, Choosing Therapy, CarePaths"
+}

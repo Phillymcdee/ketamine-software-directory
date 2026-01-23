@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SoftwareCard from '../components/SoftwareCard.astro';
+import FeatureMatrix from '../components/FeatureMatrix.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+
+// Sort software: ketamine-specific first, then by number of ketamine features
+const sortedSoftware = allSoftware
+  .map((s) => ({
+    ...s.data,
+    id: s.id,
+    ketamineFeatureCount: Object.values(s.data.ketamine_features).filter(Boolean).length,
+    isKetamineSpecific:
+      s.data.ketamine_features.iv_protocols ||
+      s.data.ketamine_features.im_protocols ||
+      s.data.ketamine_features.ketamine_consent_forms,
+  }))
+  .sort((a, b) => {
+    if (a.isKetamineSpecific && !b.isKetamineSpecific) return -1;
+    if (!a.isKetamineSpecific && b.isKetamineSpecific) return 1;
+    return b.ketamineFeatureCount - a.ketamineFeatureCount;
+  });
+
+const featuredSoftware = sortedSoftware.slice(0, 6);
+const ketamineSpecificSoftware = sortedSoftware.filter((s) => s.isKetamineSpecific);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Ketamine Software Directory',
+  description: 'Compare EHR and practice management software for ketamine and psychedelic therapy clinics',
+  url: 'https://ketaminesoftware.directory',
+};
+---
+
+<BaseLayout
+  title="Ketamine Clinic Software Directory | Compare EHR & Practice Management"
+  description="Compare the best EHR and practice management software for ketamine and psychedelic therapy clinics. Unbiased reviews, pricing, and feature comparisons."
+  jsonLd={jsonLd}
+>
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-b from-emerald-50 to-white px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-7xl">
+      <div class="mx-auto max-w-3xl text-center">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
+          Find the Right Software for Your
+          <span class="text-emerald-600"> Ketamine Clinic</span>
+        </h1>
+        <p class="mt-6 text-lg text-gray-600 sm:text-xl">
+          Compare EHR, practice management, and billing software built for ketamine and psychedelic therapy practices. Unbiased reviews, real pricing, and feature comparisons.
+        </p>
+        <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+          <a
+            href="/software/"
+            class="inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-3 text-base font-medium text-white hover:bg-emerald-700"
+          >
+            Browse All Software
+          </a>
+          <a
+            href="/compare/"
+            class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Compare Options
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="border-y border-gray-200 bg-white px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div class="text-center">
+          <p class="text-3xl font-bold text-emerald-600">{allSoftware.length}</p>
+          <p class="mt-1 text-sm text-gray-600">Software Reviewed</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-emerald-600">{ketamineSpecificSoftware.length}</p>
+          <p class="mt-1 text-sm text-gray-600">Ketamine-Specific</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-emerald-600">7</p>
+          <p class="mt-1 text-sm text-gray-600">Feature Categories</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl font-bold text-emerald-600">100%</p>
+          <p class="mt-1 text-sm text-gray-600">Independent Reviews</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Software -->
+  <section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900">Featured Software</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          Top-rated EHR and practice management solutions for ketamine clinics
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredSoftware.map((software) => (
+          <SoftwareCard
+            name={software.name}
+            slug={software.slug}
+            description={software.description}
+            logo={software.logo}
+            startingPrice={software.pricing.starting_price}
+            currency={software.pricing.currency}
+            pricingModel={software.pricing.model}
+            hasFreeTrisl={software.pricing.has_free_trial}
+            ketamineFeatureCount={software.ketamineFeatureCount}
+            isKetamineSpecific={software.isKetamineSpecific}
+          />
+        ))}
+      </div>
+
+      <div class="mt-10 text-center">
+        <a
+          href="/software/"
+          class="inline-flex items-center text-emerald-600 hover:text-emerald-700"
+        >
+          View all {allSoftware.length} software options
+          <svg class="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Matrix Section -->
+  <section class="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900">Ketamine Feature Comparison</h2>
+        <p class="mt-4 text-lg text-gray-600">
+          See which software has the ketamine-specific features you need
+        </p>
+      </div>
+
+      <div class="mt-12 rounded-xl border border-gray-200 bg-white p-4 shadow-sm lg:p-6">
+        <FeatureMatrix software={sortedSoftware} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Use This Directory -->
+  <section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+        <h2 class="text-3xl font-bold text-gray-900">Why Use This Directory?</h2>
+      </div>
+
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        <div class="rounded-xl border border-gray-200 bg-white p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
+            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-gray-900">Ketamine-Focused</h3>
+          <p class="mt-2 text-gray-600">
+            We evaluate software specifically for ketamine and psychedelic therapy workflows, not just general healthcare.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 bg-white p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
+            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-gray-900">Real Pricing</h3>
+          <p class="mt-2 text-gray-600">
+            We publish actual pricing whenever available, including hidden fees and add-on costs.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-gray-200 bg-white p-6">
+          <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-100">
+            <svg class="h-6 w-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5" />
+            </svg>
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-gray-900">Side-by-Side Comparisons</h3>
+          <p class="mt-2 text-gray-600">
+            Compare any two software options head-to-head on features, pricing, and ketamine-specific capabilities.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="bg-emerald-600 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-3xl font-bold text-white">Ready to Find Your Software?</h2>
+      <p class="mt-4 text-lg text-emerald-100">
+        Browse our complete directory or use our comparison tool to find the perfect fit for your ketamine clinic.
+      </p>
+      <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+        <a
+          href="/software/"
+          class="inline-flex items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-medium text-emerald-600 hover:bg-emerald-50"
+        >
+          Browse Directory
+        </a>
+        <a
+          href="/guides/choosing-ketamine-ehr/"
+          class="inline-flex items-center justify-center rounded-lg border border-emerald-400 px-6 py-3 text-base font-medium text-white hover:bg-emerald-700"
+        >
+          Read Buyer's Guide
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

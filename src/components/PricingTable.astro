@@ -1,0 +1,114 @@
+---
+interface SoftwareData {
+  name: string;
+  slug: string;
+  pricing: {
+    model: 'per_clinician' | 'flat' | 'custom';
+    starting_price: number | null;
+    currency: string;
+    has_free_trial: boolean;
+    billing_cycle: string;
+    notes: string;
+  };
+}
+
+interface Props {
+  software: SoftwareData[];
+}
+
+const { software } = Astro.props;
+
+// Sort by price (null/contact last, then ascending)
+const sortedSoftware = [...software].sort((a, b) => {
+  if (a.pricing.starting_price === null) return 1;
+  if (b.pricing.starting_price === null) return -1;
+  return a.pricing.starting_price - b.pricing.starting_price;
+});
+
+function formatPrice(price: number | null, currency: string): string {
+  if (price === null) return 'Contact';
+  if (price === 0) return 'Free';
+  const symbol = currency === 'CAD' ? 'CA$' : '$';
+  return `${symbol}${price}`;
+}
+
+function getPricingModelLabel(model: string): string {
+  switch (model) {
+    case 'per_clinician':
+      return '/clinician/mo';
+    case 'flat':
+      return '/mo';
+    case 'custom':
+      return '';
+    default:
+      return '/mo';
+  }
+}
+---
+
+<div class="overflow-x-auto">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead>
+      <tr class="bg-gray-50">
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+          Software
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+          Starting Price
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+          Pricing Model
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+          Free Trial
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+          Notes
+        </th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200 bg-white">
+      {sortedSoftware.map((s, index) => (
+        <tr class:list={['hover:bg-gray-50', index === 0 && s.pricing.starting_price === 0 && 'bg-emerald-50']}>
+          <td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
+            <a href={`/software/${s.slug}/`} class="text-sm font-medium text-gray-900 hover:text-emerald-600">
+              {s.name}
+            </a>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4">
+            <span class:list={[
+              'text-sm font-semibold',
+              s.pricing.starting_price === 0 ? 'text-emerald-600' : 'text-gray-900',
+            ]}>
+              {formatPrice(s.pricing.starting_price, s.pricing.currency)}
+            </span>
+            <span class="text-sm text-gray-500">
+              {getPricingModelLabel(s.pricing.model)}
+            </span>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            {s.pricing.model === 'per_clinician' && 'Per Clinician'}
+            {s.pricing.model === 'flat' && 'Flat Rate'}
+            {s.pricing.model === 'custom' && 'Custom Quote'}
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-center">
+            {s.pricing.has_free_trial ? (
+              <span class="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
+                Yes
+              </span>
+            ) : (
+              <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                No
+              </span>
+            )}
+          </td>
+          <td class="px-3 py-4 text-sm text-gray-500 max-w-xs">
+            <p class="truncate" title={s.pricing.notes}>
+              {s.pricing.notes}
+            </p>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,63 @@
+{
+  "name": "TherapyNotes",
+  "slug": "therapynotes",
+  "website": "https://www.therapynotes.com",
+  "logo": "/images/software/therapynotes-logo.png",
+  "description": "Comprehensive behavioral health EHR with 24/7 US-based support, 60,000+ users, and strong focus on compliance and structured documentation.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 69,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Solo $69/mo, Group $79/mo first clinician + $50/mo additional. Enterprise 30+ users. AI docs add-on $40/clinician/mo. 30-day free trial."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "ePrescribing (including controlled substances)", "available": true },
+    { "category": "Clinical", "feature": "Customizable note templates", "available": true },
+    { "category": "Clinical", "feature": "Treatment planning", "available": true },
+    { "category": "Clinical", "feature": "AI documentation (add-on)", "available": true },
+    { "category": "Scheduling", "feature": "Appointment scheduling", "available": true },
+    { "category": "Scheduling", "feature": "Automated reminders (text/voice/email)", "available": true },
+    { "category": "Billing", "feature": "Insurance claims submission", "available": true },
+    { "category": "Billing", "feature": "Real-time eligibility verification", "available": true },
+    { "category": "Billing", "feature": "Credit card processing (3.1% + $0.30)", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure client portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Online intake forms", "available": true },
+    { "category": "Telehealth", "feature": "Video sessions", "available": true },
+    { "category": "Analytics", "feature": "Performance reporting", "available": true },
+    { "category": "Analytics", "feature": "Practice analytics dashboard", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "Insurance clearinghouses",
+    "Credit card processors",
+    "ePrescribing networks"
+  ],
+  "pros": [
+    "24/7 US-based customer support - highly praised",
+    "Easy to implement with clean interface",
+    "60,000+ users - established platform",
+    "Strong compliance and documentation standards",
+    "4.6/5 value for money rating"
+  ],
+  "cons": [
+    "Not ketamine-specific - general behavioral health",
+    "Limited workflow automation",
+    "Billing tools described as rigid",
+    "AI documentation costs extra $40/clinician/mo",
+    "Credit card fees higher than some competitors"
+  ],
+  "ideal_for": "Behavioral health practices prioritizing excellent customer support and structured, compliant documentation workflows.",
+  "last_verified": "2025-01-23",
+  "data_source": "TherapyNotes.com, Capterra, Choosing Therapy, CarePaths"
+}

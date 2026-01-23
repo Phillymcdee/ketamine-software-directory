@@ -1,0 +1,63 @@
+{
+  "name": "Osmind",
+  "slug": "osmind",
+  "website": "https://www.osmind.org",
+  "logo": "/images/software/osmind-logo.png",
+  "description": "The leading ketamine-specific EHR with outcome tracking, patient engagement tools, and charting optimized for IV, IM, and psychotherapy modalities.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 199,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Starter plan at $199/mo, Plus plan at $249/mo with additional features"
+  },
+  "ketamine_features": {
+    "iv_protocols": true,
+    "im_protocols": true,
+    "outcome_tracking": true,
+    "spravato_workflows": true,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": true,
+    "treatment_series_tracking": true
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Custom chart note templates", "available": true },
+    { "category": "Clinical", "feature": "30+ validated rating scales (PHQ-9, GAD-7, etc.)", "available": true },
+    { "category": "Clinical", "feature": "Smart alert thresholds", "available": true },
+    { "category": "Clinical", "feature": "E-prescribing", "available": true },
+    { "category": "Scheduling", "feature": "Multi-calendar sync", "available": true },
+    { "category": "Scheduling", "feature": "Appointment reminders", "available": true },
+    { "category": "Scheduling", "feature": "Google Calendar integration", "available": true },
+    { "category": "Billing", "feature": "Superbill generation", "available": true },
+    { "category": "Billing", "feature": "Payment collection", "available": true },
+    { "category": "Billing", "feature": "OON reimbursement support", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient mobile app", "available": true },
+    { "category": "Patient Engagement", "feature": "Mood tracking", "available": true },
+    { "category": "Patient Engagement", "feature": "Intake forms with e-signature", "available": true },
+    { "category": "Telehealth", "feature": "Video visits", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "ONC certified", "available": true },
+    { "category": "Compliance", "feature": "End-to-end encryption", "available": true }
+  ],
+  "integrations": [
+    "Google Calendar",
+    "Stripe",
+    "Patient mobile app (iOS/Android)"
+  ],
+  "pros": [
+    "Purpose-built for ketamine clinics with specialized charting templates",
+    "Integrated patient app for mood tracking between visits",
+    "96% user satisfaction rating on review sites",
+    "Strong outcome tracking with 30+ validated scales",
+    "ONC certified and HIPAA compliant"
+  ],
+  "cons": [
+    "Cost adds up for multi-clinician practices ($199/clinician/month)",
+    "Some users report interface improvements needed",
+    "No API available for custom integrations"
+  ],
+  "ideal_for": "Solo practitioners and small ketamine clinics seeking a specialized EHR with built-in patient engagement tools.",
+  "last_verified": "2025-01-23",
+  "data_source": "Capterra, Osmind.org, Software Finder"
+}

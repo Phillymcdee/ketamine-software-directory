@@ -1,0 +1,65 @@
+{
+  "name": "OptiMantra",
+  "slug": "optimantra",
+  "website": "https://www.optimantra.com",
+  "logo": "/images/software/optimantra-logo.png",
+  "description": "Cloud-based EMR for integrative medicine, behavioral health, and psychiatry with customizable charting, e-prescribing for controlled substances, and built-in psychiatric questionnaires.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 99,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Starting at $99/mo. Pay as you grow model with 30-day notice (no long-term contracts). Add-ons available for eRx, two-way texting, fax."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "ePrescribing (including controlled substances)", "available": true },
+    { "category": "Clinical", "feature": "PDMP integration", "available": true },
+    { "category": "Clinical", "feature": "Built-in psychiatric questionnaires (GAD-7, PHQ, AIMS, ASRS)", "available": true },
+    { "category": "Clinical", "feature": "Customizable charting templates", "available": true },
+    { "category": "Clinical", "feature": "Mental status exam templates", "available": true },
+    { "category": "Clinical", "feature": "Labs integration (hundreds of labs)", "available": true },
+    { "category": "Scheduling", "feature": "Self-scheduling for patients", "available": true },
+    { "category": "Scheduling", "feature": "Recurring appointments", "available": true },
+    { "category": "Scheduling", "feature": "Group session scheduling", "available": true },
+    { "category": "Billing", "feature": "Insurance billing with real-time eligibility", "available": true },
+    { "category": "Billing", "feature": "Credit card processing", "available": true },
+    { "category": "Billing", "feature": "Revenue cycle management (optional)", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Prospect screening contact form", "available": true },
+    { "category": "Telehealth", "feature": "HIPAA-compliant video visits", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Workflow", "feature": "Supervising workflow with cosigning", "available": true }
+  ],
+  "integrations": [
+    "Labs (hundreds)",
+    "PDMP",
+    "ePrescribing networks",
+    "Credit card processors"
+  ],
+  "pros": [
+    "Affordable starting price at $99/mo",
+    "No long-term contracts - pay as you grow",
+    "Built-in psychiatric questionnaires with auto-scoring",
+    "Highly responsive customer support",
+    "Strong ePrescribing for controlled substances"
+  ],
+  "cons": [
+    "Not ketamine-specific - general psychiatry focus",
+    "Learning curve reported by some users",
+    "Some features require add-on fees",
+    "Interface may feel dated compared to newer EHRs"
+  ],
+  "ideal_for": "Psychiatry and behavioral health practices wanting affordable, customizable EMR with strong e-prescribing and outcome tracking.",
+  "last_verified": "2025-01-23",
+  "data_source": "OptiMantra.com, Capterra, GetApp, EHRinPractice"
+}

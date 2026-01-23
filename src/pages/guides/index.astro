@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const guides = [
+  {
+    title: 'How to Choose an EHR for Your Ketamine Clinic',
+    slug: 'choosing-ketamine-ehr',
+    description: 'A comprehensive guide to evaluating EHR and practice management software for ketamine and psychedelic therapy practices.',
+    readTime: '12 min read',
+  },
+];
+---
+
+<BaseLayout
+  title="Guides | Ketamine Clinic Software"
+  description="Expert guides on choosing EHR and practice management software for ketamine and psychedelic therapy clinics."
+>
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-gray-50 to-white px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Guides & Resources
+      </h1>
+      <p class="mt-4 text-lg text-gray-600">
+        Expert guides to help you choose and implement software for your ketamine clinic.
+      </p>
+    </div>
+  </section>
+
+  <!-- Guides List -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="space-y-6">
+        {guides.map((guide) => (
+          <a
+            href={`/guides/${guide.slug}/`}
+            class="block rounded-xl border border-gray-200 bg-white p-6 hover:border-emerald-300 hover:shadow-md"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h2 class="text-xl font-semibold text-gray-900">{guide.title}</h2>
+                <p class="mt-2 text-gray-600">{guide.description}</p>
+              </div>
+              <svg class="h-6 w-6 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+              </svg>
+            </div>
+            <p class="mt-4 text-sm text-gray-500">{guide.readTime}</p>
+          </a>
+        ))}
+      </div>
+
+      <!-- Coming Soon -->
+      <div class="mt-12 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-8 text-center">
+        <h3 class="text-lg font-semibold text-gray-900">More Guides Coming Soon</h3>
+        <p class="mt-2 text-gray-600">
+          We're working on additional resources to help you run your ketamine clinic more effectively.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

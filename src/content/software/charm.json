@@ -1,0 +1,63 @@
+{
+  "name": "Charm Health",
+  "slug": "charm",
+  "website": "https://www.charmhealth.com",
+  "logo": "/images/software/charm-logo.png",
+  "description": "Flexible, highly customizable EHR with a generous free tier, AI scribe capabilities, and support for psychiatry and mental health practices.",
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 0,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Free plan (50 encounters/mo, 1 provider). Encounter plan $25/mo + $0.50/encounter. Provider plan $200/mo includes 1000 SMS."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "AI Scribe (auto-transcription)", "available": true },
+    { "category": "Clinical", "feature": "CharmAssist AI (referrals, lab interpretation)", "available": true },
+    { "category": "Clinical", "feature": "Customizable SOAP templates by specialty", "available": true },
+    { "category": "Clinical", "feature": "ePrescribing", "available": true },
+    { "category": "Clinical", "feature": "PDMP integration (additional fee)", "available": true },
+    { "category": "Scheduling", "feature": "Online appointment scheduling", "available": true },
+    { "category": "Scheduling", "feature": "Automated reminders", "available": true },
+    { "category": "Billing", "feature": "Insurance billing", "available": true },
+    { "category": "Billing", "feature": "Payment processing", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Patient Engagement", "feature": "Pre-appointment paperwork", "available": true },
+    { "category": "Telehealth", "feature": "Video visits", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "Labs",
+    "PDMP",
+    "ePrescribing networks",
+    "Payment processors"
+  ],
+  "pros": [
+    "Free tier available - best free EMR option",
+    "Highly customizable - 10+ years of refinement",
+    "AI scribe reduces documentation time",
+    "Cost-effective for small practices",
+    "Psychiatry-specific templates available"
+  ],
+  "cons": [
+    "Not ketamine-specific - general practice EHR",
+    "Customer service response times criticized",
+    "Hidden costs for features like PDMP, text reminders",
+    "ePCS setup reported to take months",
+    "Some features require additional fees"
+  ],
+  "ideal_for": "Budget-conscious practices wanting a flexible, customizable EHR with strong virtual care support and AI assistance.",
+  "last_verified": "2025-01-23",
+  "data_source": "CharmHealth.com, Capterra, FindEMR, user reviews"
+}

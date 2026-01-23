@@ -1,0 +1,98 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  software: [
+    { href: '/software/', label: 'All Software' },
+    { href: '/software/osmind/', label: 'Osmind' },
+    { href: '/software/clinifusion/', label: 'CliniFusion' },
+    { href: '/software/mediyeti/', label: 'MediYeti' },
+  ],
+  compare: [
+    { href: '/compare/osmind-vs-clinifusion/', label: 'Osmind vs CliniFusion' },
+    { href: '/compare/osmind-vs-mediyeti/', label: 'Osmind vs MediYeti' },
+    { href: '/compare/', label: 'All Comparisons' },
+  ],
+  resources: [
+    { href: '/guides/choosing-ketamine-ehr/', label: 'Choosing a Ketamine EHR' },
+    { href: '/guides/', label: 'All Guides' },
+    { href: '/about/', label: 'About Us' },
+  ],
+};
+---
+
+<footer class="border-t border-gray-200 bg-gray-50">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="flex items-center gap-2">
+          <span class="text-lg font-bold text-gray-900">Ketamine Software</span>
+        </a>
+        <p class="mt-4 text-sm text-gray-600">
+          Independent directory comparing EHR and practice management software for ketamine and psychedelic therapy clinics.
+        </p>
+      </div>
+
+      <!-- Software Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">Software</h3>
+        <ul class="mt-4 space-y-3">
+          {footerLinks.software.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-600 hover:text-emerald-600">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Compare Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">Compare</h3>
+        <ul class="mt-4 space-y-3">
+          {footerLinks.compare.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-600 hover:text-emerald-600">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Resources Links -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900">Resources</h3>
+        <ul class="mt-4 space-y-3">
+          {footerLinks.resources.map((link) => (
+            <li>
+              <a href={link.href} class="text-sm text-gray-600 hover:text-emerald-600">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="mt-12 border-t border-gray-200 pt-8">
+      <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <p class="text-sm text-gray-500">
+          &copy; {currentYear} Ketamine Software Directory. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a href="/privacy/" class="text-sm text-gray-500 hover:text-gray-700">Privacy Policy</a>
+          <a href="/terms/" class="text-sm text-gray-500 hover:text-gray-700">Terms of Service</a>
+        </div>
+      </div>
+
+      <!-- Affiliate Disclosure -->
+      <p class="mt-6 text-center text-xs text-gray-400">
+        Disclosure: Some links on this site may be affiliate links. We may receive compensation if you purchase through our links, at no additional cost to you. This does not influence our reviews or recommendations.
+      </p>
+    </div>
+  </div>
+</footer>
