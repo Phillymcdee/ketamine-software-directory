@@ -103,18 +103,18 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Breadcrumb -->
-  <nav class="border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6 lg:px-8">
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <ol class="flex items-center gap-2 text-sm">
         <li>
-          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
         </li>
-        <li class="text-gray-400">/</li>
+        <li class="text-slate-400">/</li>
         <li>
-          <a href="/software/" class="text-gray-500 hover:text-gray-700">Software</a>
+          <a href="/software/" class="text-slate-500 hover:text-slate-700">Software</a>
         </li>
-        <li class="text-gray-400">/</li>
-        <li class="text-gray-900">{software.name}</li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">{software.name}</li>
       </ol>
     </div>
   </nav>
@@ -126,47 +126,47 @@ const jsonLd = {
         <!-- Software Info -->
         <div class="flex-1">
           <div class="flex items-start gap-6">
-            <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-gray-100">
+            <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-slate-100">
               <img
                 src={software.logo}
                 alt={`${software.name} logo`}
                 class="h-14 w-14 object-contain"
                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               />
-              <span class="hidden h-14 w-14 items-center justify-center text-2xl font-bold text-gray-400">
+              <span class="hidden h-14 w-14 items-center justify-center text-2xl font-bold text-slate-400">
                 {software.name.charAt(0)}
               </span>
             </div>
             <div>
               <div class="flex items-center gap-3">
-                <h1 class="text-3xl font-bold text-gray-900">{software.name}</h1>
+                <h1 class="text-3xl font-bold text-slate-900">{software.name}</h1>
                 {isKetamineSpecific && (
-                  <span class="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700">
+                  <span class="rounded-full bg-teal-100 px-3 py-1 text-sm font-medium text-teal-700">
                     Ketamine-Specific
                   </span>
                 )}
               </div>
-              <p class="mt-2 text-lg text-gray-600">{software.description}</p>
+              <p class="mt-2 text-lg text-slate-600">{software.description}</p>
             </div>
           </div>
         </div>
 
         <!-- Pricing Card -->
-        <div class="w-full shrink-0 rounded-xl border border-gray-200 bg-white p-6 shadow-sm lg:w-80">
+        <div class="w-full shrink-0 rounded-xl border border-slate-200 bg-white p-6 shadow-sm lg:w-80">
           <div class="text-center">
-            <p class="text-sm text-gray-500">Starting at</p>
-            <p class="mt-1 text-3xl font-bold text-gray-900">
+            <p class="text-sm text-slate-500">Starting at</p>
+            <p class="mt-1 text-3xl font-bold text-slate-900">
               {formatPrice(software.pricing.starting_price, software.pricing.currency)}
             </p>
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-slate-500">
               {software.pricing.model === 'per_clinician' && 'per clinician'}
               {software.pricing.model === 'flat' && 'flat rate'}
             </p>
           </div>
 
           {software.pricing.has_free_trial && (
-            <div class="mt-4 rounded-lg bg-emerald-50 p-3 text-center">
-              <span class="text-sm font-medium text-emerald-700">Free Trial Available</span>
+            <div class="mt-4 rounded-lg bg-teal-50 p-3 text-center">
+              <span class="text-sm font-medium text-teal-700">Free Trial Available</span>
             </div>
           )}
 
@@ -175,7 +175,7 @@ const jsonLd = {
               href={software.website}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-700"
+              class="flex w-full items-center justify-center rounded-lg bg-teal-600 px-4 py-3 text-sm font-medium text-white hover:bg-teal-700"
             >
               Visit Website
               <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -184,17 +184,17 @@ const jsonLd = {
             </a>
           </div>
 
-          <p class="mt-4 text-xs text-gray-500">{software.pricing.notes}</p>
+          <p class="mt-4 text-xs text-slate-500">{software.pricing.notes}</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Ketamine Features -->
-  <section class="border-t border-gray-200 bg-emerald-50 px-4 py-12 sm:px-6 lg:px-8">
+  <section class="border-t border-slate-200 bg-teal-50 px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <h2 class="text-2xl font-bold text-gray-900">Ketamine-Specific Features</h2>
-      <p class="mt-2 text-gray-600">
+      <h2 class="text-2xl font-bold text-slate-900">Ketamine-Specific Features</h2>
+      <p class="mt-2 text-slate-600">
         {software.name} has {ketamineFeatureCount} of 7 ketamine-specific features
       </p>
 
@@ -205,23 +205,23 @@ const jsonLd = {
             <div
               class:list={[
                 'flex items-center gap-3 rounded-lg border p-4',
-                hasFeature ? 'border-emerald-200 bg-white' : 'border-gray-200 bg-gray-50',
+                hasFeature ? 'border-teal-200 bg-white' : 'border-slate-200 bg-slate-50',
               ]}
             >
               {hasFeature ? (
-                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                  <svg class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-100">
+                  <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                   </svg>
                 </div>
               ) : (
-                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gray-200">
-                  <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200">
+                  <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                   </svg>
                 </div>
               )}
-              <span class:list={['text-sm font-medium', hasFeature ? 'text-gray-900' : 'text-gray-500']}>
+              <span class:list={['text-sm font-medium', hasFeature ? 'text-slate-900' : 'text-slate-500']}>
                 {label}
               </span>
             </div>
@@ -234,25 +234,25 @@ const jsonLd = {
   <!-- General Features -->
   <section class="px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <h2 class="text-2xl font-bold text-gray-900">Features</h2>
+      <h2 class="text-2xl font-bold text-slate-900">Features</h2>
 
       <div class="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {Object.entries(featuresByCategory).map(([category, features]) => (
           <div>
-            <h3 class="font-semibold text-gray-900">{category}</h3>
+            <h3 class="font-semibold text-slate-900">{category}</h3>
             <ul class="mt-4 space-y-2">
               {features.map((feature) => (
                 <li class="flex items-start gap-2">
                   {feature.available ? (
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-teal-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                   ) : (
-                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <svg class="mt-0.5 h-5 w-5 shrink-0 text-slate-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                   )}
-                  <span class:list={['text-sm', feature.available ? 'text-gray-700' : 'text-gray-400']}>
+                  <span class:list={['text-sm', feature.available ? 'text-slate-700' : 'text-slate-400']}>
                     {feature.feature}
                   </span>
                 </li>
@@ -265,14 +265,14 @@ const jsonLd = {
   </section>
 
   <!-- Pros & Cons -->
-  <section class="border-t border-gray-200 bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+  <section class="border-t border-slate-200 bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <h2 class="text-2xl font-bold text-gray-900">Pros & Cons</h2>
+      <h2 class="text-2xl font-bold text-slate-900">Pros & Cons</h2>
 
       <div class="mt-8 grid gap-8 md:grid-cols-2">
         <!-- Pros -->
-        <div class="rounded-xl border border-emerald-200 bg-white p-6">
-          <h3 class="flex items-center gap-2 text-lg font-semibold text-emerald-700">
+        <div class="rounded-xl border border-teal-200 bg-white p-6">
+          <h3 class="flex items-center gap-2 text-lg font-semibold text-teal-700">
             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
             </svg>
@@ -280,8 +280,8 @@ const jsonLd = {
           </h3>
           <ul class="mt-4 space-y-3">
             {software.pros.map((pro) => (
-              <li class="flex items-start gap-2 text-sm text-gray-700">
-                <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"></span>
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
                 {pro}
               </li>
             ))}
@@ -298,7 +298,7 @@ const jsonLd = {
           </h3>
           <ul class="mt-4 space-y-3">
             {software.cons.map((con) => (
-              <li class="flex items-start gap-2 text-sm text-gray-700">
+              <li class="flex items-start gap-2 text-sm text-slate-700">
                 <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500"></span>
                 {con}
               </li>
@@ -315,16 +315,16 @@ const jsonLd = {
       <div class="grid gap-8 md:grid-cols-2">
         <!-- Ideal For -->
         <div>
-          <h2 class="text-xl font-bold text-gray-900">Ideal For</h2>
-          <p class="mt-4 text-gray-600">{software.ideal_for}</p>
+          <h2 class="text-xl font-bold text-slate-900">Ideal For</h2>
+          <p class="mt-4 text-slate-600">{software.ideal_for}</p>
         </div>
 
         <!-- Integrations -->
         <div>
-          <h2 class="text-xl font-bold text-gray-900">Integrations</h2>
+          <h2 class="text-xl font-bold text-slate-900">Integrations</h2>
           <div class="mt-4 flex flex-wrap gap-2">
             {software.integrations.map((integration) => (
-              <span class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700">
+              <span class="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700">
                 {integration}
               </span>
             ))}
@@ -335,9 +335,9 @@ const jsonLd = {
   </section>
 
   <!-- Footer Meta -->
-  <section class="border-t border-gray-200 bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+  <section class="border-t border-slate-200 bg-slate-50 px-4 py-6 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <p class="text-sm text-gray-500">
+      <p class="text-sm text-slate-500">
         Last verified: {software.last_verified} · Data sources: {software.data_source}
       </p>
     </div>

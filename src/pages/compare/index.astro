@@ -31,13 +31,13 @@ const popularComparisons = [
   description="Compare ketamine clinic software side-by-side. See feature comparisons, pricing differences, and find the best EHR for your practice."
 >
   <!-- Header -->
-  <section class="bg-gradient-to-b from-gray-50 to-white px-4 py-12 sm:px-6 lg:px-8">
+  <section class="bg-slate-900 px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="max-w-3xl">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Compare Ketamine Clinic Software
         </h1>
-        <p class="mt-4 text-lg text-gray-600">
+        <p class="mt-4 text-lg text-slate-300">
           Select two software options to compare features, pricing, and ketamine-specific capabilities side-by-side.
         </p>
       </div>
@@ -47,17 +47,17 @@ const popularComparisons = [
   <!-- Comparison Selector -->
   <section class="px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 class="text-lg font-semibold text-gray-900">Create Custom Comparison</h2>
+      <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <h2 class="text-lg font-semibold text-slate-900">Create Custom Comparison</h2>
         <form id="compare-form" class="mt-6 grid gap-6 md:grid-cols-3">
           <div>
-            <label for="software-a" class="block text-sm font-medium text-gray-700">
+            <label for="software-a" class="block text-sm font-medium text-slate-700">
               First Software
             </label>
             <select
               id="software-a"
               name="software-a"
-              class="mt-2 block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500"
+              class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-teal-500 focus:ring-teal-500"
             >
               <option value="">Select software...</option>
               {sortedSoftware.map((s) => (
@@ -67,13 +67,13 @@ const popularComparisons = [
           </div>
 
           <div>
-            <label for="software-b" class="block text-sm font-medium text-gray-700">
+            <label for="software-b" class="block text-sm font-medium text-slate-700">
               Second Software
             </label>
             <select
               id="software-b"
               name="software-b"
-              class="mt-2 block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-emerald-500 focus:ring-emerald-500"
+              class="mt-2 block w-full rounded-lg border border-slate-300 px-4 py-3 text-slate-900 focus:border-teal-500 focus:ring-teal-500"
             >
               <option value="">Select software...</option>
               {sortedSoftware.map((s) => (
@@ -85,7 +85,7 @@ const popularComparisons = [
           <div class="flex items-end">
             <button
               type="submit"
-              class="w-full rounded-lg bg-emerald-600 px-6 py-3 text-base font-medium text-white hover:bg-emerald-700"
+              class="w-full rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
             >
               Compare
             </button>
@@ -96,19 +96,19 @@ const popularComparisons = [
   </section>
 
   <!-- Popular Comparisons -->
-  <section class="bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <h2 class="text-2xl font-bold text-gray-900">Popular Comparisons</h2>
-      <p class="mt-2 text-gray-600">Most viewed head-to-head comparisons</p>
+      <h2 class="text-2xl font-bold text-slate-900">Popular Comparisons</h2>
+      <p class="mt-2 text-slate-600">Most viewed head-to-head comparisons</p>
 
       <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {popularComparisons.map((comparison) => (
           <a
             href={`/compare/${comparison.a}-vs-${comparison.b}/`}
-            class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 hover:border-emerald-300 hover:shadow-md"
+            class="flex items-center justify-between rounded-lg border border-slate-200 bg-white p-4 hover:border-teal-300 hover:shadow-md"
           >
-            <span class="font-medium text-gray-900">{comparison.label}</span>
-            <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <span class="font-medium text-slate-900">{comparison.label}</span>
+            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
             </svg>
           </a>
@@ -120,21 +120,21 @@ const popularComparisons = [
   <!-- All Software Quick Compare -->
   <section class="px-4 py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-7xl">
-      <h2 class="text-2xl font-bold text-gray-900">All Software</h2>
-      <p class="mt-2 text-gray-600">Click any software to start a comparison</p>
+      <h2 class="text-2xl font-bold text-slate-900">All Software</h2>
+      <p class="mt-2 text-slate-600">Click any software to start a comparison</p>
 
       <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {sortedSoftware.map((s) => (
           <a
             href={`/software/${s.slug}/`}
-            class="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-4 hover:border-emerald-300"
+            class="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-4 hover:border-teal-300"
           >
-            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100">
-              <span class="text-lg font-bold text-gray-400">{s.name.charAt(0)}</span>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-100">
+              <span class="text-lg font-bold text-slate-400">{s.name.charAt(0)}</span>
             </div>
             <div>
-              <p class="font-medium text-gray-900">{s.name}</p>
-              <p class="text-sm text-gray-500">
+              <p class="font-medium text-slate-900">{s.name}</p>
+              <p class="text-sm text-slate-500">
                 {s.ketamineFeatureCount} ketamine features
               </p>
             </div>

@@ -47,62 +47,62 @@ function getPricingModelLabel(model: string): string {
 ---
 
 <div class="overflow-x-auto">
-  <table class="min-w-full divide-y divide-gray-200">
+  <table class="min-w-full divide-y divide-slate-200">
     <thead>
-      <tr class="bg-gray-50">
-        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+      <tr class="bg-slate-50">
+        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-slate-900 sm:pl-6">
           Software
         </th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">
           Starting Price
         </th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">
           Pricing Model
         </th>
-        <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
+        <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-slate-900">
           Free Trial
         </th>
-        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-slate-900">
           Notes
         </th>
       </tr>
     </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
+    <tbody class="divide-y divide-slate-200 bg-white">
       {sortedSoftware.map((s, index) => (
-        <tr class:list={['hover:bg-gray-50', index === 0 && s.pricing.starting_price === 0 && 'bg-emerald-50']}>
+        <tr class:list={['hover:bg-slate-50', index === 0 && s.pricing.starting_price === 0 && 'bg-teal-50']}>
           <td class="whitespace-nowrap py-4 pl-4 pr-3 sm:pl-6">
-            <a href={`/software/${s.slug}/`} class="text-sm font-medium text-gray-900 hover:text-emerald-600">
+            <a href={`/software/${s.slug}/`} class="text-sm font-medium text-slate-900 hover:text-teal-600">
               {s.name}
             </a>
           </td>
           <td class="whitespace-nowrap px-3 py-4">
             <span class:list={[
               'text-sm font-semibold',
-              s.pricing.starting_price === 0 ? 'text-emerald-600' : 'text-gray-900',
+              s.pricing.starting_price === 0 ? 'text-teal-600' : 'text-slate-900',
             ]}>
               {formatPrice(s.pricing.starting_price, s.pricing.currency)}
             </span>
-            <span class="text-sm text-gray-500">
+            <span class="text-sm text-slate-500">
               {getPricingModelLabel(s.pricing.model)}
             </span>
           </td>
-          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-slate-500">
             {s.pricing.model === 'per_clinician' && 'Per Clinician'}
             {s.pricing.model === 'flat' && 'Flat Rate'}
             {s.pricing.model === 'custom' && 'Custom Quote'}
           </td>
           <td class="whitespace-nowrap px-3 py-4 text-center">
             {s.pricing.has_free_trial ? (
-              <span class="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-700">
+              <span class="inline-flex items-center rounded-full bg-teal-100 px-2.5 py-0.5 text-xs font-medium text-teal-700">
                 Yes
               </span>
             ) : (
-              <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+              <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600">
                 No
               </span>
             )}
           </td>
-          <td class="px-3 py-4 text-sm text-gray-500 max-w-xs">
+          <td class="px-3 py-4 text-sm text-slate-500 max-w-xs">
             <p class="truncate" title={s.pricing.notes}>
               {s.pricing.notes}
             </p>

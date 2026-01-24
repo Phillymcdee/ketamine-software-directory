@@ -46,74 +46,74 @@ const ketamineFeatureLabels: Record<string, string> = {
 };
 ---
 
-<div class="overflow-hidden rounded-xl border border-gray-200 bg-white">
+<div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
   <!-- Header -->
-  <div class="grid grid-cols-3 border-b border-gray-200 bg-gray-50">
+  <div class="grid grid-cols-3 border-b border-slate-200 bg-slate-50">
     <div class="p-4"></div>
-    <div class="border-l border-gray-200 p-4 text-center">
-      <a href={`/software/${softwareA.slug}/`} class="text-lg font-semibold text-gray-900 hover:text-emerald-600">
+    <div class="border-l border-slate-200 p-4 text-center">
+      <a href={`/software/${softwareA.slug}/`} class="text-lg font-semibold text-slate-900 hover:text-teal-600">
         {softwareA.name}
       </a>
     </div>
-    <div class="border-l border-gray-200 p-4 text-center">
-      <a href={`/software/${softwareB.slug}/`} class="text-lg font-semibold text-gray-900 hover:text-emerald-600">
+    <div class="border-l border-slate-200 p-4 text-center">
+      <a href={`/software/${softwareB.slug}/`} class="text-lg font-semibold text-slate-900 hover:text-teal-600">
         {softwareB.name}
       </a>
     </div>
   </div>
 
   <!-- Pricing -->
-  <div class="grid grid-cols-3 border-b border-gray-200">
-    <div class="p-4 font-medium text-gray-900">Pricing</div>
-    <div class="border-l border-gray-200 p-4 text-center">
-      <p class="font-semibold text-gray-900">{formatPrice(softwareA.pricing.starting_price, softwareA.pricing.currency)}</p>
+  <div class="grid grid-cols-3 border-b border-slate-200">
+    <div class="p-4 font-medium text-slate-900">Pricing</div>
+    <div class="border-l border-slate-200 p-4 text-center">
+      <p class="font-semibold text-slate-900">{formatPrice(softwareA.pricing.starting_price, softwareA.pricing.currency)}</p>
       {softwareA.pricing.has_free_trial && (
-        <span class="mt-1 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700">Free Trial</span>
+        <span class="mt-1 inline-block rounded-full bg-teal-100 px-2 py-0.5 text-xs text-teal-700">Free Trial</span>
       )}
     </div>
-    <div class="border-l border-gray-200 p-4 text-center">
-      <p class="font-semibold text-gray-900">{formatPrice(softwareB.pricing.starting_price, softwareB.pricing.currency)}</p>
+    <div class="border-l border-slate-200 p-4 text-center">
+      <p class="font-semibold text-slate-900">{formatPrice(softwareB.pricing.starting_price, softwareB.pricing.currency)}</p>
       {softwareB.pricing.has_free_trial && (
-        <span class="mt-1 inline-block rounded-full bg-emerald-100 px-2 py-0.5 text-xs text-emerald-700">Free Trial</span>
+        <span class="mt-1 inline-block rounded-full bg-teal-100 px-2 py-0.5 text-xs text-teal-700">Free Trial</span>
       )}
     </div>
   </div>
 
   <!-- Ketamine Features Count -->
-  <div class="grid grid-cols-3 border-b border-gray-200 bg-emerald-50">
-    <div class="p-4 font-medium text-gray-900">Ketamine Features</div>
-    <div class="border-l border-emerald-100 p-4 text-center">
-      <span class="text-2xl font-bold text-emerald-600">{countKetamineFeatures(softwareA.ketamine_features)}</span>
-      <span class="text-sm text-gray-500"> / 7</span>
+  <div class="grid grid-cols-3 border-b border-slate-200 bg-teal-50">
+    <div class="p-4 font-medium text-slate-900">Ketamine Features</div>
+    <div class="border-l border-teal-100 p-4 text-center">
+      <span class="text-2xl font-bold text-teal-600">{countKetamineFeatures(softwareA.ketamine_features)}</span>
+      <span class="text-sm text-slate-500"> / 7</span>
     </div>
-    <div class="border-l border-emerald-100 p-4 text-center">
-      <span class="text-2xl font-bold text-emerald-600">{countKetamineFeatures(softwareB.ketamine_features)}</span>
-      <span class="text-sm text-gray-500"> / 7</span>
+    <div class="border-l border-teal-100 p-4 text-center">
+      <span class="text-2xl font-bold text-teal-600">{countKetamineFeatures(softwareB.ketamine_features)}</span>
+      <span class="text-sm text-slate-500"> / 7</span>
     </div>
   </div>
 
   <!-- Individual Ketamine Features -->
   {Object.entries(ketamineFeatureLabels).map(([key, label]) => (
-    <div class="grid grid-cols-3 border-b border-gray-200">
-      <div class="p-4 text-sm text-gray-600">{label}</div>
-      <div class="border-l border-gray-200 p-4 text-center">
+    <div class="grid grid-cols-3 border-b border-slate-200">
+      <div class="p-4 text-sm text-slate-600">{label}</div>
+      <div class="border-l border-slate-200 p-4 text-center">
         {softwareA.ketamine_features[key] ? (
-          <svg class="mx-auto h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <svg class="mx-auto h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
           </svg>
         ) : (
-          <svg class="mx-auto h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <svg class="mx-auto h-5 w-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         )}
       </div>
-      <div class="border-l border-gray-200 p-4 text-center">
+      <div class="border-l border-slate-200 p-4 text-center">
         {softwareB.ketamine_features[key] ? (
-          <svg class="mx-auto h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <svg class="mx-auto h-5 w-5 text-teal-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
           </svg>
         ) : (
-          <svg class="mx-auto h-5 w-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <svg class="mx-auto h-5 w-5 text-slate-300" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
         )}
@@ -122,39 +122,39 @@ const ketamineFeatureLabels: Record<string, string> = {
   ))}
 
   <!-- Ideal For -->
-  <div class="grid grid-cols-3 border-b border-gray-200">
-    <div class="p-4 font-medium text-gray-900">Ideal For</div>
-    <div class="border-l border-gray-200 p-4 text-sm text-gray-600">
+  <div class="grid grid-cols-3 border-b border-slate-200">
+    <div class="p-4 font-medium text-slate-900">Ideal For</div>
+    <div class="border-l border-slate-200 p-4 text-sm text-slate-600">
       {softwareA.ideal_for}
     </div>
-    <div class="border-l border-gray-200 p-4 text-sm text-gray-600">
+    <div class="border-l border-slate-200 p-4 text-sm text-slate-600">
       {softwareB.ideal_for}
     </div>
   </div>
 
   <!-- Pros -->
-  <div class="grid grid-cols-3 border-b border-gray-200">
-    <div class="p-4 font-medium text-gray-900">Pros</div>
-    <div class="border-l border-gray-200 p-4">
+  <div class="grid grid-cols-3 border-b border-slate-200">
+    <div class="p-4 font-medium text-slate-900">Pros</div>
+    <div class="border-l border-slate-200 p-4">
       <ul class="space-y-1 text-sm">
         {softwareA.pros.slice(0, 3).map((pro) => (
           <li class="flex items-start gap-2">
-            <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="mt-0.5 h-4 w-4 shrink-0 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
             </svg>
-            <span class="text-gray-600">{pro}</span>
+            <span class="text-slate-600">{pro}</span>
           </li>
         ))}
       </ul>
     </div>
-    <div class="border-l border-gray-200 p-4">
+    <div class="border-l border-slate-200 p-4">
       <ul class="space-y-1 text-sm">
         {softwareB.pros.slice(0, 3).map((pro) => (
           <li class="flex items-start gap-2">
-            <svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="mt-0.5 h-4 w-4 shrink-0 text-teal-500" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
             </svg>
-            <span class="text-gray-600">{pro}</span>
+            <span class="text-slate-600">{pro}</span>
           </li>
         ))}
       </ul>
@@ -163,27 +163,27 @@ const ketamineFeatureLabels: Record<string, string> = {
 
   <!-- Cons -->
   <div class="grid grid-cols-3">
-    <div class="p-4 font-medium text-gray-900">Cons</div>
-    <div class="border-l border-gray-200 p-4">
+    <div class="p-4 font-medium text-slate-900">Cons</div>
+    <div class="border-l border-slate-200 p-4">
       <ul class="space-y-1 text-sm">
         {softwareA.cons.slice(0, 3).map((con) => (
           <li class="flex items-start gap-2">
             <svg class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" />
             </svg>
-            <span class="text-gray-600">{con}</span>
+            <span class="text-slate-600">{con}</span>
           </li>
         ))}
       </ul>
     </div>
-    <div class="border-l border-gray-200 p-4">
+    <div class="border-l border-slate-200 p-4">
       <ul class="space-y-1 text-sm">
         {softwareB.cons.slice(0, 3).map((con) => (
           <li class="flex items-start gap-2">
             <svg class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" />
             </svg>
-            <span class="text-gray-600">{con}</span>
+            <span class="text-slate-600">{con}</span>
           </li>
         ))}
       </ul>
@@ -197,7 +197,7 @@ const ketamineFeatureLabels: Record<string, string> = {
     href={softwareA.website}
     target="_blank"
     rel="noopener noreferrer"
-    class="inline-flex items-center justify-center rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-600"
+    class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-teal-600"
   >
     Visit {softwareA.name}
     <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -208,7 +208,7 @@ const ketamineFeatureLabels: Record<string, string> = {
     href={softwareB.website}
     target="_blank"
     rel="noopener noreferrer"
-    class="inline-flex items-center justify-center rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white hover:bg-emerald-600"
+    class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-4 py-3 text-sm font-medium text-white hover:bg-teal-600"
   >
     Visit {softwareB.name}
     <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

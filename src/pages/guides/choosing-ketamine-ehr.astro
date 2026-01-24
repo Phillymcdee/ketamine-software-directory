@@ -28,18 +28,18 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Breadcrumb -->
-  <nav class="border-b border-gray-200 bg-gray-50 px-4 py-3 sm:px-6 lg:px-8">
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-3xl">
       <ol class="flex items-center gap-2 text-sm">
         <li>
-          <a href="/" class="text-gray-500 hover:text-gray-700">Home</a>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
         </li>
-        <li class="text-gray-400">/</li>
+        <li class="text-slate-400">/</li>
         <li>
-          <a href="/guides/" class="text-gray-500 hover:text-gray-700">Guides</a>
+          <a href="/guides/" class="text-slate-500 hover:text-slate-700">Guides</a>
         </li>
-        <li class="text-gray-400">/</li>
-        <li class="text-gray-900">Choosing a Ketamine EHR</li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Choosing a Ketamine EHR</li>
       </ol>
     </div>
   </nav>
@@ -49,13 +49,13 @@ const jsonLd = {
     <div class="mx-auto max-w-3xl">
       <!-- Header -->
       <header>
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
           How to Choose an EHR for Your Ketamine Clinic
         </h1>
-        <p class="mt-4 text-lg text-gray-600">
+        <p class="mt-4 text-lg text-slate-600">
           A comprehensive guide to evaluating EHR and practice management software for ketamine and psychedelic therapy practices.
         </p>
-        <div class="mt-6 flex items-center gap-4 text-sm text-gray-500">
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
           <span>12 min read</span>
           <span>·</span>
           <span>Last updated: January 2025</span>
@@ -63,16 +63,16 @@ const jsonLd = {
       </header>
 
       <!-- Table of Contents -->
-      <nav class="mt-10 rounded-xl border border-gray-200 bg-gray-50 p-6">
-        <h2 class="text-sm font-semibold text-gray-900">Table of Contents</h2>
+      <nav class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="text-sm font-semibold text-slate-900">Table of Contents</h2>
         <ol class="mt-4 space-y-2 text-sm">
-          <li><a href="#why-ketamine-specific" class="text-emerald-600 hover:text-emerald-700">1. Why Ketamine-Specific Features Matter</a></li>
-          <li><a href="#must-have-features" class="text-emerald-600 hover:text-emerald-700">2. Must-Have Features</a></li>
-          <li><a href="#nice-to-have" class="text-emerald-600 hover:text-emerald-700">3. Nice-to-Have Features</a></li>
-          <li><a href="#pricing-models" class="text-emerald-600 hover:text-emerald-700">4. Understanding Pricing Models</a></li>
-          <li><a href="#implementation" class="text-emerald-600 hover:text-emerald-700">5. Implementation Considerations</a></li>
-          <li><a href="#questions-to-ask" class="text-emerald-600 hover:text-emerald-700">6. Questions to Ask Vendors</a></li>
-          <li><a href="#recommendations" class="text-emerald-600 hover:text-emerald-700">7. Our Recommendations</a></li>
+          <li><a href="#why-ketamine-specific" class="text-teal-600 hover:text-teal-700">1. Why Ketamine-Specific Features Matter</a></li>
+          <li><a href="#must-have-features" class="text-teal-600 hover:text-teal-700">2. Must-Have Features</a></li>
+          <li><a href="#nice-to-have" class="text-teal-600 hover:text-teal-700">3. Nice-to-Have Features</a></li>
+          <li><a href="#pricing-models" class="text-teal-600 hover:text-teal-700">4. Understanding Pricing Models</a></li>
+          <li><a href="#implementation" class="text-teal-600 hover:text-teal-700">5. Implementation Considerations</a></li>
+          <li><a href="#questions-to-ask" class="text-teal-600 hover:text-teal-700">6. Questions to Ask Vendors</a></li>
+          <li><a href="#recommendations" class="text-teal-600 hover:text-teal-700">7. Our Recommendations</a></li>
         </ol>
       </nav>
 
@@ -239,7 +239,7 @@ const jsonLd = {
         <ul>
           {ketamineSpecific.map((s) => (
             <li>
-              <a href={`/software/${s.data.slug}/`} class="text-emerald-600 hover:text-emerald-700">
+              <a href={`/software/${s.data.slug}/`} class="text-teal-600 hover:text-teal-700">
                 {s.data.name}
               </a>
               {' '}- {s.data.ideal_for}
@@ -259,14 +259,14 @@ const jsonLd = {
       </div>
 
       <!-- CTA -->
-      <div class="mt-12 rounded-xl border border-emerald-200 bg-emerald-50 p-6">
-        <h3 class="text-lg font-semibold text-gray-900">Ready to Compare?</h3>
-        <p class="mt-2 text-gray-600">
+      <div class="mt-12 rounded-xl border border-teal-200 bg-teal-50 p-6">
+        <h3 class="text-lg font-semibold text-slate-900">Ready to Compare?</h3>
+        <p class="mt-2 text-slate-600">
           Use our comparison tool to evaluate software options side-by-side.
         </p>
         <a
           href="/compare/"
-          class="mt-4 inline-flex items-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700"
+          class="mt-4 inline-flex items-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
         >
           Compare Software
           <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

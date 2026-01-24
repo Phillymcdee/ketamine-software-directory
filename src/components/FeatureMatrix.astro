@@ -55,41 +55,41 @@ const displayedSoftware = showAll ? software : software.slice(0, 5);
 ---
 
 <div class="overflow-x-auto">
-  <table class="min-w-full divide-y divide-gray-200">
+  <table class="min-w-full divide-y divide-slate-200">
     <thead>
-      <tr class="bg-gray-50">
-        <th scope="col" class="sticky left-0 z-10 bg-gray-50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">
+      <tr class="bg-slate-50">
+        <th scope="col" class="sticky left-0 z-10 bg-slate-50 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-slate-900 sm:pl-6">
           Ketamine Features
         </th>
         {displayedSoftware.map((s) => (
-          <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-            <a href={`/software/${s.slug}/`} class="hover:text-emerald-600">
+          <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-slate-900">
+            <a href={`/software/${s.slug}/`} class="hover:text-teal-600">
               {s.name}
             </a>
           </th>
         ))}
       </tr>
     </thead>
-    <tbody class="divide-y divide-gray-200 bg-white">
+    <tbody class="divide-y divide-slate-200 bg-white">
       {Object.entries(featureLabels).map(([key, { label, description }]) => (
-        <tr class="hover:bg-gray-50">
-          <td class="sticky left-0 z-10 bg-white py-4 pl-4 pr-3 sm:pl-6 hover:bg-gray-50">
-            <div class="text-sm font-medium text-gray-900">{label}</div>
-            <div class="text-xs text-gray-500">{description}</div>
+        <tr class="hover:bg-slate-50">
+          <td class="sticky left-0 z-10 bg-white py-4 pl-4 pr-3 sm:pl-6 hover:bg-slate-50">
+            <div class="text-sm font-medium text-slate-900">{label}</div>
+            <div class="text-xs text-slate-500">{description}</div>
           </td>
           {displayedSoftware.map((s) => {
             const hasFeature = s.ketamine_features[key as keyof typeof s.ketamine_features];
             return (
               <td class="px-3 py-4 text-center">
                 {hasFeature ? (
-                  <span class="inline-flex items-center justify-center rounded-full bg-emerald-100 p-1">
-                    <svg class="h-5 w-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <span class="inline-flex items-center justify-center rounded-full bg-teal-100 p-1">
+                    <svg class="h-5 w-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                     </svg>
                   </span>
                 ) : (
-                  <span class="inline-flex items-center justify-center rounded-full bg-gray-100 p-1">
-                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                  <span class="inline-flex items-center justify-center rounded-full bg-slate-100 p-1">
+                    <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                   </span>
@@ -105,7 +105,7 @@ const displayedSoftware = showAll ? software : software.slice(0, 5);
 
 {!showAll && software.length > 5 && (
   <div class="mt-4 text-center">
-    <a href="/software/" class="text-sm font-medium text-emerald-600 hover:text-emerald-700">
+    <a href="/software/" class="text-sm font-medium text-teal-600 hover:text-teal-700">
       View all {software.length} software options →
     </a>
   </div>
