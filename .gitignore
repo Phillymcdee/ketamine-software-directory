@@ -23,3 +23,7 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .vercel
+
+# Raw review data (temp files from Apify)
+data/reviews/g2-raw.json
+data/reviews/capterra-raw.json

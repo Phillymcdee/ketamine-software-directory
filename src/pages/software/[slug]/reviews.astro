@@ -1,0 +1,273 @@
+---
+/**
+ * Reviews page - Aggregated review data from G2 and Capterra
+ * URL: /software/{slug}/reviews/
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AggregateRating from '../../../components/AggregateRating.astro';
+import ReviewBadge from '../../../components/ReviewBadge.astro';
+import { getCollection } from 'astro:content';
+import aggregatedReviews from '../../../../data/reviews/aggregated-reviews.json';
+
+export async function getStaticPaths() {
+  const software = await getCollection('software');
+  return software.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { software: entry.data },
+  }));
+}
+
+interface Props {
+  software: {
+    name: string;
+    slug: string;
+    website: string;
+    logo: string;
+    description: string;
+    pros: string[];
+    cons: string[];
+  };
+}
+
+const { software } = Astro.props;
+
+const reviewData = aggregatedReviews[software.slug as keyof typeof aggregatedReviews] || {
+  aggregateScore: null,
+  totalCount: 0,
+  sources: [],
+  lastAggregated: null,
+};
+
+const hasReviews = reviewData.aggregateScore !== null && reviewData.totalCount > 0;
+
+const jsonLd = hasReviews
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: software.name,
+      description: `${software.name} reviews from verified users. Aggregate rating ${reviewData.aggregateScore}/5 based on ${reviewData.totalCount} reviews.`,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: reviewData.aggregateScore,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: reviewData.totalCount,
+      },
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: software.name,
+      description: `${software.name} for ketamine clinics. ${software.description}`,
+    };
+---
+
+<BaseLayout
+  title={`${software.name} Reviews 2025 | User Ratings for Ketamine Clinics`}
+  description={hasReviews
+    ? `${software.name} has a ${reviewData.aggregateScore}/5 rating from ${reviewData.totalCount} verified reviews. See what ketamine clinic owners say about ${software.name}.`
+    : `${software.name} reviews for ketamine clinics. See pros, cons, and user feedback.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li>
+          <a href="/software/" class="text-slate-500 hover:text-slate-700">Software</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li>
+          <a href={`/software/${software.slug}/`} class="text-slate-500 hover:text-slate-700">{software.name}</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Reviews</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="flex flex-col items-center gap-6 text-center md:flex-row md:text-left">
+        <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-xl bg-slate-100">
+          <img
+            src={software.logo}
+            alt={`${software.name} logo`}
+            class="h-14 w-14 object-contain"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <span class="hidden h-14 w-14 items-center justify-center text-2xl font-bold text-slate-400">
+            {software.name.charAt(0)}
+          </span>
+        </div>
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            {software.name} Reviews
+          </h1>
+          <p class="mt-2 text-lg text-slate-600">
+            User reviews and ratings from G2 and Capterra
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {hasReviews ? (
+    <>
+      <!-- Aggregate Score -->
+      <section class="bg-teal-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <div class="inline-flex flex-col items-center rounded-2xl bg-white p-8 shadow-sm">
+            <p class="text-sm font-medium uppercase tracking-wide text-slate-500">Aggregate Rating</p>
+            <div class="mt-4">
+              <AggregateRating
+                score={reviewData.aggregateScore}
+                totalCount={reviewData.totalCount}
+                sources={reviewData.sources}
+                size="lg"
+                showSources={false}
+              />
+            </div>
+            <p class="mt-4 text-sm text-slate-500">
+              Based on {reviewData.totalCount} verified reviews
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Review Sources -->
+      <section class="px-4 py-12 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-3xl">
+          <h2 class="text-center text-2xl font-bold text-slate-900">Review Sources</h2>
+          <p class="mt-2 text-center text-slate-600">
+            Click to read detailed reviews on each platform
+          </p>
+
+          <div class="mt-8 grid gap-4 sm:grid-cols-2">
+            {reviewData.sources.map((source) => (
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-teal-200 hover:shadow-md"
+              >
+                <div>
+                  <p class="text-lg font-semibold capitalize text-slate-900">{source.source}</p>
+                  <p class="mt-1 text-sm text-slate-500">{source.count} reviews</p>
+                </div>
+                <div class="text-right">
+                  <div class="flex items-center gap-1">
+                    <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    <span class="text-2xl font-bold text-slate-900">{source.score.toFixed(1)}</span>
+                  </div>
+                  <p class="text-xs text-slate-500">out of 5</p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <p class="mt-6 text-center text-xs text-slate-500">
+            Last updated: {reviewData.lastAggregated || 'Recently'}
+          </p>
+        </div>
+      </section>
+    </>
+  ) : (
+    <!-- No Reviews Yet -->
+    <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="rounded-2xl border border-slate-200 bg-white p-8">
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-100">
+            <svg class="h-8 w-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+            </svg>
+          </div>
+          <h2 class="mt-4 text-xl font-semibold text-slate-900">No Reviews Available Yet</h2>
+          <p class="mt-2 text-slate-600">
+            We haven't aggregated review data for {software.name} from G2 or Capterra yet.
+            Check back soon or visit the vendor website for user testimonials.
+          </p>
+          <a
+            href={software.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
+          >
+            Visit {software.name} Website
+            <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Pros & Cons Summary -->
+  <section class="border-t border-slate-200 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="text-2xl font-bold text-slate-900">What Users Say</h2>
+      <p class="mt-2 text-slate-600">Common pros and cons from {software.name} users</p>
+
+      <div class="mt-8 grid gap-8 md:grid-cols-2">
+        <!-- Pros -->
+        <div class="rounded-xl border border-teal-200 bg-teal-50 p-6">
+          <h3 class="flex items-center gap-2 text-lg font-semibold text-teal-700">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" />
+            </svg>
+            Pros
+          </h3>
+          <ul class="mt-4 space-y-3">
+            {software.pros.map((pro) => (
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500"></span>
+                {pro}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Cons -->
+        <div class="rounded-xl border border-amber-200 bg-amber-50 p-6">
+          <h3 class="flex items-center gap-2 text-lg font-semibold text-amber-700">
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" />
+            </svg>
+            Cons
+          </h3>
+          <ul class="mt-4 space-y-3">
+            {software.cons.map((con) => (
+              <li class="flex items-start gap-2 text-sm text-slate-700">
+                <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500"></span>
+                {con}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Main Review -->
+  <section class="border-t border-slate-200 bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <a
+        href={`/software/${software.slug}/`}
+        class="inline-flex items-center text-teal-600 hover:text-teal-700"
+      >
+        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        Back to {software.name} Review
+      </a>
+    </div>
+  </section>
+</BaseLayout>

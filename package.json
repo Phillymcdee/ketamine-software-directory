@@ -6,7 +6,12 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "validate": "node scripts/validation/validate-software.mjs && node scripts/validation/validate-aggregated-reviews.mjs && node scripts/validation/validate-vendor-mappings.mjs",
+    "validate:software": "node scripts/validation/validate-software.mjs",
+    "validate:reviews": "node scripts/validation/validate-aggregated-reviews.mjs",
+    "validate:mappings": "node scripts/validation/validate-vendor-mappings.mjs",
+    "aggregate-reviews": "node scripts/aggregate-reviews.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",

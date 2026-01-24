@@ -1,0 +1,90 @@
+{
+  "lastUpdated": "2026-01-24",
+  "vendors": {
+    "osmind": {
+      "g2": {
+        "slug": "osmind",
+        "url": "https://www.g2.com/products/osmind/reviews"
+      },
+      "capterra": {
+        "slug": "osmind",
+        "url": "https://www.capterra.com/p/225855/Osmind/reviews/"
+      }
+    },
+    "simplepractice": {
+      "g2": {
+        "slug": "simplepractice",
+        "url": "https://www.g2.com/products/simplepractice/reviews"
+      },
+      "capterra": {
+        "slug": "simplepractice",
+        "url": "https://www.capterra.com/p/151461/SimplePractice/reviews/"
+      }
+    },
+    "therapynotes": {
+      "g2": {
+        "slug": "therapynotes",
+        "url": "https://www.g2.com/products/therapynotes/reviews"
+      },
+      "capterra": {
+        "slug": "therapynotes",
+        "url": "https://www.capterra.com/p/145011/TherapyNotes/reviews/"
+      }
+    },
+    "valant": {
+      "g2": {
+        "slug": "valant",
+        "url": "https://www.g2.com/products/valant/reviews"
+      },
+      "capterra": {
+        "slug": "valant",
+        "url": "https://www.capterra.com/p/134979/Valant/reviews/"
+      }
+    },
+    "janeapp": {
+      "g2": {
+        "slug": "jane-app",
+        "url": "https://www.g2.com/products/jane-app/reviews"
+      },
+      "capterra": {
+        "slug": "jane",
+        "url": "https://www.capterra.com/p/156817/Jane/reviews/"
+      }
+    },
+    "charm": {
+      "g2": {
+        "slug": "charm-ehr",
+        "url": "https://www.g2.com/products/charm-ehr/reviews"
+      },
+      "capterra": {
+        "slug": "charm-health",
+        "url": "https://www.capterra.com/p/174396/ChARM-Health/reviews/"
+      }
+    },
+    "practiceq": {
+      "g2": {
+        "slug": "practice-q",
+        "url": "https://www.g2.com/products/practice-q/reviews"
+      },
+      "capterra": null
+    },
+    "mediyeti": {
+      "g2": null,
+      "capterra": null
+    },
+    "clinifusion": {
+      "g2": null,
+      "capterra": null
+    },
+    "optimantra": {
+      "g2": null,
+      "capterra": null
+    }
+  },
+  "notes": {
+    "mediyeti": "Ketamine-specific EHR, smaller company - may not be on major review platforms",
+    "clinifusion": "Ketamine-specific EMR by anesthesiologists - niche product",
+    "optimantra": "Integrative medicine focus - may have limited reviews on mainstream platforms",
+    "practiceq": "Practice management platform - only found on G2"
+  }
+}

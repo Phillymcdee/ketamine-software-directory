@@ -1,0 +1,259 @@
+name: Update Review Data
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    # Run every Monday at 6 AM UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    # Allow manual triggering from GitHub UI
+
+jobs:
+  update-reviews:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ensure reviews directory exists
+        run: mkdir -p data/reviews
+
+      # IMPROVEMENT: Retry logic for Apify API calls
+      - name: Trigger Apify G2 scraper (with retry)
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          G2_TASK_ID: ${{ secrets.APIFY_G2_TASK_ID }}
+        run: |
+          set -euo pipefail
+          MAX_RETRIES=3
+          RETRY_DELAY=10
+
+          echo "Triggering G2 scraper task..."
+          for i in $(seq 1 $MAX_RETRIES); do
+            echo "Attempt $i of $MAX_RETRIES..."
+            if curl -fsS -X POST \
+              "https://api.apify.com/v2/actor-tasks/${G2_TASK_ID}/runs?token=${APIFY_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -d '{}' > g2_run.json; then
+
+              G2_RUN_ID=$(cat g2_run.json | jq -r '.data.id')
+              if [ -n "${G2_RUN_ID}" ] && [ "${G2_RUN_ID}" != "null" ]; then
+                echo "G2_RUN_ID=${G2_RUN_ID}" >> $GITHUB_ENV
+                echo "G2 scraper started with run ID: ${G2_RUN_ID}"
+                exit 0
+              fi
+            fi
+
+            if [ $i -lt $MAX_RETRIES ]; then
+              echo "Retrying in ${RETRY_DELAY}s..."
+              sleep $RETRY_DELAY
+              RETRY_DELAY=$((RETRY_DELAY * 2))
+            fi
+          done
+
+          echo "Failed to start G2 scraper after $MAX_RETRIES attempts"
+          exit 1
+
+      # IMPROVEMENT: Retry logic for Apify API calls
+      - name: Trigger Apify Capterra scraper (with retry)
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          CAPTERRA_TASK_ID: ${{ secrets.APIFY_CAPTERRA_TASK_ID }}
+        run: |
+          set -euo pipefail
+          MAX_RETRIES=3
+          RETRY_DELAY=10
+
+          echo "Triggering Capterra scraper task..."
+          for i in $(seq 1 $MAX_RETRIES); do
+            echo "Attempt $i of $MAX_RETRIES..."
+            if curl -fsS -X POST \
+              "https://api.apify.com/v2/actor-tasks/${CAPTERRA_TASK_ID}/runs?token=${APIFY_TOKEN}" \
+              -H "Content-Type: application/json" \
+              -d '{}' > capterra_run.json; then
+
+              CAPTERRA_RUN_ID=$(cat capterra_run.json | jq -r '.data.id')
+              if [ -n "${CAPTERRA_RUN_ID}" ] && [ "${CAPTERRA_RUN_ID}" != "null" ]; then
+                echo "CAPTERRA_RUN_ID=${CAPTERRA_RUN_ID}" >> $GITHUB_ENV
+                echo "Capterra scraper started with run ID: ${CAPTERRA_RUN_ID}"
+                exit 0
+              fi
+            fi
+
+            if [ $i -lt $MAX_RETRIES ]; then
+              echo "Retrying in ${RETRY_DELAY}s..."
+              sleep $RETRY_DELAY
+              RETRY_DELAY=$((RETRY_DELAY * 2))
+            fi
+          done
+
+          echo "Failed to start Capterra scraper after $MAX_RETRIES attempts"
+          exit 1
+
+      - name: Wait for scrapers to complete (up to 10 minutes)
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Waiting for scrapers to complete..."
+
+          # Wait for G2
+          G2_DONE="false"
+          for i in {1..20}; do
+            G2_STATUS=$(curl -fsS "https://api.apify.com/v2/actor-runs/${G2_RUN_ID}?token=${APIFY_TOKEN}" | jq -r '.data.status')
+            echo "G2 status: ${G2_STATUS}"
+            if [ "$G2_STATUS" = "SUCCEEDED" ]; then
+              echo "G2 scraper completed successfully"
+              G2_DONE="true"
+              break
+            elif [ "$G2_STATUS" = "FAILED" ] || [ "$G2_STATUS" = "ABORTED" ]; then
+              echo "G2 scraper failed or was aborted"
+              exit 1
+            fi
+            sleep 30
+          done
+          if [ "${G2_DONE}" != "true" ]; then
+            echo "G2 scraper did not finish within the wait window."
+            exit 1
+          fi
+
+          # Wait for Capterra
+          CAPTERRA_DONE="false"
+          for i in {1..20}; do
+            CAPTERRA_STATUS=$(curl -fsS "https://api.apify.com/v2/actor-runs/${CAPTERRA_RUN_ID}?token=${APIFY_TOKEN}" | jq -r '.data.status')
+            echo "Capterra status: ${CAPTERRA_STATUS}"
+            if [ "$CAPTERRA_STATUS" = "SUCCEEDED" ]; then
+              echo "Capterra scraper completed successfully"
+              CAPTERRA_DONE="true"
+              break
+            elif [ "$CAPTERRA_STATUS" = "FAILED" ] || [ "$CAPTERRA_STATUS" = "ABORTED" ]; then
+              echo "Capterra scraper failed or was aborted"
+              exit 1
+            fi
+            sleep 30
+          done
+          if [ "${CAPTERRA_DONE}" != "true" ]; then
+            echo "Capterra scraper did not finish within the wait window."
+            exit 1
+          fi
+
+      - name: Download G2 results
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Downloading G2 results..."
+          curl -fsS "https://api.apify.com/v2/actor-runs/${G2_RUN_ID}/dataset/items?token=${APIFY_TOKEN}&format=json" \
+            -o data/reviews/g2-raw.json
+          echo "G2 results saved to data/reviews/g2-raw.json"
+          cat data/reviews/g2-raw.json | jq 'length'
+
+      - name: Download Capterra results
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          echo "Downloading Capterra results..."
+          curl -fsS "https://api.apify.com/v2/actor-runs/${CAPTERRA_RUN_ID}/dataset/items?token=${APIFY_TOKEN}&format=json" \
+            -o data/reviews/capterra-raw.json
+          echo "Capterra results saved to data/reviews/capterra-raw.json"
+          cat data/reviews/capterra-raw.json | jq 'length'
+
+      - name: Run aggregation script
+        run: |
+          set -euo pipefail
+          echo "Running aggregation script..."
+          node scripts/aggregate-reviews.mjs
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet -- data/reviews/aggregated-reviews.json || echo "changes=true" >> $GITHUB_OUTPUT
+
+      # IMPROVEMENT: Generate change summary for PR body
+      - name: Generate change summary
+        id: summary
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          {
+            echo 'CHANGE_SUMMARY<<EOF'
+            if [ -f data/reviews/aggregated-reviews.json ]; then
+              VENDORS_WITH_REVIEWS=$(cat data/reviews/aggregated-reviews.json | jq '[.[] | select(.aggregateScore != null)] | length')
+              echo "- Vendors with reviews: ${VENDORS_WITH_REVIEWS}/10"
+              echo ""
+              echo "**Changes detected in this update.**"
+            fi
+            echo 'EOF'
+          } >> $GITHUB_OUTPUT
+
+      - name: Create pull request
+        id: create_pr
+        if: steps.check_changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: bot/update-reviews
+          delete-branch: true
+          title: "[bot] Weekly review data update"
+          commit-message: "[bot] Weekly review data update"
+          add-paths: |
+            data/reviews/aggregated-reviews.json
+          body: |
+            Automated weekly review aggregation update via Apify.
+
+            ## Summary
+            ${{ steps.summary.outputs.CHANGE_SUMMARY }}
+
+            ## Run Details
+            - G2 Run ID: `${{ env.G2_RUN_ID }}`
+            - Capterra Run ID: `${{ env.CAPTERRA_RUN_ID }}`
+
+            ## Checks
+            - [ ] Review changes in `data/reviews/aggregated-reviews.json`
+            - [ ] Ensure review counts look reasonable
+            - [ ] CI checks pass
+
+      - name: Summary
+        run: |
+          echo "## Review Update Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f data/reviews/aggregated-reviews.json ]; then
+            VENDORS_WITH_REVIEWS=$(cat data/reviews/aggregated-reviews.json | jq '[.[] | select(.aggregateScore != null)] | length')
+            echo "- Vendors with reviews: ${VENDORS_WITH_REVIEWS}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "- G2 Run ID: ${G2_RUN_ID}" >> $GITHUB_STEP_SUMMARY
+          echo "- Capterra Run ID: ${CAPTERRA_RUN_ID}" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify Slack of PR
+        if: steps.check_changes.outputs.changes == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PR_URL: ${{ steps.create_pr.outputs.pull-request-url }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            curl -X POST -H 'Content-Type: application/json' \
+              --data "{
+                \"blocks\": [
+                  {\"type\": \"header\", \"text\": {\"type\": \"plain_text\", \"text\": \":robot_face: Weekly Reviews PR Ready\", \"emoji\": true}},
+                  {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"Ketamine Software Directory review data updated. Merge if it looks good.\"}},
+                  {\"type\": \"actions\", \"elements\": [
+                    {\"type\": \"button\", \"text\": {\"type\": \"plain_text\", \"text\": \"View PR\"}, \"url\": \"${PR_URL}\"}
+                  ]}
+                ]
+              }" "$SLACK_WEBHOOK_URL"
+          else
+            echo "SLACK_WEBHOOK_URL not set, skipping notification"
+          fi

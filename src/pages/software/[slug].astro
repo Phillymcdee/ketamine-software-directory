@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import AggregateRating from '../../components/AggregateRating.astro';
+import ReviewBadge from '../../components/ReviewBadge.astro';
 import { getCollection } from 'astro:content';
+import aggregatedReviews from '../../../data/reviews/aggregated-reviews.json';
 
 export async function getStaticPaths() {
   const software = await getCollection('software');
@@ -37,6 +40,13 @@ interface Props {
 }
 
 const { software } = Astro.props;
+
+// Get review data for this software
+const reviewData = aggregatedReviews[software.slug as keyof typeof aggregatedReviews] || {
+  aggregateScore: null,
+  totalCount: 0,
+  sources: [],
+};
 
 function formatPrice(price: number | null, currency: string): string {
   if (price === null) return 'Contact for pricing';
@@ -94,6 +104,15 @@ const jsonLd = {
         },
       }
     : undefined,
+  aggregateRating: reviewData.aggregateScore !== null
+    ? {
+        '@type': 'AggregateRating',
+        ratingValue: reviewData.aggregateScore,
+        bestRating: 5,
+        worstRating: 1,
+        ratingCount: reviewData.totalCount,
+      }
+    : undefined,
 };
 ---
 
@@ -147,6 +166,17 @@ const jsonLd = {
                 )}
               </div>
               <p class="mt-2 text-lg text-slate-600">{software.description}</p>
+
+              {/* Aggregate Rating */}
+              <div class="mt-4">
+                <AggregateRating
+                  score={reviewData.aggregateScore}
+                  totalCount={reviewData.totalCount}
+                  sources={reviewData.sources}
+                  size="md"
+                  showSources={false}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -185,6 +215,23 @@ const jsonLd = {
           </div>
 
           <p class="mt-4 text-xs text-slate-500">{software.pricing.notes}</p>
+
+          {/* Review Badges */}
+          {reviewData.sources.length > 0 && (
+            <div class="mt-6 border-t border-slate-200 pt-4">
+              <p class="mb-3 text-xs font-medium uppercase tracking-wide text-slate-500">Reviews</p>
+              <div class="flex flex-col gap-2">
+                {reviewData.sources.map((source) => (
+                  <ReviewBadge
+                    source={source.source as 'g2' | 'capterra'}
+                    score={source.score}
+                    count={source.count}
+                    url={source.url}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,0 +1,108 @@
+---
+/**
+ * AggregateRating - Shows combined review score from all sources
+ *
+ * Usage:
+ *   <AggregateRating score={4.5} totalCount={245} sources={[...]} />
+ */
+
+interface ReviewSource {
+  source: 'g2' | 'capterra';
+  score: number;
+  count: number;
+  url: string;
+  lastUpdated: string;
+}
+
+interface Props {
+  score: number | null;
+  totalCount: number;
+  sources: ReviewSource[];
+  size?: 'sm' | 'md' | 'lg';
+  showSources?: boolean;
+}
+
+const { score, totalCount, sources, size = 'md', showSources = true } = Astro.props;
+
+const hasReviews = score !== null && totalCount > 0;
+
+const sizeClasses = {
+  sm: {
+    star: 'h-4 w-4',
+    score: 'text-lg',
+    count: 'text-xs',
+  },
+  md: {
+    star: 'h-5 w-5',
+    score: 'text-xl',
+    count: 'text-sm',
+  },
+  lg: {
+    star: 'h-6 w-6',
+    score: 'text-2xl',
+    count: 'text-base',
+  },
+};
+
+const classes = sizeClasses[size];
+const displayScore = hasReviews ? score.toFixed(1) : null;
+---
+
+{hasReviews ? (
+  <div class="flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <div class="flex items-center">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <svg
+            class:list={[
+              classes.star,
+              star <= Math.round(score) ? 'text-amber-400' : 'text-slate-200',
+            ]}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </svg>
+        ))}
+      </div>
+      <span class:list={['font-bold text-slate-900', classes.score]}>
+        {displayScore}
+      </span>
+      <span class:list={['text-slate-500', classes.count]}>
+        ({totalCount} reviews)
+      </span>
+    </div>
+
+    {showSources && sources.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {sources.map((source) => (
+          <a
+            href={source.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-teal-600"
+          >
+            <span class="capitalize">{source.source}</span>
+            <span>{source.score.toFixed(1)}</span>
+            <span>({source.count})</span>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+) : (
+  <div class="flex items-center gap-2 text-slate-400">
+    <div class="flex items-center">
+      {[1, 2, 3, 4, 5].map(() => (
+        <svg
+          class:list={[classes.star, 'text-slate-200']}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+    <span class:list={[classes.count]}>No reviews yet</span>
+  </div>
+)}
