@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ketaminesoftware.directory', // Update with actual domain
+  site: 'https://ketaminesoftware.com',
   vite: {
     plugins: [tailwindcss()]
   },
