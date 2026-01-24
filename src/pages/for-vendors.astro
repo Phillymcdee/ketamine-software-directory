@@ -1,0 +1,274 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const benefits = [
+  {
+    title: 'Reach Decision Makers',
+    description: 'Clinic owners and administrators actively researching software solutions find us through search.',
+  },
+  {
+    title: 'High-Intent Traffic',
+    description: 'Visitors comparing solutions are ready to buy. Our comparison pages rank for purchase-intent keywords.',
+  },
+  {
+    title: 'Niche Authority',
+    description: 'We focus exclusively on ketamine and psychedelic therapy—your target market, not general healthcare.',
+  },
+];
+
+const listingOptions = [
+  {
+    name: 'Free Listing',
+    price: 'Free',
+    features: [
+      'Basic profile with features and pricing',
+      'Included in comparison pages',
+      'Link to your website',
+    ],
+    cta: 'Already listed? Request updates',
+    highlighted: false,
+  },
+  {
+    name: 'Featured Listing',
+    price: '$400/month',
+    features: [
+      'Everything in Free, plus:',
+      'Featured badge on profile',
+      'Priority placement in category pages',
+      'Highlighted in comparison tables',
+      'Monthly performance report',
+    ],
+    cta: 'Get Featured',
+    highlighted: true,
+  },
+  {
+    name: 'Sponsored Content',
+    price: 'Custom',
+    features: [
+      'Dedicated guide or case study',
+      'Your solution in context of clinic workflows',
+      'Permanent content that ranks in search',
+      'Distribution to our audience',
+    ],
+    cta: 'Discuss Options',
+    highlighted: false,
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'For Software Vendors | Ketamine Software Directory',
+  description: 'Partner with Ketamine Software Directory to reach ketamine and psychedelic therapy clinics actively searching for software solutions.',
+};
+---
+
+<BaseLayout
+  title="For Software Vendors | Ketamine Software Directory"
+  description="Partner with Ketamine Software Directory to reach ketamine and psychedelic therapy clinics actively searching for software solutions."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-emerald-50 to-white px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Reach Ketamine Clinics Actively Shopping for Software
+      </h1>
+      <p class="mt-6 text-lg text-gray-600">
+        Clinic owners and administrators use our directory to compare EHR and practice management solutions. Get your software in front of high-intent buyers.
+      </p>
+      <div class="mt-8">
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center rounded-lg bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+        >
+          Partner With Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Partner -->
+  <section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-center text-2xl font-bold text-gray-900">
+        Why Software Vendors Partner With Us
+      </h2>
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        {benefits.map((benefit) => (
+          <div class="rounded-lg border border-gray-200 bg-white p-6">
+            <h3 class="text-lg font-semibold text-gray-900">{benefit.title}</h3>
+            <p class="mt-2 text-gray-600">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Audience Stats -->
+  <section class="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-center text-2xl font-bold text-gray-900">
+        Our Audience
+      </h2>
+      <p class="mt-4 text-center text-gray-600">
+        We serve the growing ketamine and psychedelic therapy market
+      </p>
+      <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="text-center">
+          <div class="text-4xl font-bold text-emerald-600">3,000+</div>
+          <div class="mt-2 text-sm text-gray-600">Ketamine clinics in the US</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-emerald-600">$100-300</div>
+          <div class="mt-2 text-sm text-gray-600">Monthly software spend per clinician</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-emerald-600">40%</div>
+          <div class="mt-2 text-sm text-gray-600">Annual market growth rate</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl font-bold text-emerald-600">10</div>
+          <div class="mt-2 text-sm text-gray-600">Software solutions reviewed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Listing Options -->
+  <section class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-center text-2xl font-bold text-gray-900">
+        Listing Options
+      </h2>
+      <p class="mt-4 text-center text-gray-600">
+        Choose the visibility level that fits your goals
+      </p>
+      <div class="mt-12 grid gap-8 lg:grid-cols-3">
+        {listingOptions.map((option) => (
+          <div
+            class={`rounded-lg border p-6 ${
+              option.highlighted
+                ? 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500'
+                : 'border-gray-200 bg-white'
+            }`}
+          >
+            {option.highlighted && (
+              <div class="mb-4 inline-block rounded-full bg-emerald-600 px-3 py-1 text-xs font-medium text-white">
+                Most Popular
+              </div>
+            )}
+            <h3 class="text-xl font-semibold text-gray-900">{option.name}</h3>
+            <div class="mt-2 text-3xl font-bold text-gray-900">{option.price}</div>
+            <ul class="mt-6 space-y-3">
+              {option.features.map((feature) => (
+                <li class="flex items-start gap-2">
+                  <svg class="mt-1 h-4 w-4 flex-shrink-0 text-emerald-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-sm text-gray-600">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              class={`mt-8 block w-full rounded-lg px-4 py-2 text-center text-sm font-medium ${
+                option.highlighted
+                  ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                  : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+              }`}
+            >
+              {option.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Affiliate Program -->
+  <section class="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-gray-900">
+        Affiliate Partnership
+      </h2>
+      <p class="mt-4 text-gray-600">
+        Have an existing affiliate program? We're happy to join it. We'll add tracking links to your listing and earn commissions on referred customers—no upfront cost to you.
+      </p>
+      <a
+        href="#contact"
+        class="mt-6 inline-flex items-center text-emerald-600 hover:text-emerald-700"
+      >
+        Tell us about your affiliate program
+        <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" class="px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-xl">
+      <h2 class="text-center text-2xl font-bold text-gray-900">
+        Get in Touch
+      </h2>
+      <p class="mt-4 text-center text-gray-600">
+        Interested in a listing, partnership, or have questions? We'd love to hear from you.
+      </p>
+
+      <div class="mt-8 rounded-lg border border-gray-200 bg-white p-8">
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-semibold text-gray-900">Email us directly</h3>
+            <p class="mt-2 text-gray-600">
+              Send details about your software and what you're looking for to:
+            </p>
+            <a
+              href="mailto:vendors@ketaminesoftware.directory?subject=Partnership%20Inquiry"
+              class="mt-3 inline-flex items-center gap-2 text-lg font-medium text-emerald-600 hover:text-emerald-700"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              vendors@ketaminesoftware.directory
+            </a>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <div>
+            <h3 class="font-semibold text-gray-900">What to include</h3>
+            <ul class="mt-3 space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600">•</span>
+                Your company and software name
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600">•</span>
+                Which option you're interested in (Featured Listing, Affiliate, Sponsored Content)
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-emerald-600">•</span>
+                Any questions you have about the partnership
+              </li>
+            </ul>
+          </div>
+
+          <hr class="border-gray-200" />
+
+          <div>
+            <h3 class="font-semibold text-gray-900">Already listed?</h3>
+            <p class="mt-2 text-sm text-gray-600">
+              Need to update your information, pricing, or features? Email us at{' '}
+              <a href="mailto:hello@ketaminesoftware.directory" class="text-emerald-600 hover:underline">
+                hello@ketaminesoftware.directory
+              </a>{' '}
+              with the corrections.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
