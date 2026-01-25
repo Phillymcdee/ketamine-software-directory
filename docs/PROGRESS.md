@@ -1,8 +1,8 @@
 # Ketamine Software Directory - Progress Tracker
 
 > **LIVING DOCUMENT** - Update after every task completion
-> Last Updated: 2026-01-24
-> Current Phase: Phase 6 - Analytics (Pending)
+> Last Updated: 2026-01-25
+> Current Phase: Phase 5 - Content Expansion (Pending)
 
 ---
 
@@ -10,11 +10,12 @@
 
 | Metric | Status |
 |--------|--------|
-| Current Phase | Phase 6 (Analytics - Pending) |
+| Current Phase | Phase 5 (Content Expansion - Pending) |
 | Live URL | https://ketaminesoftware.com |
 | Software Tracked | 10 |
 | Pages Live | 139 |
-| Automation | Review aggregation ready, validation gates active |
+| Automation | Review aggregation ready, validation gates active, traffic digest active |
+| Analytics | Pirsch (privacy-friendly) |
 
 ---
 
@@ -96,25 +97,25 @@
 
 ---
 
-## Phase 4: Traffic Monitoring - PENDING
+## Phase 4: Traffic Monitoring - COMPLETE
 
-### Milestone 4.1: Analytics Setup - TODO
+### Milestone 4.1: Analytics Setup - DONE (2026-01-25)
 
-- [ ] Pirsch account created ($5/mo)
-- [ ] Tracking code added to BaseLayout
-- [ ] OAuth client for API access
-- [ ] Dashboard ID noted
+- [x] Pirsch account configured (ketaminesoftware.com added)
+- [x] Tracking code added to BaseLayout.astro
+- [x] OAuth client created for API access
+- [x] Dashboard ID: `OxdzDwpgBl`
 
-### Milestone 4.2: Traffic Digest - TODO
+### Milestone 4.2: Traffic Digest - DONE (2026-01-25)
 
-- [ ] `.github/workflows/weekly-traffic-digest.yml`
-- [ ] GitHub secrets configured
-- [ ] Test notification sent
+- [x] `.github/workflows/weekly-traffic-digest.yml` (Monday 7am UTC)
+- [x] GitHub secrets configured via CLI
+- [ ] Test notification sent (pending first manual trigger)
 
-**Required secrets:**
-- `PIRSCH_CLIENT_ID`
-- `PIRSCH_CLIENT_SECRET`
-- `PIRSCH_DASHBOARD_ID`
+**Configured secrets:**
+- `PIRSCH_CLIENT_ID` ✓
+- `PIRSCH_CLIENT_SECRET` ✓
+- `PIRSCH_DASHBOARD_ID` ✓
 
 ---
 
@@ -152,6 +153,7 @@
 | 2026-01-24 | Review aggregation system | Mappings, aggregation script, update-reviews.yml |
 | 2026-01-24 | UI components | ReviewBadge, AggregateRating |
 | 2026-01-24 | Programmatic SEO | +30 pages (alternatives, pricing, reviews) |
+| 2026-01-25 | Analytics setup | Pirsch tracking, weekly-traffic-digest.yml |
 
 ---
 
@@ -163,7 +165,6 @@ None currently.
 
 ## Next Actions
 
-1. Set up Pirsch analytics account
-2. Add tracking code to BaseLayout.astro
-3. Create traffic digest workflow
-4. Configure GitHub secrets for Pirsch
+1. Test traffic digest workflow (manual trigger in GitHub Actions)
+2. Deploy changes to Vercel (tracking will go live)
+3. Plan Phase 5: Content Expansion (more software profiles, guides)

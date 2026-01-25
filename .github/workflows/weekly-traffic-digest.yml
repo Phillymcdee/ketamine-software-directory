@@ -1,0 +1,121 @@
+name: Weekly Traffic Digest
+
+on:
+  schedule:
+    # Run every Monday at 7 AM UTC (1 hour after review updates)
+    - cron: '0 7 * * 1'
+  workflow_dispatch:
+    # Allow manual triggering from GitHub UI
+
+jobs:
+  traffic-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Get Pirsch access token
+        id: auth
+        env:
+          PIRSCH_CLIENT_ID: ${{ secrets.PIRSCH_CLIENT_ID }}
+          PIRSCH_CLIENT_SECRET: ${{ secrets.PIRSCH_CLIENT_SECRET }}
+        run: |
+          RESPONSE=$(curl -s -X POST https://api.pirsch.io/api/v1/token \
+            -H "Content-Type: application/json" \
+            -d "{\"client_id\":\"${PIRSCH_CLIENT_ID}\",\"client_secret\":\"${PIRSCH_CLIENT_SECRET}\"}")
+
+          TOKEN=$(echo "$RESPONSE" | jq -r '.access_token')
+
+          if [ -z "$TOKEN" ] || [ "$TOKEN" = "null" ]; then
+            echo "Failed to get access token"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          echo "token=$TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Fetch traffic statistics
+        id: stats
+        env:
+          PIRSCH_DASHBOARD_ID: ${{ secrets.PIRSCH_DASHBOARD_ID }}
+          TOKEN: ${{ steps.auth.outputs.token }}
+        run: |
+          # Calculate date range (last 7 days)
+          END_DATE=$(date -u +%Y-%m-%d)
+          START_DATE=$(date -u -d '7 days ago' +%Y-%m-%d)
+
+          echo "Fetching stats from $START_DATE to $END_DATE"
+
+          # Fetch visitor statistics
+          STATS=$(curl -s -H "Authorization: Bearer $TOKEN" \
+            "https://api.pirsch.io/api/v1/statistics/visitor?id=${PIRSCH_DASHBOARD_ID}&from=${START_DATE}&to=${END_DATE}&tz=UTC")
+
+          # Extract totals
+          VISITORS=$(echo "$STATS" | jq '[.[].visitors] | add // 0')
+          VIEWS=$(echo "$STATS" | jq '[.[].views] | add // 0')
+          SESSIONS=$(echo "$STATS" | jq '[.[].sessions] | add // 0')
+          BOUNCE_RATE=$(echo "$STATS" | jq '([.[].bounce_rate] | add) / ([.[].bounce_rate] | length) // 0 | . * 100 | round')
+
+          echo "visitors=$VISITORS" >> $GITHUB_OUTPUT
+          echo "views=$VIEWS" >> $GITHUB_OUTPUT
+          echo "sessions=$SESSIONS" >> $GITHUB_OUTPUT
+          echo "bounce_rate=$BOUNCE_RATE" >> $GITHUB_OUTPUT
+
+          # Fetch top pages
+          PAGES=$(curl -s -H "Authorization: Bearer $TOKEN" \
+            "https://api.pirsch.io/api/v1/statistics/page?id=${PIRSCH_DASHBOARD_ID}&from=${START_DATE}&to=${END_DATE}&tz=UTC")
+
+          TOP_PAGES=$(echo "$PAGES" | jq -r '.[0:5] | map("• \(.path) (\(.visitors) visitors)") | join("\\n")' 2>/dev/null || echo "No data yet")
+
+          # Store for Slack (escape newlines for JSON)
+          echo "top_pages<<EOF" >> $GITHUB_OUTPUT
+          echo "$TOP_PAGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Post to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          VISITORS: ${{ steps.stats.outputs.visitors }}
+          VIEWS: ${{ steps.stats.outputs.views }}
+          SESSIONS: ${{ steps.stats.outputs.sessions }}
+          BOUNCE_RATE: ${{ steps.stats.outputs.bounce_rate }}
+          TOP_PAGES: ${{ steps.stats.outputs.top_pages }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            # Format top pages for Slack (replace literal \n with actual newlines in mrkdwn)
+            FORMATTED_PAGES=$(echo "$TOP_PAGES" | sed 's/\\n/\n/g')
+
+            curl -X POST -H 'Content-Type: application/json' \
+              --data "{
+                \"blocks\": [
+                  {\"type\": \"header\", \"text\": {\"type\": \"plain_text\", \"text\": \"📊 Weekly Traffic Digest\", \"emoji\": true}},
+                  {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"*Ketamine Software Directory* - Last 7 days\"}},
+                  {\"type\": \"section\", \"fields\": [
+                    {\"type\": \"mrkdwn\", \"text\": \"*Visitors*\\n${VISITORS}\"},
+                    {\"type\": \"mrkdwn\", \"text\": \"*Page Views*\\n${VIEWS}\"},
+                    {\"type\": \"mrkdwn\", \"text\": \"*Sessions*\\n${SESSIONS}\"},
+                    {\"type\": \"mrkdwn\", \"text\": \"*Bounce Rate*\\n${BOUNCE_RATE}%\"}
+                  ]},
+                  {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"*Top Pages*\\n${FORMATTED_PAGES}\"}},
+                  {\"type\": \"actions\", \"elements\": [
+                    {\"type\": \"button\", \"text\": {\"type\": \"plain_text\", \"text\": \"View Dashboard\"}, \"url\": \"https://dashboard.pirsch.io/?domain=ketaminesoftware.com\"}
+                  ]}
+                ]
+              }" "$SLACK_WEBHOOK_URL"
+          else
+            echo "SLACK_WEBHOOK_URL not set, skipping notification"
+            echo "## Traffic Summary" >> $GITHUB_STEP_SUMMARY
+            echo "- Visitors: $VISITORS" >> $GITHUB_STEP_SUMMARY
+            echo "- Page Views: $VIEWS" >> $GITHUB_STEP_SUMMARY
+            echo "- Sessions: $SESSIONS" >> $GITHUB_STEP_SUMMARY
+            echo "- Bounce Rate: $BOUNCE_RATE%" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Summary
+        env:
+          VISITORS: ${{ steps.stats.outputs.visitors }}
+          VIEWS: ${{ steps.stats.outputs.views }}
+        run: |
+          echo "## Weekly Traffic Digest" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Visitors: $VISITORS" >> $GITHUB_STEP_SUMMARY
+          echo "- Page Views: $VIEWS" >> $GITHUB_STEP_SUMMARY
