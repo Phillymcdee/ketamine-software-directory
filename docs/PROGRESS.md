@@ -110,7 +110,7 @@
 
 - [x] `.github/workflows/weekly-traffic-digest.yml` (Monday 7am UTC)
 - [x] GitHub secrets configured via CLI
-- [ ] Test notification sent (pending first manual trigger)
+- [x] Test notification sent (verified 2026-01-25)
 
 **Configured secrets:**
 - `PIRSCH_CLIENT_ID` ✓
@@ -165,6 +165,6 @@ None currently.
 
 ## Next Actions
 
-1. Test traffic digest workflow (manual trigger in GitHub Actions)
+1. ~~Test traffic digest workflow~~ ✓ Completed 2026-01-25
 2. Deploy changes to Vercel (tracking will go live)
 3. Plan Phase 5: Content Expansion (more software profiles, guides)
