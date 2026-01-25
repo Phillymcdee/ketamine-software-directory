@@ -3,7 +3,15 @@
   "slug": "therapynotes",
   "website": "https://www.therapynotes.com",
   "logo": "/images/software/therapynotes-logo.png",
+  "software_type": "ketamine_compatible",
   "description": "Comprehensive behavioral health EHR with 24/7 US-based support, 60,000+ users, and strong focus on compliance and structured documentation.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.therapynotes.com"],
+    "notes": "General behavioral health EHR. Not ketamine-specific but supports mental health documentation workflows."
+  },
   "pricing": {
     "model": "per_clinician",
     "starting_price": 69,
@@ -58,6 +66,6 @@
     "Credit card fees higher than some competitors"
   ],
   "ideal_for": "Behavioral health practices prioritizing excellent customer support and structured, compliant documentation workflows.",
-  "last_verified": "2025-01-23",
-  "data_source": "TherapyNotes.com, Capterra, Choosing Therapy, CarePaths"
+  "last_verified": "2026-01-25",
+  "data_source": "TherapyNotes.com"
 }

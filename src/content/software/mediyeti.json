@@ -3,7 +3,8 @@
   "slug": "mediyeti",
   "website": "https://mediyeti.com",
   "logo": "/images/software/mediyeti-logo.png",
-  "description": "Modular, customizable EHR and billing system designed for ketamine and mental health practices with strong billing automation and Utah-based support.",
+  "software_type": "general_ehr",
+  "description": "Modular, customizable EHR and billing system for medical practices with strong billing automation, customizable templates, and Utah-based support.",
   "pricing": {
     "model": "custom",
     "starting_price": null,
@@ -13,13 +14,20 @@
     "notes": "Tailored pricing based on practice requirements - contact for quote"
   },
   "ketamine_features": {
-    "iv_protocols": true,
-    "im_protocols": true,
-    "outcome_tracking": true,
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": false,
     "spravato_workflows": false,
-    "patient_rating_scales": true,
-    "ketamine_consent_forms": true,
-    "treatment_series_tracking": true
+    "patient_rating_scales": false,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://mediyeti.com"],
+    "notes": "General EHR platform. No ketamine-specific features found on vendor website. Vendor markets as 'built by doctors for doctors' for general medical practices."
   },
   "general_features": [
     { "category": "Clinical", "feature": "Customizable templates", "available": true },
@@ -51,12 +59,12 @@
     "Telehealth with image capture integration"
   ],
   "cons": [
+    "Not ketamine-specific - general practice EHR",
+    "No built-in outcome tracking or rating scales",
     "No mobile app available",
-    "English only - no multilingual support",
-    "No API for custom integrations",
     "Pricing requires contact - not transparent"
   ],
-  "ideal_for": "Ketamine and mental health practices prioritizing billing automation and wanting US-based, same-timezone support.",
-  "last_verified": "2025-01-23",
-  "data_source": "MediYeti.com, Software Finder"
+  "ideal_for": "General medical practices seeking customizable EHR with strong billing automation and US-based support. Not specifically designed for ketamine clinics.",
+  "last_verified": "2026-01-25",
+  "data_source": "MediYeti.com"
 }

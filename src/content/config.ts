@@ -7,6 +7,8 @@ const softwareCollection = defineCollection({
     slug: z.string(),
     website: z.string().url(),
     logo: z.string(),
+    // Software classification
+    software_type: z.enum(['ketamine_specific', 'ketamine_compatible', 'general_ehr']).optional(),
     description: z.string(),
     pricing: z.object({
       model: z.enum(['per_clinician', 'flat', 'custom']),
@@ -16,6 +18,14 @@ const softwareCollection = defineCollection({
       billing_cycle: z.string(),
       notes: z.string(),
     }),
+    // Verification metadata
+    verification: z.object({
+      status: z.enum(['verified', 'unverified', 'needs_review']),
+      last_verified: z.string(),
+      verified_by: z.enum(['manual', 'agent']),
+      source_urls: z.array(z.string()),
+      notes: z.string(),
+    }).optional(),
     ketamine_features: z.object({
       iv_protocols: z.boolean(),
       im_protocols: z.boolean(),

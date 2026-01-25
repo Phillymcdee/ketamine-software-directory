@@ -3,14 +3,22 @@
   "slug": "osmind",
   "website": "https://www.osmind.org",
   "logo": "/images/software/osmind-logo.png",
-  "description": "The leading ketamine-specific EHR with outcome tracking, patient engagement tools, and charting optimized for IV, IM, and psychotherapy modalities.",
+  "software_type": "ketamine_compatible",
+  "description": "Psychiatry-focused practice management platform serving 800+ independent practices with outcome tracking, patient engagement tools, and specialized billing support for Spravato and TMS treatments.",
   "pricing": {
     "model": "per_clinician",
     "starting_price": 199,
     "currency": "USD",
     "has_free_trial": true,
     "billing_cycle": "monthly",
-    "notes": "Starter plan at $199/mo, Plus plan at $249/mo with additional features"
+    "notes": "Osmind One at $199/mo per clinician. Osmind 360 offers performance-based pricing (percentage of collections)."
+  },
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.osmind.org", "https://www.osmind.org/pricing"],
+    "notes": "Pricing verified. Platform serves general psychiatry with strong support for Spravato/TMS billing. Not exclusively ketamine-focused but compatible with ketamine workflows."
   },
   "ketamine_features": {
     "iv_protocols": true,
@@ -46,18 +54,18 @@
     "Patient mobile app (iOS/Android)"
   ],
   "pros": [
-    "Purpose-built for ketamine clinics with specialized charting templates",
+    "Strong support for Spravato and TMS billing workflows",
     "Integrated patient app for mood tracking between visits",
-    "96% user satisfaction rating on review sites",
+    "800+ psychiatry practices on the platform",
     "Strong outcome tracking with 30+ validated scales",
     "ONC certified and HIPAA compliant"
   ],
   "cons": [
     "Cost adds up for multi-clinician practices ($199/clinician/month)",
-    "Some users report interface improvements needed",
-    "No API available for custom integrations"
+    "Not exclusively ketamine-focused - general psychiatry platform",
+    "Performance-based pricing (Osmind 360) may vary"
   ],
-  "ideal_for": "Solo practitioners and small ketamine clinics seeking a specialized EHR with built-in patient engagement tools.",
-  "last_verified": "2025-01-23",
-  "data_source": "Capterra, Osmind.org, Software Finder"
+  "ideal_for": "Psychiatry practices seeking a modern EHR with strong outcome tracking and specialized billing support for treatments like Spravato and TMS.",
+  "last_verified": "2026-01-25",
+  "data_source": "Osmind.org, Osmind.org/pricing"
 }

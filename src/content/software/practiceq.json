@@ -3,7 +3,8 @@
   "slug": "practiceq",
   "website": "https://www.practiceq.com",
   "logo": "/images/software/practiceq-logo.png",
-  "description": "Customizable practice management and EHR with specific ketamine clinic features including intake templates, inventory tracking, and ePrescribing for controlled substances.",
+  "software_type": "ketamine_compatible",
+  "description": "Customizable practice management and EHR serving multiple specialties including psychiatry, behavioral health, and IV infusion clinics. Features ePrescribing for controlled substances and customizable intake forms.",
   "pricing": {
     "model": "flat",
     "starting_price": null,
@@ -13,26 +14,32 @@
     "notes": "14-day free trial. Transparent flat-rate pricing with no surprise charges. Telehealth included for all tiers."
   },
   "ketamine_features": {
-    "iv_protocols": true,
-    "im_protocols": true,
+    "iv_protocols": false,
+    "im_protocols": false,
     "outcome_tracking": true,
     "spravato_workflows": false,
     "patient_rating_scales": true,
-    "ketamine_consent_forms": true,
-    "treatment_series_tracking": true
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.practiceq.com"],
+    "notes": "Serves IV infusion clinics as one of many specialties. No ketamine-specific features explicitly advertised. General EHR with customization capabilities that could support ketamine workflows."
   },
   "general_features": [
-    { "category": "Clinical", "feature": "Ketamine-specific intake forms", "available": true },
+    { "category": "Clinical", "feature": "Customizable intake forms", "available": true },
     { "category": "Clinical", "feature": "Customizable treatment plans", "available": true },
     { "category": "Clinical", "feature": "Visit and discharge summaries", "available": true },
     { "category": "Clinical", "feature": "E-Prescribing (controlled substances)", "available": true },
     { "category": "Clinical", "feature": "PDMP integration", "available": true },
-    { "category": "Clinical", "feature": "Formulary information", "available": true },
     { "category": "Clinical", "feature": "Labs integration", "available": true },
-    { "category": "Inventory", "feature": "Ketamine stock tracking", "available": true },
+    { "category": "Clinical", "feature": "AI-assisted charting", "available": true },
     { "category": "Scheduling", "feature": "Online booking", "available": true },
     { "category": "Scheduling", "feature": "Auto-send intake forms by service type", "available": true },
-    { "category": "Billing", "feature": "No-fee insurance claims", "available": true },
+    { "category": "Billing", "feature": "Insurance claims submission", "available": true },
     { "category": "Billing", "feature": "Integrated payment processing", "available": true },
     { "category": "Patient Engagement", "feature": "Secure patient portal", "available": true },
     { "category": "Telehealth", "feature": "Video visits (all tiers)", "available": true },
@@ -44,18 +51,19 @@
     "PDMP (Prescription Drug Monitoring Program)"
   ],
   "pros": [
-    "Ketamine-specific features (inventory tracking, specialized forms)",
-    "No-fee insurance claim submission",
+    "Serves multiple specialties including IV infusion clinics",
+    "Customizable forms and templates",
     "Telehealth included in all pricing tiers",
     "14-day free trial to evaluate",
-    "Transparent pricing with no surprise charges"
+    "Strong ePrescribing for controlled substances"
   ],
   "cons": [
-    "Interface described as 'not the prettiest' - may need customization",
-    "General practice management tool vs. ketamine-specific",
-    "Specific pricing not publicly listed"
+    "Not ketamine-specific - general multi-specialty EHR",
+    "No explicit ketamine protocols or consent forms",
+    "Specific pricing not publicly listed",
+    "Requires customization for ketamine workflows"
   ],
-  "ideal_for": "Multi-specialty clinics offering ketamine alongside other mental health services who want flexible, customizable practice management.",
-  "last_verified": "2025-01-23",
-  "data_source": "PracticeQ.com, independent reviews"
+  "ideal_for": "Multi-specialty clinics seeking flexible, customizable practice management that can be adapted for various treatment types including IV infusions.",
+  "last_verified": "2026-01-25",
+  "data_source": "PracticeQ.com"
 }

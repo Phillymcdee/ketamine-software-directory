@@ -23,6 +23,8 @@ Everything comes to Slack. If Slack is empty, there's nothing to do.
 | CI failure | On failure | Link to failed run |
 | Weekly reviews PR | Monday 6am UTC | Link to PR for review |
 | Weekly traffic digest | Monday 7am UTC | Visitors, clicks, top pages |
+| Vendor verification issues | Monday 8am UTC | List of vendors with problems |
+| New vendors discovered | Wednesday 6am UTC | PR link with new vendors |
 
 ## Required Secrets (GitHub Actions)
 
@@ -63,7 +65,75 @@ Everything comes to Slack. If Slack is empty, there's nothing to do.
 - Frequency: Weekly (Monday 07:00 UTC) + manual trigger
 - Output: Posts traffic summary to Slack (visitors, page views, clicks, top pages)
 
-## Weekly Human Routine (≤15 minutes)
+### Vendor claim verification
+
+- Workflow: `.github/workflows/verify-claims.yml`
+- Frequency: Weekly (Monday 08:00 UTC) + manual trigger
+- Output: Verification report artifact, Slack alert if issues found
+- Checks:
+  - Website accessibility for all vendors
+  - Verification status (stale data detection)
+  - Classification accuracy
+
+### Vendor acquisition (discovery)
+
+- Workflow: `.github/workflows/acquire-vendors.yml`
+- Frequency: Weekly (Wednesday 06:00 UTC) + manual trigger
+- Output: PR with newly discovered vendors (if any)
+- **Slack notification**: Posts when new vendors found
+- Process:
+  1. Load discovered vendors from G2/Capterra scrapes (data/acquire/)
+  2. Verify vendor websites are live
+  3. Search for ketamine-specific keywords
+  4. Classify as ketamine_specific, ketamine_compatible, or general_ehr
+  5. Generate candidate entries
+  6. Create PR for human review
+
+## Vendor Acquisition Agent
+
+The acquisition agent (`scripts/agents/acquire/`) automates vendor discovery and verification.
+
+### Agent Components
+
+| Script | Purpose |
+|--------|---------|
+| `index.mjs` | Main orchestrator - coordinates the pipeline |
+| `verify.mjs` | Website verification - checks pages for ketamine keywords |
+| `classify.mjs` | Software classification - categorizes based on evidence |
+
+### Software Classification
+
+| Type | Criteria |
+|------|----------|
+| `ketamine_specific` | 5+ ketamine mentions, explicit ketamine/Spravato keywords |
+| `ketamine_compatible` | 1+ ketamine mention OR 3+ psychiatry mentions |
+| `general_ehr` | No ketamine or psychiatry-specific evidence |
+
+### Running Manually
+
+```bash
+# Full acquisition pipeline
+node scripts/agents/acquire/index.mjs
+
+# Verify existing vendors only
+node scripts/agents/acquire/index.mjs --verify-only
+```
+
+### Data Flow
+
+```
+G2/Capterra scrapes (data/acquire/*.json)
+         ↓
+    verify.mjs (website checks)
+         ↓
+    classify.mjs (categorization)
+         ↓
+    new-vendors.json (candidates)
+         ↓
+    PR for human review
+```
+
+## Weekly Human Routine (≤30 minutes)
 
 Everything comes to Slack. React to notifications:
 
@@ -77,7 +147,19 @@ Everything comes to Slack. React to notifications:
    - Glance at visitors, clicks, top pages
    - No action needed unless something looks off
 
-3. **As-needed**: CI failures
+3. **Monday ~8am UTC**: "Vendor Verification Issues" (if any)
+   - Review which vendors have website issues
+   - Check if issues are temporary or need profile updates
+   - Update profiles if vendors have shut down or changed
+
+4. **Wednesday ~6am UTC**: "New Vendors Discovered" (if any)
+   - Click the PR link
+   - Verify each new vendor website is legitimate
+   - Check ketamine classification is accurate
+   - Confirm pricing if listed
+   - Merge if accurate, request changes if needed
+
+5. **As-needed**: CI failures
    - Investigate and fix
 
 ## Rules for Agent Contributions
@@ -97,3 +179,28 @@ When adding new automation scripts/workflows:
 | Features | Vendor website or demo | Before adding/updating |
 | Review scores | G2/Capterra API | Weekly (automated) |
 | last_verified | ISO date (YYYY-MM-DD) | On any manual update |
+
+### Verification Metadata Schema
+
+Each software profile includes verification metadata:
+
+```json
+{
+  "verification": {
+    "status": "verified" | "unverified" | "needs_review",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual" | "agent",
+    "source_urls": ["https://vendor.com/pricing"],
+    "notes": "Human-readable verification notes"
+  },
+  "software_type": "ketamine_specific" | "ketamine_compatible" | "general_ehr"
+}
+```
+
+### Verification Status Meanings
+
+| Status | Meaning |
+|--------|---------|
+| `verified` | Data confirmed against vendor website within 90 days |
+| `unverified` | Cannot verify - website down, data stale, or new discovery |
+| `needs_review` | Agent found discrepancies, human review required |

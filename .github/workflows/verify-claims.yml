@@ -1,0 +1,116 @@
+name: Verify Claims
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Weekly Monday 8am UTC
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify existing vendors
+        id: verify
+        run: |
+          node scripts/agents/acquire/index.mjs --verify-only > verification-output.txt 2>&1 || true
+          cat verification-output.txt
+
+      - name: Check verification results
+        id: check
+        run: |
+          if [ -f "data/verification-report.json" ]; then
+            # Count vendors with issues
+            unverified=$(node -e "
+              const data = JSON.parse(require('fs').readFileSync('data/verification-report.json'));
+              const issues = data.filter(v => v.status === 'unverified' || !v.website_live);
+              console.log(issues.length);
+            ")
+            echo "issues=$unverified" >> $GITHUB_OUTPUT
+
+            # Get list of problematic vendors
+            node -e "
+              const data = JSON.parse(require('fs').readFileSync('data/verification-report.json'));
+              const issues = data.filter(v => v.status === 'unverified' || !v.website_live);
+              if (issues.length > 0) {
+                console.log('### Vendors with Issues\n');
+                issues.forEach(v => {
+                  console.log('- **' + v.name + '**: ' + (v.website_error || 'needs review'));
+                });
+              }
+            " > verification-issues.md
+          else
+            echo "issues=0" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Notify Slack on issues
+        if: steps.check.outputs.issues != '0'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            issues="${{ steps.check.outputs.issues }}"
+            curl -X POST -H 'Content-Type: application/json' \
+              --data "{
+                \"blocks\": [
+                  {
+                    \"type\": \"header\",
+                    \"text\": {
+                      \"type\": \"plain_text\",
+                      \"text\": \":warning: Vendor Verification Issues\",
+                      \"emoji\": true
+                    }
+                  },
+                  {
+                    \"type\": \"section\",
+                    \"text\": {
+                      \"type\": \"mrkdwn\",
+                      \"text\": \"*$issues vendor(s)* have verification issues (website down or stale data).\"
+                    }
+                  },
+                  {
+                    \"type\": \"section\",
+                    \"text\": {
+                      \"type\": \"mrkdwn\",
+                      \"text\": \"Please review the verification report and update any stale information.\"
+                    }
+                  },
+                  {
+                    \"type\": \"actions\",
+                    \"elements\": [
+                      {
+                        \"type\": \"button\",
+                        \"text\": {
+                          \"type\": \"plain_text\",
+                          \"text\": \"View Run\",
+                          \"emoji\": true
+                        },
+                        \"url\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"
+                      }
+                    ]
+                  }
+                ]
+              }" "$SLACK_WEBHOOK_URL"
+          fi
+
+      - name: Upload verification report
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-report
+          path: |
+            data/verification-report.json
+            data/classification-report.json
+            verification-issues.md
+          retention-days: 30

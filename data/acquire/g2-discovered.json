@@ -1,0 +1,62 @@
+[
+  {
+    "name": "AdvancedMD",
+    "website": "https://www.advancedmd.com",
+    "description": "Cloud-based EHR and practice management for medical practices including behavioral health",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "DrChrono",
+    "website": "https://www.drchrono.com",
+    "description": "EHR and medical billing platform with customizable templates for various specialties",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "Kareo",
+    "website": "https://www.kareo.com",
+    "description": "Cloud-based clinical and billing platform for independent practices",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "NextGen Healthcare",
+    "website": "https://www.nextgen.com",
+    "description": "Ambulatory EHR and practice management with behavioral health solutions",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "athenahealth",
+    "website": "https://www.athenahealth.com",
+    "description": "Cloud-based EHR with network intelligence for healthcare providers",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "TheraNest",
+    "website": "https://www.theranest.com",
+    "description": "Practice management software for mental health professionals",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "Luminello",
+    "website": "https://luminello.com",
+    "description": "EHR designed specifically for psychiatrists and psychiatric nurse practitioners",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "ICANotes",
+    "website": "https://www.icanotes.com",
+    "description": "Behavioral health EHR with rapid clinical documentation",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "Elation Health",
+    "website": "https://www.elationhealth.com",
+    "description": "Clinical-first EHR for primary care with behavioral health capabilities",
+    "source": "G2 Behavioral Health EHR category"
+  },
+  {
+    "name": "Qualifacts",
+    "website": "https://www.qualifacts.com",
+    "description": "EHR platform for behavioral health and human services organizations",
+    "source": "G2 Behavioral Health EHR category"
+  }
+]

@@ -3,7 +3,15 @@
   "slug": "optimantra",
   "website": "https://www.optimantra.com",
   "logo": "/images/software/optimantra-logo.png",
+  "software_type": "ketamine_compatible",
   "description": "Cloud-based EMR for integrative medicine, behavioral health, and psychiatry with customizable charting, e-prescribing for controlled substances, and built-in psychiatric questionnaires.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.optimantra.com"],
+    "notes": "General EMR for integrative medicine and psychiatry. Pricing ($99/mo) verified. Serves multiple specialties including behavioral health."
+  },
   "pricing": {
     "model": "per_clinician",
     "starting_price": 99,
@@ -60,6 +68,6 @@
     "Interface may feel dated compared to newer EHRs"
   ],
   "ideal_for": "Psychiatry and behavioral health practices wanting affordable, customizable EMR with strong e-prescribing and outcome tracking.",
-  "last_verified": "2025-01-23",
-  "data_source": "OptiMantra.com, Capterra, GetApp, EHRinPractice"
+  "last_verified": "2026-01-25",
+  "data_source": "OptiMantra.com"
 }

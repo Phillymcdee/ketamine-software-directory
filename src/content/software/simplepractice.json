@@ -3,7 +3,15 @@
   "slug": "simplepractice",
   "website": "https://www.simplepractice.com",
   "logo": "/images/software/simplepractice-logo.png",
-  "description": "Popular practice management platform serving 225,000+ practitioners with intuitive interface, integrated telehealth, and comprehensive billing tools.",
+  "software_type": "ketamine_compatible",
+  "description": "Popular practice management platform serving 250,000+ practitioners with intuitive interface, integrated telehealth, and comprehensive billing tools.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.simplepractice.com"],
+    "notes": "General practice management for therapists and mental health providers. Not ketamine-specific but can support mental health practices."
+  },
   "pricing": {
     "model": "flat",
     "starting_price": 49,
@@ -61,6 +69,6 @@
     "Rising costs over time"
   ],
   "ideal_for": "Solo therapists and small mental health practices wanting an easy-to-use, general-purpose EHR with strong telehealth.",
-  "last_verified": "2025-01-23",
-  "data_source": "SimplePractice.com, Capterra, Choosing Therapy, CarePaths"
+  "last_verified": "2026-01-25",
+  "data_source": "SimplePractice.com"
 }

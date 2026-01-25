@@ -3,7 +3,15 @@
   "slug": "charm",
   "website": "https://www.charmhealth.com",
   "logo": "/images/software/charm-logo.png",
-  "description": "Flexible, highly customizable EHR with a generous free tier, AI scribe capabilities, and support for psychiatry and mental health practices.",
+  "software_type": "general_ehr",
+  "description": "AI-powered healthcare platform with a free tier, customizable templates, and support for medical practices of all sizes.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.charmhealth.com"],
+    "notes": "General EHR for medical practices. Free tier verified. Not specific to psychiatry or ketamine."
+  },
   "pricing": {
     "model": "per_clinician",
     "starting_price": 0,
@@ -58,6 +66,6 @@
     "Some features require additional fees"
   ],
   "ideal_for": "Budget-conscious practices wanting a flexible, customizable EHR with strong virtual care support and AI assistance.",
-  "last_verified": "2025-01-23",
-  "data_source": "CharmHealth.com, Capterra, FindEMR, user reviews"
+  "last_verified": "2026-01-25",
+  "data_source": "CharmHealth.com"
 }

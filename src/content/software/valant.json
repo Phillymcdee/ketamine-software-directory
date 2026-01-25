@@ -3,7 +3,15 @@
   "slug": "valant",
   "website": "https://www.valant.io",
   "logo": "/images/software/valant-logo.png",
+  "software_type": "ketamine_compatible",
   "description": "Behavioral health EHR built by psychiatrists with 80+ outcome measures, AI-assisted notes, and specialized templates for evidence-based therapies.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.valant.io"],
+    "notes": "General behavioral health EHR designed for psychiatry practices. Strong outcome tracking capabilities."
+  },
   "pricing": {
     "model": "per_clinician",
     "starting_price": 120,
@@ -63,6 +71,6 @@
     "4.1/5 rating - lower than some competitors"
   ],
   "ideal_for": "Psychiatry practices and behavioral health groups needing comprehensive outcome tracking and evidence-based therapy templates.",
-  "last_verified": "2025-01-23",
-  "data_source": "Valant.io, Capterra, GetApp, Software Finder"
+  "last_verified": "2026-01-25",
+  "data_source": "Valant.io"
 }

@@ -3,7 +3,15 @@
   "slug": "janeapp",
   "website": "https://jane.app",
   "logo": "/images/software/janeapp-logo.png",
-  "description": "Canadian practice management platform for allied health, wellness, and mental health clinics with 96% user satisfaction, AI Scribe, and robust telehealth capabilities.",
+  "software_type": "general_ehr",
+  "description": "Canadian practice management platform for allied health, wellness, and mental health clinics with AI Scribe and robust telehealth capabilities.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://jane.app"],
+    "notes": "General practice management for allied health and wellness. Not specific to psychiatry or ketamine - serves physiotherapists, massage therapists, counselors, etc."
+  },
   "pricing": {
     "model": "per_clinician",
     "starting_price": 54,
@@ -60,6 +68,6 @@
     "No ePrescribing for controlled substances"
   ],
   "ideal_for": "Allied health and wellness clinics, especially in Canada, wanting user-friendly practice management with strong scheduling and telehealth.",
-  "last_verified": "2025-01-23",
-  "data_source": "Jane.app, Capterra, SelectHub, Medesk"
+  "last_verified": "2026-01-25",
+  "data_source": "Jane.app"
 }

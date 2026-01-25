@@ -3,7 +3,8 @@
   "slug": "clinifusion",
   "website": "https://clinifusion.com",
   "logo": "/images/software/clinifusion-logo.png",
-  "description": "Web-based ketamine EMR developed by anesthesiologists, specializing in IV infusion clinics with integrated vital signs monitoring and outcome documentation.",
+  "software_type": "ketamine_specific",
+  "description": "Web-based ketamine EMR reportedly developed by anesthesiologists, specializing in IV infusion clinics with integrated vital signs monitoring and outcome documentation.",
   "pricing": {
     "model": "custom",
     "starting_price": null,
@@ -11,6 +12,13 @@
     "has_free_trial": false,
     "billing_cycle": "monthly",
     "notes": "Contact for pricing - custom quotes based on clinic size"
+  },
+  "verification": {
+    "status": "unverified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": [],
+    "notes": "WARNING: Website SSL certificate expired as of January 2026. Unable to verify current operational status. Historical data retained but should be independently verified before consideration."
   },
   "ketamine_features": {
     "iv_protocols": true,
@@ -47,11 +55,12 @@
     "Works with existing hospital/medical office IT infrastructure"
   ],
   "cons": [
+    "VERIFICATION WARNING: Website SSL certificate expired - status uncertain",
     "Pricing not publicly available - requires contact",
     "Less focus on mental health features vs. infusion clinic operations",
     "Primarily deployed in Southwest US - may have limited support elsewhere"
   ],
   "ideal_for": "IV ketamine infusion clinics run by anesthesiologists seeking specialized infusion charting and vital signs integration.",
-  "last_verified": "2025-01-23",
-  "data_source": "CliniFusion.com, Caretaker Medical partnership announcements"
+  "last_verified": "2026-01-25",
+  "data_source": "Historical data - unable to verify against current website"
 }
