@@ -1,51 +1,61 @@
 {
-  "timestamp": "2026-01-26T02:11:39.558Z",
+  "timestamp": "2026-01-26T02:58:58.770Z",
   "site": "ketaminesoftware.com",
   "uptime": {
     "status": "up",
     "statusCode": 200,
-    "responseTime": 344
+    "responseTime": 343
   },
   "rankings": {
     "ketamine therapy software": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "ketamine clinic ehr": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "ketamine clinic software": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "psychedelic therapy ehr": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "ketamine practice management": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "ketamine infusion clinic software": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "osmind vs mindbloom": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "osmind alternatives": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "ketamine telehealth software": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     },
     "mental health ehr ketamine": {
       "position": null,
-      "error": "API error"
+      "url": null,
+      "title": null
     }
   },
   "changes": [],
