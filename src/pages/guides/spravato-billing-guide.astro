@@ -1,0 +1,325 @@
+---
+/**
+ * SPRAVATO billing guide - targeting clinics offering esketamine
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+const spravatoCabable = allSoftware.filter(
+  (s) => s.data.ketamine_features.spravato_workflows ||
+    s.data.description.toLowerCase().includes('spravato') ||
+    s.data.general_features?.some(f => f.feature.toLowerCase().includes('spravato'))
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'SPRAVATO Billing Guide for Mental Health Practices',
+  description: 'Complete guide to SPRAVATO billing codes, REMS compliance, and reimbursement for psychiatry practices offering esketamine treatment.',
+  author: {
+    '@type': 'Organization',
+    name: 'Ketamine Software Directory',
+  },
+};
+---
+
+<BaseLayout
+  title="SPRAVATO Billing Guide 2026 - Codes, REMS Compliance & Reimbursement"
+  description="Complete guide to SPRAVATO (esketamine) billing for psychiatry practices. CPT codes, HCPCS codes, REMS compliance, insurance authorization, and EHR requirements."
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li>
+          <a href="/guides/" class="text-slate-500 hover:text-slate-700">Guides</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">SPRAVATO Billing Guide</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <header>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          SPRAVATO Billing Guide
+        </h1>
+        <p class="mt-4 text-lg text-slate-600">
+          A practical guide to billing, coding, and REMS compliance for practices offering SPRAVATO (esketamine) treatment.
+        </p>
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
+          <span>10 min read</span>
+          <span>·</span>
+          <span>Last updated: January 2026</span>
+        </div>
+      </header>
+
+      <!-- Important Notice -->
+      <div class="mt-10 rounded-xl border border-amber-200 bg-amber-50 p-6">
+        <div class="flex gap-3">
+          <svg class="h-6 w-6 shrink-0 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <div>
+            <h3 class="font-semibold text-amber-800">Disclaimer</h3>
+            <p class="mt-1 text-sm text-amber-700">
+              This guide is for informational purposes only and is not billing or legal advice. Always verify current codes and requirements with your payers and compliance team. Billing rules change frequently.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table of Contents -->
+      <nav class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="text-sm font-semibold text-slate-900">Table of Contents</h2>
+        <ol class="mt-4 space-y-2 text-sm">
+          <li><a href="#overview" class="text-teal-600 hover:text-teal-700">1. SPRAVATO Overview</a></li>
+          <li><a href="#rems" class="text-teal-600 hover:text-teal-700">2. REMS Certification Requirements</a></li>
+          <li><a href="#billing-codes" class="text-teal-600 hover:text-teal-700">3. Billing Codes (CPT & HCPCS)</a></li>
+          <li><a href="#authorization" class="text-teal-600 hover:text-teal-700">4. Prior Authorization</a></li>
+          <li><a href="#documentation" class="text-teal-600 hover:text-teal-700">5. Documentation Requirements</a></li>
+          <li><a href="#software" class="text-teal-600 hover:text-teal-700">6. Software with SPRAVATO Support</a></li>
+        </ol>
+      </nav>
+
+      <!-- Content -->
+      <div class="prose prose-gray mt-12 max-w-none">
+        <h2 id="overview">SPRAVATO Overview</h2>
+        <p>
+          SPRAVATO (esketamine nasal spray) is FDA-approved for treatment-resistant depression (TRD) and major depressive disorder (MDD) with suicidal ideation. Unlike IV ketamine, SPRAVATO is covered by many insurance plans, but billing requires navigating a complex REMS program and specific coding requirements.
+        </p>
+
+        <h3>Key Differences from IV Ketamine</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th>SPRAVATO</th>
+              <th>IV Ketamine</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FDA Approval</td>
+              <td>Yes (TRD, MDD with SI)</td>
+              <td>Off-label for depression</td>
+            </tr>
+            <tr>
+              <td>Insurance Coverage</td>
+              <td>Often covered</td>
+              <td>Usually cash-pay</td>
+            </tr>
+            <tr>
+              <td>Administration</td>
+              <td>Nasal spray, self-administered</td>
+              <td>IV infusion by provider</td>
+            </tr>
+            <tr>
+              <td>Monitoring</td>
+              <td>2+ hours post-administration</td>
+              <td>During infusion</td>
+            </tr>
+            <tr>
+              <td>REMS</td>
+              <td>Required</td>
+              <td>Not applicable</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="rems">REMS Certification Requirements</h2>
+        <p>
+          SPRAVATO requires enrollment in the REMS (Risk Evaluation and Mitigation Strategy) program before you can prescribe or administer.
+        </p>
+
+        <h3>Healthcare Setting Requirements</h3>
+        <ul>
+          <li>Complete REMS enrollment via the SPRAVATO portal</li>
+          <li>Staff must be certified (prescribers and healthcare staff who monitor)</li>
+          <li>Patient must be enrolled and complete Patient Enrollment Form</li>
+          <li>Document compliance with monitoring requirements</li>
+          <li>Drug cannot leave the healthcare setting</li>
+        </ul>
+
+        <h3>Per-Visit REMS Compliance</h3>
+        <ol>
+          <li>Verify patient hasn't eaten for 2 hours, drunk liquids for 30 minutes</li>
+          <li>Confirm patient has arranged transportation (cannot drive day of treatment)</li>
+          <li>Monitor blood pressure before dosing</li>
+          <li>Patient self-administers under supervision</li>
+          <li>Monitor for 2+ hours post-administration</li>
+          <li>Document all REMS requirements were met</li>
+          <li>Complete the PDSS (Patient Status Sheet) form</li>
+        </ol>
+
+        <h2 id="billing-codes">Billing Codes</h2>
+
+        <h3>Drug Codes (HCPCS)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+              <th>Dose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>J3305</code></td>
+              <td>SPRAVATO (esketamine) nasal spray</td>
+              <td>1 mg</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <strong>Important:</strong> J3305 is billed per 1mg. A 56mg dose = 56 units. An 84mg dose = 84 units.
+        </p>
+
+        <h3>Administration & Observation Codes (CPT)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>90899</code></td>
+              <td>Unlisted psychiatric service (sometimes used)</td>
+            </tr>
+            <tr>
+              <td><code>99211-99215</code></td>
+              <td>E/M office visit (for assessment)</td>
+            </tr>
+            <tr>
+              <td><code>96372</code></td>
+              <td>Therapeutic injection (not always applicable)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Place of Service</h3>
+        <p>
+          Use <strong>POS 11</strong> (Office) for outpatient administration. SPRAVATO must be administered in a certified healthcare setting.
+        </p>
+
+        <h3>Common Modifier Usage</h3>
+        <ul>
+          <li><strong>JW</strong> - Drug amount discarded (if applicable)</li>
+          <li>Check payer-specific modifier requirements</li>
+        </ul>
+
+        <h2 id="authorization">Prior Authorization</h2>
+        <p>
+          Most payers require prior authorization for SPRAVATO. Common requirements include:
+        </p>
+
+        <h3>Medical Necessity Documentation</h3>
+        <ul>
+          <li>Diagnosis of TRD (failed 2+ antidepressants) or MDD with suicidal ideation</li>
+          <li>Documentation of previous treatments and failures</li>
+          <li>Current PHQ-9 or MADRS scores</li>
+          <li>Treatment plan with frequency and duration</li>
+          <li>REMS enrollment confirmation</li>
+        </ul>
+
+        <h3>Common Payer Requirements</h3>
+        <ul>
+          <li><strong>United Healthcare:</strong> Step therapy documentation, PA required</li>
+          <li><strong>Aetna:</strong> Must meet TRD criteria, PA required</li>
+          <li><strong>BCBS:</strong> Varies by state, typically PA required</li>
+          <li><strong>Medicare:</strong> Covered under Part D, check specific plan</li>
+        </ul>
+
+        <h2 id="documentation">Documentation Requirements</h2>
+        <p>
+          Proper documentation is essential for billing compliance and REMS adherence:
+        </p>
+
+        <h3>Each Treatment Session Must Document</h3>
+        <ul>
+          <li>Pre-treatment blood pressure</li>
+          <li>Dose administered (56mg or 84mg)</li>
+          <li>Time of administration</li>
+          <li>Monitoring observations (typically every 30 min)</li>
+          <li>Post-treatment blood pressure (before discharge)</li>
+          <li>Dissociative symptoms if any</li>
+          <li>Patient discharged with transportation (documented)</li>
+          <li>PDSS form completed</li>
+        </ul>
+
+        <h3>EHR Template Recommendations</h3>
+        <p>
+          Your EHR should have templates that capture:
+        </p>
+        <ul>
+          <li>REMS compliance checklist (built into workflow)</li>
+          <li>Vital signs table with timestamps</li>
+          <li>Dissociation scale documentation</li>
+          <li>Patient status at discharge</li>
+          <li>Next appointment scheduling</li>
+        </ul>
+
+        <h2 id="software">Software with SPRAVATO Support</h2>
+        <p>
+          The following EHR systems have documented SPRAVATO billing or workflow support:
+        </p>
+
+        {spravatoCabable.length > 0 ? (
+          <ul>
+            {spravatoCabable.map((s) => (
+              <li>
+                <a href={`/software/${s.data.slug}/`} class="text-teal-600 hover:text-teal-700">
+                  {s.data.name}
+                </a>
+                {' '}- {s.data.description.substring(0, 100)}...
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>
+            Currently, <a href="/software/advancedmd/" class="text-teal-600">AdvancedMD</a> is known for strong SPRAVATO REMS billing support. Many practices also use general behavioral health EHRs with custom templates.
+          </p>
+        )}
+
+        <h3>Key EHR Features for SPRAVATO</h3>
+        <ul>
+          <li>REMS compliance tracking built into workflow</li>
+          <li>Vital signs documentation with timestamps</li>
+          <li>Prior authorization tracking</li>
+          <li>Buy-and-bill inventory management</li>
+          <li>J-code billing support</li>
+          <li>Automated PDSS form generation</li>
+        </ul>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 rounded-xl border border-teal-200 bg-teal-50 p-6">
+        <h3 class="text-lg font-semibold text-slate-900">Need SPRAVATO-Ready Software?</h3>
+        <p class="mt-2 text-slate-600">
+          Compare EHR options with SPRAVATO billing support and REMS compliance features.
+        </p>
+        <a
+          href="/software/"
+          class="mt-4 inline-flex items-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+        >
+          Browse Software
+          <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
