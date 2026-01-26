@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-26T01:21:30.576Z",
+  "timestamp": "2026-01-26T01:36:23.017Z",
   "site": "ketaminesoftware.com",
   "uptime": {
     "status": "up",
     "statusCode": 200,
-    "responseTime": 425
+    "responseTime": 265
   },
   "rankings": {
     "ketamine therapy software": {
@@ -48,85 +48,14 @@
       "error": "API error"
     }
   },
-  "changes": [
-    {
-      "keyword": "ketamine therapy software",
-      "type": "dropped",
-      "previous": 35,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "ketamine clinic ehr",
-      "type": "dropped",
-      "previous": 31,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "ketamine clinic software",
-      "type": "dropped",
-      "previous": 70,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "psychedelic therapy ehr",
-      "type": "dropped",
-      "previous": 6,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "ketamine practice management",
-      "type": "dropped",
-      "previous": 11,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "ketamine infusion clinic software",
-      "type": "dropped",
-      "previous": 25,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "osmind vs mindbloom",
-      "type": "dropped",
-      "previous": 90,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "osmind alternatives",
-      "type": "dropped",
-      "previous": 80,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "ketamine telehealth software",
-      "type": "dropped",
-      "previous": 29,
-      "current": null,
-      "change": "Dropped out of top 100"
-    },
-    {
-      "keyword": "mental health ehr ketamine",
-      "type": "dropped",
-      "previous": 11,
-      "current": null,
-      "change": "Dropped out of top 100"
-    }
-  ],
+  "changes": [],
   "summary": {
     "totalKeywords": 10,
     "rankedKeywords": 0,
     "top10Count": 0,
     "top30Count": 0,
-    "significantChanges": 10,
+    "significantChanges": 0,
     "improvements": 0,
-    "declines": 10
+    "declines": 0
   }
 }
