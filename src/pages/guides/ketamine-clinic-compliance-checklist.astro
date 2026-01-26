@@ -1,0 +1,379 @@
+---
+/**
+ * Ketamine clinic compliance checklist - targeting new clinics
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Ketamine Clinic Compliance Checklist',
+  description: 'Complete compliance checklist for ketamine infusion clinics covering DEA registration, state licensing, HIPAA, controlled substance handling, and documentation.',
+  author: {
+    '@type': 'Organization',
+    name: 'Ketamine Software Directory',
+  },
+};
+---
+
+<BaseLayout
+  title="Ketamine Clinic Compliance Checklist 2026 - Regulations & Requirements"
+  description="Complete compliance checklist for starting a ketamine clinic. DEA registration, state licensing, controlled substance handling, HIPAA, documentation requirements, and more."
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li>
+          <a href="/guides/" class="text-slate-500 hover:text-slate-700">Guides</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Compliance Checklist</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <header>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          Ketamine Clinic Compliance Checklist
+        </h1>
+        <p class="mt-4 text-lg text-slate-600">
+          Essential regulatory and compliance requirements for operating a ketamine infusion clinic in the United States.
+        </p>
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
+          <span>15 min read</span>
+          <span>·</span>
+          <span>Last updated: January 2026</span>
+        </div>
+      </header>
+
+      <!-- Disclaimer -->
+      <div class="mt-10 rounded-xl border border-amber-200 bg-amber-50 p-6">
+        <div class="flex gap-3">
+          <svg class="h-6 w-6 shrink-0 text-amber-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <div>
+            <h3 class="font-semibold text-amber-800">Consult Legal Counsel</h3>
+            <p class="mt-1 text-sm text-amber-700">
+              This checklist is for informational purposes only. Requirements vary by state and change frequently. Always consult with a healthcare attorney and compliance specialist familiar with your state's regulations.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-gray mt-12 max-w-none">
+        <h2>Federal Requirements</h2>
+
+        <h3>DEA Registration</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Obtain DEA registration for practice location (Form 224)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Register for Schedule III controlled substances (ketamine)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Ensure all prescribing providers have individual DEA numbers</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Establish secure storage for controlled substances</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Implement DEA-compliant inventory tracking system</span>
+            </label>
+          </div>
+        </div>
+
+        <h3>HIPAA Compliance</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Designate a Privacy Officer</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Conduct HIPAA risk assessment</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Develop Notice of Privacy Practices (NPP)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Train all staff on HIPAA requirements</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Implement technical safeguards (encryption, access controls)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Execute BAAs with all vendors handling PHI</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Establish breach notification procedures</span>
+            </label>
+          </div>
+        </div>
+
+        <h2>State Requirements</h2>
+
+        <h3>Medical Licensing</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Verify all providers licensed in practice state</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Obtain state controlled substance registration (if required)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Check state board requirements for off-label ketamine use</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Review collaborative practice requirements for NPs/PAs</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Obtain facility license (if required by state)</span>
+            </label>
+          </div>
+        </div>
+
+        <h3>PDMP Requirements</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Register with state Prescription Drug Monitoring Program</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Understand state PDMP check requirements (many require check before prescribing controlled substances)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Integrate PDMP with EHR (if available)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document PDMP checks in patient records</span>
+            </label>
+          </div>
+        </div>
+
+        <h2>Controlled Substance Handling</h2>
+
+        <h3>Storage & Security</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Install DEA-compliant locked storage (substantially constructed cabinet or safe)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Limit access to authorized personnel only</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Maintain access log for controlled substance storage</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Install security system with alarm monitoring</span>
+            </label>
+          </div>
+        </div>
+
+        <h3>Inventory Management</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Conduct initial inventory upon opening</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Conduct biennial inventory (every 2 years)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Maintain perpetual inventory records</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Track lot numbers and expiration dates</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document all waste/disposal (witness required)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Report thefts/losses to DEA within one business day</span>
+            </label>
+          </div>
+        </div>
+
+        <h2>Clinical Documentation</h2>
+
+        <h3>Informed Consent</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Develop ketamine-specific informed consent form</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Include off-label use disclosure (for depression/pain)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document risks, benefits, and alternatives</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Include driving restrictions (no driving day of treatment)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Obtain signature before each treatment series</span>
+            </label>
+          </div>
+        </div>
+
+        <h3>Treatment Documentation</h3>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document medical necessity for ketamine treatment</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Record baseline vital signs before each treatment</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document dose, route, and administration time</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Record monitoring observations during treatment</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Document patient status at discharge</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Track treatment outcomes (PHQ-9, etc.) over time</span>
+            </label>
+          </div>
+        </div>
+
+        <h2>Emergency Preparedness</h2>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Establish emergency response protocols</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Maintain emergency equipment (oxygen, suction, AED)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Stock reversal agents (benzodiazepines for emergence)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Train staff in BLS/ACLS (appropriate to services)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Establish hospital transfer protocols</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Conduct regular emergency drills</span>
+            </label>
+          </div>
+        </div>
+
+        <h2>Software & Technology</h2>
+        <div class="not-prose rounded-lg border border-slate-200 bg-slate-50 p-4">
+          <div class="space-y-3">
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Implement HIPAA-compliant EHR system</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Configure ketamine-specific documentation templates</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Set up ePrescribing with EPCS capability</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Integrate PDMP checking into workflow</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Implement patient outcome tracking (PHQ-9, GAD-7)</span>
+            </label>
+            <label class="flex items-start gap-3">
+              <input type="checkbox" class="mt-1 h-4 w-4 rounded border-slate-300" />
+              <span class="text-sm text-slate-700">Configure controlled substance inventory tracking</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 rounded-xl border border-teal-200 bg-teal-50 p-6">
+        <h3 class="text-lg font-semibold text-slate-900">Find Compliant EHR Software</h3>
+        <p class="mt-2 text-slate-600">
+          Compare EHR systems with ketamine-specific features, EPCS, and compliance tools.
+        </p>
+        <a
+          href="/software/"
+          class="mt-4 inline-flex items-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+        >
+          Browse Software
+          <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

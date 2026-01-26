@@ -1,0 +1,316 @@
+---
+/**
+ * IV therapy EHR requirements guide
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+const ivCapable = allSoftware.filter(
+  (s) => s.data.ketamine_features.iv_protocols ||
+    s.data.description.toLowerCase().includes('iv') ||
+    s.data.description.toLowerCase().includes('infusion')
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'IV Therapy EHR Requirements',
+  description: 'What to look for in EHR software for IV therapy and infusion clinics. Documentation, vital monitoring, protocol templates, and compliance features.',
+  author: {
+    '@type': 'Organization',
+    name: 'Ketamine Software Directory',
+  },
+};
+---
+
+<BaseLayout
+  title="IV Therapy EHR Requirements 2026 - What Infusion Clinics Need"
+  description="Essential EHR features for IV therapy and infusion clinics. Vital sign documentation, protocol templates, medication management, and compliance requirements."
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li>
+          <a href="/guides/" class="text-slate-500 hover:text-slate-700">Guides</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">IV Therapy EHR Requirements</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Article -->
+  <article class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <!-- Header -->
+      <header>
+        <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+          IV Therapy EHR Requirements
+        </h1>
+        <p class="mt-4 text-lg text-slate-600">
+          What to look for in electronic health records software for ketamine infusion clinics and IV therapy centers.
+        </p>
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
+          <span>8 min read</span>
+          <span>·</span>
+          <span>Last updated: January 2026</span>
+        </div>
+      </header>
+
+      <!-- Table of Contents -->
+      <nav class="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-6">
+        <h2 class="text-sm font-semibold text-slate-900">Table of Contents</h2>
+        <ol class="mt-4 space-y-2 text-sm">
+          <li><a href="#why-specialized" class="text-teal-600 hover:text-teal-700">1. Why IV Therapy Needs Specialized EHR</a></li>
+          <li><a href="#documentation" class="text-teal-600 hover:text-teal-700">2. Documentation Requirements</a></li>
+          <li><a href="#vitals" class="text-teal-600 hover:text-teal-700">3. Vital Sign Monitoring</a></li>
+          <li><a href="#protocols" class="text-teal-600 hover:text-teal-700">4. Infusion Protocol Templates</a></li>
+          <li><a href="#medication" class="text-teal-600 hover:text-teal-700">5. Medication Management</a></li>
+          <li><a href="#scheduling" class="text-teal-600 hover:text-teal-700">6. Scheduling for Infusion Clinics</a></li>
+          <li><a href="#software-options" class="text-teal-600 hover:text-teal-700">7. Software Options</a></li>
+        </ol>
+      </nav>
+
+      <!-- Content -->
+      <div class="prose prose-gray mt-12 max-w-none">
+        <h2 id="why-specialized">Why IV Therapy Needs Specialized EHR</h2>
+        <p>
+          IV infusion clinics have fundamentally different documentation needs than traditional outpatient practices. A standard mental health EHR designed for 50-minute therapy sessions won't adequately capture the clinical workflow of a 2-hour ketamine infusion.
+        </p>
+
+        <h3>Key Differences in IV Therapy Workflows</h3>
+        <ul>
+          <li><strong>Real-time documentation</strong> - Vital signs and observations must be recorded during the procedure, not after</li>
+          <li><strong>Timed intervals</strong> - Documentation often follows specific intervals (pre-infusion, 15 min, 30 min, etc.)</li>
+          <li><strong>Multiple data points per visit</strong> - Blood pressure, heart rate, SpO2, and clinical observations at each interval</li>
+          <li><strong>Medication calculations</strong> - Weight-based dosing that may need adjustment during treatment</li>
+          <li><strong>Chair time optimization</strong> - Scheduling must account for actual infusion time plus monitoring</li>
+        </ul>
+
+        <h2 id="documentation">Documentation Requirements</h2>
+
+        <h3>Pre-Infusion Assessment</h3>
+        <p>Your EHR should capture:</p>
+        <ul>
+          <li>Patient eligibility confirmation (no contraindications)</li>
+          <li>Fasting status (if required by protocol)</li>
+          <li>Current medications and recent changes</li>
+          <li>Mental status assessment</li>
+          <li>Baseline vital signs</li>
+          <li>IV access site selection and condition</li>
+          <li>Consent verification</li>
+        </ul>
+
+        <h3>During Infusion</h3>
+        <p>Real-time documentation needs:</p>
+        <ul>
+          <li>Medication name, concentration, and dose</li>
+          <li>Start time and infusion rate</li>
+          <li>IV site assessment (patency, infiltration signs)</li>
+          <li>Vital signs at defined intervals</li>
+          <li>Patient response and tolerance</li>
+          <li>Any dose adjustments and rationale</li>
+          <li>Adverse events or complications</li>
+        </ul>
+
+        <h3>Post-Infusion</h3>
+        <ul>
+          <li>End time and total medication administered</li>
+          <li>Recovery assessment</li>
+          <li>Discharge criteria met</li>
+          <li>Post-treatment instructions given</li>
+          <li>Follow-up scheduled</li>
+          <li>Transportation arranged (for sedating treatments)</li>
+        </ul>
+
+        <h2 id="vitals">Vital Sign Monitoring</h2>
+        <p>
+          For ketamine and other sedating infusions, vital sign monitoring is critical for patient safety. Your EHR should support:
+        </p>
+
+        <h3>Essential Capabilities</h3>
+        <ul>
+          <li><strong>Timed vital sign templates</strong> - Pre-built documentation for vitals at intervals (baseline, 15 min, 30 min, 45 min, 1 hr, etc.)</li>
+          <li><strong>Trending and graphing</strong> - Visual display of BP, HR, SpO2 over the treatment session</li>
+          <li><strong>Abnormal value alerts</strong> - Flag values outside normal ranges</li>
+          <li><strong>Mobile/tablet entry</strong> - Document at chairside, not across the room</li>
+        </ul>
+
+        <h3>Vital Sign Parameters for Ketamine</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Frequency</th>
+              <th>Alert Threshold (example)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Blood Pressure</td>
+              <td>Every 15 minutes during, hourly post</td>
+              <td>SBP &gt; 180 or &lt; 90</td>
+            </tr>
+            <tr>
+              <td>Heart Rate</td>
+              <td>Every 15 minutes during</td>
+              <td>&gt; 120 or &lt; 50</td>
+            </tr>
+            <tr>
+              <td>SpO2</td>
+              <td>Continuous or every 15 min</td>
+              <td>&lt; 92%</td>
+            </tr>
+            <tr>
+              <td>Respiratory Rate</td>
+              <td>Every 15 minutes</td>
+              <td>&lt; 10 or &gt; 25</td>
+            </tr>
+            <tr>
+              <td>Sedation Score</td>
+              <td>Every 15 minutes</td>
+              <td>Varies by scale</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="protocols">Infusion Protocol Templates</h2>
+        <p>
+          The best IV therapy EHRs include or allow you to build protocol-specific templates:
+        </p>
+
+        <h3>Ketamine IV Protocol Template Should Include</h3>
+        <ul>
+          <li>Standard dosing (mg/kg) with weight-based calculation</li>
+          <li>Infusion duration settings</li>
+          <li>Monitoring intervals</li>
+          <li>Pre-medication options (ondansetron, etc.)</li>
+          <li>Dissociation assessment scale</li>
+          <li>Common side effects checklist</li>
+          <li>Emergency intervention documentation</li>
+          <li>Post-infusion recovery criteria</li>
+        </ul>
+
+        <h3>Protocol Customization</h3>
+        <p>
+          Different patients may need modified protocols. Your EHR should allow:
+        </p>
+        <ul>
+          <li>Dose adjustments from baseline protocol</li>
+          <li>Extended monitoring periods</li>
+          <li>Additional vital sign checks</li>
+          <li>Protocol variations (e.g., different ketamine formulations)</li>
+        </ul>
+
+        <h2 id="medication">Medication Management</h2>
+
+        <h3>Inventory Tracking</h3>
+        <p>For controlled substances like ketamine, your EHR should support:</p>
+        <ul>
+          <li>Lot number and expiration tracking</li>
+          <li>Wastage documentation with witness</li>
+          <li>Per-patient drug accountability</li>
+          <li>Low inventory alerts</li>
+          <li>DEA-compliant record keeping</li>
+        </ul>
+
+        <h3>Dosing Calculations</h3>
+        <ul>
+          <li>Weight-based dose calculations</li>
+          <li>Concentration calculations</li>
+          <li>Infusion rate calculations</li>
+          <li>BSA calculations (if applicable)</li>
+        </ul>
+
+        <h2 id="scheduling">Scheduling for Infusion Clinics</h2>
+        <p>
+          Infusion scheduling is more complex than standard appointments:
+        </p>
+
+        <h3>Scheduling Requirements</h3>
+        <ul>
+          <li><strong>Variable appointment lengths</strong> - Different infusion types have different durations</li>
+          <li><strong>Chair/room assignment</strong> - Track which infusion chair is available</li>
+          <li><strong>Recovery time blocking</strong> - Account for post-infusion monitoring</li>
+          <li><strong>Staff assignment</strong> - Match nurse ratios to scheduled infusions</li>
+          <li><strong>Series scheduling</strong> - Book multiple sessions for treatment series</li>
+        </ul>
+
+        <h3>Capacity Planning</h3>
+        <ul>
+          <li>If ketamine infusions take 2 hours total (1 hour infusion + 1 hour monitoring)</li>
+          <li>And you have 4 infusion chairs</li>
+          <li>And one RN can monitor 2 patients</li>
+          <li>Your scheduling system should understand these constraints</li>
+        </ul>
+
+        <h2 id="software-options">Software Options</h2>
+
+        <h3>Ketamine-Specific Software</h3>
+        <p>
+          Some EHRs are built specifically for ketamine or infusion clinics:
+        </p>
+        {ivCapable.length > 0 ? (
+          <ul>
+            {ivCapable.map((s) => (
+              <li>
+                <a href={`/software/${s.data.slug}/`} class="text-teal-600 hover:text-teal-700">
+                  {s.data.name}
+                </a>
+                {' '}- {s.data.ideal_for}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>
+            See our <a href="/software/" class="text-teal-600">full software directory</a> for options with IV therapy support.
+          </p>
+        )}
+
+        <h3>General EHRs with IV Customization</h3>
+        <p>
+          If you can't find a ketamine-specific solution that meets your needs, consider general EHRs with strong customization:
+        </p>
+        <ul>
+          <li><strong>Valant</strong> - Strong behavioral health focus with customizable templates</li>
+          <li><strong>AdvancedMD</strong> - Robust practice management with specialty support</li>
+          <li><strong>DrChrono</strong> - Highly customizable with open API</li>
+        </ul>
+
+        <h3>What to Ask Vendors</h3>
+        <ol>
+          <li>Do you have other infusion clinics using your software?</li>
+          <li>Can I see your IV/infusion documentation templates?</li>
+          <li>How do you handle timed vital sign documentation?</li>
+          <li>Is there mobile/tablet support for chairside documentation?</li>
+          <li>How does inventory/medication tracking work?</li>
+          <li>Can the scheduler handle variable-length appointments?</li>
+        </ol>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 rounded-xl border border-teal-200 bg-teal-50 p-6">
+        <h3 class="text-lg font-semibold text-slate-900">Compare IV-Capable EHR Software</h3>
+        <p class="mt-2 text-slate-600">
+          Browse our directory to find EHR systems with IV therapy and infusion clinic features.
+        </p>
+        <a
+          href="/software/"
+          class="mt-4 inline-flex items-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+        >
+          Browse Software
+          <svg class="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
