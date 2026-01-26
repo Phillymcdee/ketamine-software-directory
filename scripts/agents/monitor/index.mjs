@@ -31,8 +31,8 @@ const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const DRY_RUN = process.argv.includes('--dry-run');
 const UPTIME_ONLY = process.argv.includes('--uptime-only');
 
-// Apify Google Search Scraper actor
-const SERP_ACTOR = 'apify/google-search-scraper';
+// Apify Google SERP Scraper actor (100% success rate, $0.003/query)
+const SERP_ACTOR = 'alizarin_refrigerator-owner/google-serp-scraper';
 
 async function main() {
   console.log('MONITOR Agent starting...');
@@ -159,17 +159,22 @@ async function checkKeywordRankings(keywords, site) {
 
 async function checkSingleKeyword(keyword, site) {
   try {
-    // Call Apify Google Search Scraper
+    // Call Apify Google SERP Scraper
     const response = await fetch(`https://api.apify.com/v2/acts/${SERP_ACTOR}/run-sync-get-dataset-items?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        queries: [keyword],  // Must be an array
-        maxPagesPerQuery: 1,
-        resultsPerPage: 100,
-        mobileResults: false,
-        languageCode: 'en',
-        countryCode: 'US'
+        queries: [keyword],
+        location: 'United States',
+        language: 'en',
+        device: 'desktop',
+        maxResults: 100,
+        includeAds: false,
+        includePAA: false,
+        includeLocalPack: false,
+        includeFeaturedSnippet: false,
+        includeRelatedSearches: false,
+        demoMode: false  // IMPORTANT: must be false for real results
       }),
       signal: AbortSignal.timeout(120000)  // 2 min timeout
     });
@@ -183,14 +188,14 @@ async function checkSingleKeyword(keyword, site) {
     const results = await response.json();
 
     // Find our site in organic results
-    const organicResults = results[0]?.organicResults || [];
+    const organicResults = results[0]?.organicResults || results[0]?.organic || [];
     const ourResult = organicResults.find(r =>
       r.url && r.url.includes(site)
     );
 
     if (ourResult) {
       return {
-        position: ourResult.position,
+        position: ourResult.position || ourResult.rank,
         url: ourResult.url,
         title: ourResult.title
       };
