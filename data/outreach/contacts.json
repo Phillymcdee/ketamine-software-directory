@@ -1,0 +1,145 @@
+{
+  "vendors": [
+    {
+      "slug": "osmind",
+      "name": "Osmind",
+      "website": "https://www.osmind.org",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "slug": "simplepractice",
+      "name": "SimplePractice",
+      "website": "https://www.simplepractice.com",
+      "category": "practice_management",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "slug": "theranest",
+      "name": "TheraNest",
+      "website": "https://www.theranest.com",
+      "category": "practice_management",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "slug": "therapynotes",
+      "name": "TherapyNotes",
+      "website": "https://www.therapynotes.com",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "slug": "luminello",
+      "name": "Luminello",
+      "website": "https://luminello.com",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "high"
+    },
+    {
+      "slug": "valant",
+      "name": "Valant",
+      "website": "https://www.valant.io",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "slug": "charmhealth",
+      "name": "CharmHealth",
+      "website": "https://www.charmhealth.com",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "slug": "practiceq",
+      "name": "PracticeQ",
+      "website": "https://www.practiceq.com",
+      "category": "practice_management",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "medium"
+    },
+    {
+      "slug": "drchrono",
+      "name": "DrChrono",
+      "website": "https://www.drchrono.com",
+      "category": "ehr",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "low"
+    },
+    {
+      "slug": "advancedmd",
+      "name": "AdvancedMD",
+      "website": "https://www.advancedmd.com",
+      "category": "practice_management",
+      "contact": {
+        "email": null,
+        "name": null,
+        "role": null,
+        "source": null
+      },
+      "status": "pending",
+      "priority": "low"
+    }
+  ],
+  "lastUpdated": "2025-01-25T00:00:00.000Z"
+}

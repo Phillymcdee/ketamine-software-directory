@@ -1,0 +1,94 @@
+name: Vendor Outreach
+
+on:
+  # Manual trigger only - outreach requires human judgment
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Command to run'
+        type: choice
+        options:
+          - status
+          - generate
+          - remind
+        default: status
+      dry_run:
+        description: 'Dry run (no file changes)'
+        type: boolean
+        default: true
+
+jobs:
+  outreach:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run OUTREACH agent
+        env:
+          SENDER_NAME: ${{ secrets.SENDER_NAME || 'Phil' }}
+        run: |
+          ARGS="${{ inputs.command }}"
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          node scripts/agents/outreach/index.mjs $ARGS
+
+      - name: Create PR with drafts
+        if: ${{ inputs.command == 'generate' && !inputs.dry_run }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Check if there are changes
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          # Create branch and PR
+          BRANCH="outreach-drafts-$(date +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          git add data/outreach/
+          git commit -m "chore: add outreach email drafts for review"
+          git push origin "$BRANCH"
+
+          # Create PR using gh cli
+          gh pr create \
+            --title "Outreach: Email drafts ready for review" \
+            --body "## Outreach Drafts
+
+          New email drafts have been generated for vendor outreach.
+
+          **Review process:**
+          1. Check each draft in \`data/outreach/drafts/\`
+          2. Edit as needed
+          3. When ready to send, update \`data/outreach/tracking.json\`
+          4. Merge this PR
+
+          **Do not merge until you have sent the emails.**" \
+            --label "outreach"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send Slack notification
+        if: ${{ inputs.command == 'remind' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK_URL" ]; then
+            # Run remind and capture output
+            OUTPUT=$(node scripts/agents/outreach/index.mjs remind 2>&1)
+
+            # Send to Slack if there are reminders
+            if echo "$OUTPUT" | grep -q "need follow-up"; then
+              curl -X POST -H 'Content-type: application/json' \
+                --data "{\"text\": \"*Outreach Follow-up Reminders*\n\`\`\`$OUTPUT\`\`\`\"}" \
+                "$SLACK_WEBHOOK_URL"
+            fi
+          fi

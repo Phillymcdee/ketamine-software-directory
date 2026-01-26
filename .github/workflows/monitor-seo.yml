@@ -1,0 +1,55 @@
+name: SEO Monitor
+
+on:
+  schedule:
+    # Run weekly on Sunday at 5am UTC
+    - cron: '0 5 * * 0'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without making Apify calls'
+        type: boolean
+        default: false
+      uptime_only:
+        description: 'Only check uptime'
+        type: boolean
+        default: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run MONITOR agent
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          ARGS=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          if [ "${{ inputs.uptime_only }}" = "true" ]; then
+            ARGS="$ARGS --uptime-only"
+          fi
+          node scripts/agents/monitor/index.mjs $ARGS
+
+      - name: Commit ranking data
+        if: ${{ !inputs.dry_run && !inputs.uptime_only }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/monitoring/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update SEO rankings data [skip ci]"
+            git push
+          fi

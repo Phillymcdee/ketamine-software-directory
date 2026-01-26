@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-01-26T01:11:37.269Z",
+  "site": "ketaminesoftware.com",
+  "uptime": {
+    "status": "up",
+    "statusCode": 200,
+    "responseTime": 115
+  },
+  "rankings": {
+    "ketamine therapy software": {
+      "position": 35,
+      "url": "https://ketaminesoftware.com/",
+      "title": "Ketamine Software Directory"
+    },
+    "ketamine clinic ehr": {
+      "position": 31,
+      "url": "https://ketaminesoftware.com/",
+      "title": "Ketamine Software Directory"
+    },
+    "ketamine clinic software": {
+      "position": 70,
+      "url": "https://ketaminesoftware.com/",
+      "title": "Ketamine Software Directory"
+    },
+    "psychedelic therapy ehr": {
+      "position": 6,
+      "url": null,
+      "title": null
+    },
+    "ketamine practice management": {
+      "position": 11,
+      "url": null,
+      "title": null
+    },
+    "ketamine infusion clinic software": {
+      "position": 25,
+      "url": null,
+      "title": null
+    },
+    "osmind vs mindbloom": {
+      "position": 90,
+      "url": null,
+      "title": null
+    },
+    "osmind alternatives": {
+      "position": 80,
+      "url": null,
+      "title": null
+    },
+    "ketamine telehealth software": {
+      "position": 29,
+      "url": null,
+      "title": null
+    },
+    "mental health ehr ketamine": {
+      "position": 11,
+      "url": null,
+      "title": null
+    }
+  },
+  "changes": [],
+  "summary": {
+    "totalKeywords": 10,
+    "rankedKeywords": 10,
+    "top10Count": 1,
+    "top30Count": 5,
+    "significantChanges": 0,
+    "improvements": 0,
+    "declines": 0
+  }
+}
