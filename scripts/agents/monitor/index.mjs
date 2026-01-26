@@ -32,7 +32,8 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const UPTIME_ONLY = process.argv.includes('--uptime-only');
 
 // Apify Google SERP Scraper actor (99.7% success rate, $0.0005/result)
-const SERP_ACTOR = 'scraperlink/google-search-results-serp-scraper';
+// Note: Use ~ instead of / for Apify API URLs
+const SERP_ACTOR = 'scraperlink~google-search-results-serp-scraper';
 
 async function main() {
   console.log('MONITOR Agent starting...');
