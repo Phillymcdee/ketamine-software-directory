@@ -164,19 +164,19 @@ async function checkSingleKeyword(keyword, site) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        queries: keyword,
+        queries: [keyword],  // Must be an array
         maxPagesPerQuery: 1,
         resultsPerPage: 100,
         mobileResults: false,
         languageCode: 'en',
-        countryCode: 'us'
+        countryCode: 'US'
       }),
-      signal: AbortSignal.timeout(60000)
+      signal: AbortSignal.timeout(120000)  // 2 min timeout
     });
 
     if (!response.ok) {
       const text = await response.text();
-      console.error(`Apify error for "${keyword}": ${text}`);
+      console.error(`Apify error for "${keyword}": ${text.substring(0, 200)}`);
       return { position: null, error: 'API error' };
     }
 
