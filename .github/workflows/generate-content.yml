@@ -1,0 +1,167 @@
+name: Generate AI Content
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  schedule:
+    # Run every Sunday at 5 AM UTC
+    - cron: '0 5 * * 0'
+  workflow_dispatch:
+    inputs:
+      content_type:
+        description: 'Content type to generate'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - comparison
+          - alternatives
+          - vendorSummary
+      limit:
+        description: 'Maximum items to generate (leave empty for all)'
+        required: false
+        default: ''
+      force:
+        description: 'Regenerate existing content'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ensure generated directory exists
+        run: mkdir -p data/generated
+
+      - name: Run GENERATE agent
+        id: generate
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -euo pipefail
+          echo "Running GENERATE agent..."
+
+          # Build command with optional args
+          CMD="node scripts/agents/generate/index.mjs"
+
+          if [ -n "${{ inputs.content_type || 'all' }}" ]; then
+            CMD="$CMD --type=${{ inputs.content_type || 'all' }}"
+          fi
+
+          if [ -n "${{ inputs.limit }}" ]; then
+            CMD="$CMD --limit=${{ inputs.limit }}"
+          fi
+
+          if [ "${{ inputs.force }}" = "true" ]; then
+            CMD="$CMD --force"
+          fi
+
+          echo "Command: $CMD"
+          $CMD
+
+          # Count generated items
+          COMPARISONS=0
+          ALTERNATIVES=0
+          SUMMARIES=0
+
+          if [ -f data/generated/comparisons.json ]; then
+            COMPARISONS=$(cat data/generated/comparisons.json | jq 'length')
+          fi
+          if [ -f data/generated/alternatives.json ]; then
+            ALTERNATIVES=$(cat data/generated/alternatives.json | jq 'length')
+          fi
+          if [ -f data/generated/vendor-summaries.json ]; then
+            SUMMARIES=$(cat data/generated/vendor-summaries.json | jq 'length')
+          fi
+
+          echo "comparisons=${COMPARISONS}" >> $GITHUB_OUTPUT
+          echo "alternatives=${ALTERNATIVES}" >> $GITHUB_OUTPUT
+          echo "summaries=${SUMMARIES}" >> $GITHUB_OUTPUT
+
+          TOTAL=$((COMPARISONS + ALTERNATIVES + SUMMARIES))
+          echo "total=${TOTAL}" >> $GITHUB_OUTPUT
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add data/generated/
+          git diff --cached --quiet || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Create pull request
+        id: create_pr
+        if: steps.check_changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: bot/generate-content
+          delete-branch: true
+          title: "[bot] AI-generated content update"
+          commit-message: "[bot] Update AI-generated content"
+          add-paths: |
+            data/generated/
+          body: |
+            ## AI Content Generation Update
+
+            The GENERATE agent has created/updated content for the ketamine software directory.
+
+            **Content Stats:**
+            - Comparisons: ${{ steps.generate.outputs.comparisons }}
+            - Alternatives: ${{ steps.generate.outputs.alternatives }}
+            - Vendor Summaries: ${{ steps.generate.outputs.summaries }}
+            - **Total:** ${{ steps.generate.outputs.total }}
+
+            **Review Checklist:**
+            - [ ] Spot-check 2-3 comparison narratives for accuracy
+            - [ ] Verify ketamine-specific details are correct
+            - [ ] Check factual claims match software data
+
+            ---
+            *AI-generated content - human review recommended*
+
+      - name: Notify Slack
+        if: steps.check_changes.outputs.changes == 'true'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          PR_URL: ${{ steps.create_pr.outputs.pull-request-url }}
+          TOTAL: ${{ steps.generate.outputs.total }}
+        run: |
+          if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+            curl -X POST -H 'Content-Type: application/json' \
+              --data "{
+                \"blocks\": [
+                  {\"type\": \"header\", \"text\": {\"type\": \"plain_text\", \"text\": \":pencil: AI Content Generated (Ketamine)\", \"emoji\": true}},
+                  {\"type\": \"section\", \"text\": {\"type\": \"mrkdwn\", \"text\": \"GENERATE agent created/updated *${TOTAL}* content pieces.\"}},
+                  {\"type\": \"actions\", \"elements\": [
+                    {\"type\": \"button\", \"text\": {\"type\": \"plain_text\", \"text\": \"Review PR\"}, \"url\": \"${PR_URL:-https://github.com/Phillymcdee/ketamine-software-directory/pulls}\"}
+                  ]}
+                ]
+              }" "$SLACK_WEBHOOK_URL"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## GENERATE Agent Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Content Type | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Comparisons | ${{ steps.generate.outputs.comparisons }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Alternatives | ${{ steps.generate.outputs.alternatives }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Vendor Summaries | ${{ steps.generate.outputs.summaries }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Total** | **${{ steps.generate.outputs.total }}** |" >> $GITHUB_STEP_SUMMARY

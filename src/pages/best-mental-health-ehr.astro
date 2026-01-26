@@ -1,0 +1,223 @@
+---
+/**
+ * Category landing page targeting "best mental health EHR" (880/mo search volume)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SoftwareCard from '../components/SoftwareCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+
+// Sort by ketamine feature count (mental health relevance proxy)
+const sortedSoftware = allSoftware
+  .map((s) => ({
+    ...s.data,
+    ketamineFeatureCount: Object.values(s.data.ketamine_features).filter(Boolean).length,
+    hasMentalHealthFocus:
+      s.data.software_type === 'ketamine_specific' ||
+      s.data.software_type === 'ketamine_compatible' ||
+      s.data.description.toLowerCase().includes('mental health') ||
+      s.data.description.toLowerCase().includes('behavioral health') ||
+      s.data.description.toLowerCase().includes('psychiatr'),
+  }))
+  .sort((a, b) => {
+    // Prioritize mental health focused software
+    if (a.hasMentalHealthFocus && !b.hasMentalHealthFocus) return -1;
+    if (!a.hasMentalHealthFocus && b.hasMentalHealthFocus) return 1;
+    return b.ketamineFeatureCount - a.ketamineFeatureCount;
+  });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Best Mental Health EHR Software 2026',
+  description: `Compare the ${allSoftware.length} best mental health EHR systems. Features, pricing, and reviews for therapists, psychiatrists, and behavioral health practices.`,
+  url: 'https://ketaminesoftware.com/best-mental-health-ehr/',
+};
+---
+
+<BaseLayout
+  title="Best Mental Health EHR Software 2026 - Top 15 Compared"
+  description={`Compare the ${allSoftware.length} best mental health EHR systems for therapists, psychiatrists, and behavioral health practices. See pricing, features, and honest reviews.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Best Mental Health EHR</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+        Best Mental Health EHR Software
+      </h1>
+      <p class="mt-6 text-xl text-slate-300">
+        Compare {allSoftware.length} EHR systems designed for therapists, psychiatrists, and behavioral health practices. Find the right fit for your mental health practice.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro Content -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose prose-slate max-w-none">
+        <h2>What Makes a Good Mental Health EHR?</h2>
+        <p>
+          Mental health practices have unique needs that general medical EHRs often don't address. The best mental health EHR software includes:
+        </p>
+        <ul>
+          <li><strong>Progress note templates</strong> designed for therapy sessions (SOAP, DAP, BIRP notes)</li>
+          <li><strong>Treatment planning tools</strong> with clinical interventions and goals tracking</li>
+          <li><strong>Patient outcome measures</strong> like PHQ-9, GAD-7, and other validated assessments</li>
+          <li><strong>Integrated telehealth</strong> for remote therapy sessions</li>
+          <li><strong>E-prescribing with EPCS</strong> for psychiatrists prescribing controlled substances</li>
+          <li><strong>HIPAA compliance</strong> with audit trails and secure messaging</li>
+        </ul>
+        <p>
+          We've evaluated each EHR below based on these criteria, plus pricing transparency and user reviews.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software Grid -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h2 class="text-2xl font-bold text-slate-900">Top {allSoftware.length} Mental Health EHR Systems</h2>
+      <p class="mt-2 text-slate-600">
+        Ranked by mental health features, user reviews, and value
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedSoftware.map((software, index) => (
+          <div class="relative">
+            {index < 3 && (
+              <div class="absolute -top-2 -left-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 text-sm font-bold text-white">
+                #{index + 1}
+              </div>
+            )}
+            <SoftwareCard
+              name={software.name}
+              slug={software.slug}
+              description={software.description}
+              logo={software.logo}
+              startingPrice={software.pricing.starting_price}
+              currency={software.pricing.currency}
+              pricingModel={software.pricing.model}
+              hasFreeTrisl={software.pricing.has_free_trial}
+              ketamineFeatureCount={software.ketamineFeatureCount}
+              isKetamineSpecific={software.hasMentalHealthFocus}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Comparison Table -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-bold text-slate-900">Quick Price Comparison</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-slate-200">
+              <th class="py-3 pr-4 text-left font-semibold text-slate-900">EHR</th>
+              <th class="px-4 py-3 text-left font-semibold text-slate-900">Starting Price</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Free Trial</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Telehealth</th>
+              <th class="pl-4 py-3 text-right font-semibold text-slate-900"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {sortedSoftware.slice(0, 10).map((s) => (
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 pr-4 font-medium text-slate-900">{s.name}</td>
+                <td class="px-4 py-3 text-slate-600">
+                  {s.pricing.starting_price ? `$${s.pricing.starting_price}/mo` : 'Contact for pricing'}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.pricing.has_free_trial ? (
+                    <span class="text-teal-600">Yes</span>
+                  ) : (
+                    <span class="text-slate-400">No</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('telehealth') && f.available) ? (
+                    <span class="text-teal-600">Yes</span>
+                  ) : (
+                    <span class="text-slate-400">-</span>
+                  )}
+                </td>
+                <td class="py-3 pl-4 text-right">
+                  <a href={`/software/${s.slug}/`} class="text-teal-600 hover:text-teal-700">
+                    Review
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section for SEO -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
+      <div class="mt-8 space-y-6">
+        <div>
+          <h3 class="font-semibold text-slate-900">What is the best EHR for a solo therapist?</h3>
+          <p class="mt-2 text-slate-600">
+            For solo therapists, SimplePractice and TheraNest offer the best value with intuitive interfaces, integrated telehealth, and affordable pricing starting under $50/month.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">Do mental health EHRs include telehealth?</h3>
+          <p class="mt-2 text-slate-600">
+            Most modern mental health EHRs include integrated telehealth. SimplePractice, TherapyNotes, and Jane App all offer video sessions as part of their core plans.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">What EHR do psychiatrists use?</h3>
+          <p class="mt-2 text-slate-600">
+            Psychiatrists often need e-prescribing for controlled substances (EPCS). Valant, AdvancedMD, and DrChrono offer robust e-prescribing with EPCS compliance.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">How much does mental health EHR software cost?</h3>
+          <p class="mt-2 text-slate-600">
+            Pricing ranges from $29/month (TheraNest) to $299+/month (AdvancedMD) depending on features and practice size. Most offer per-clinician pricing with volume discounts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-slate-900">Need Help Choosing?</h2>
+      <p class="mt-4 text-slate-600">
+        Compare any two EHRs side-by-side to see detailed feature differences.
+      </p>
+      <a
+        href="/compare/"
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
+      >
+        Compare EHR Software
+      </a>
+    </div>
+  </section>
+</BaseLayout>

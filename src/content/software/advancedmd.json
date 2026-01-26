@@ -1,0 +1,76 @@
+{
+  "name": "AdvancedMD",
+  "slug": "advancedmd",
+  "website": "https://www.advancedmd.com",
+  "logo": "/images/software/advancedmd-logo.png",
+  "software_type": "general_ehr",
+  "description": "Comprehensive cloud-based EHR and practice management solution with specialized behavioral health workflows, integrated billing, and revenue cycle management for practices of all sizes.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.advancedmd.com", "https://www.advancedmd.com/software-pricing/"],
+    "notes": "General EHR with dedicated behavioral health and mental health specialty support. Known SPRAVATO billing integration partner. Quote-based pricing varies significantly."
+  },
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 299,
+    "currency": "USD",
+    "has_free_trial": false,
+    "billing_cycle": "monthly",
+    "notes": "Behavioral health bundle starts at $299/mo per provider. General pricing ranges $229-$729/mo. NOW subscription at $130/mo. Setup fees and add-ons extra. Multi-provider discounts available."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": true,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Behavioral health documentation templates", "available": true },
+    { "category": "Clinical", "feature": "ePrescribe with EPCS", "available": true },
+    { "category": "Clinical", "feature": "Treatment plan management", "available": true },
+    { "category": "Clinical", "feature": "Clinical decision support", "available": true },
+    { "category": "Clinical", "feature": "Lab integrations", "available": true },
+    { "category": "Scheduling", "feature": "Online appointment scheduling", "available": true },
+    { "category": "Scheduling", "feature": "Automated appointment reminders", "available": true },
+    { "category": "Scheduling", "feature": "Multi-location scheduling", "available": true },
+    { "category": "Billing", "feature": "Medical billing and claims", "available": true },
+    { "category": "Billing", "feature": "Revenue cycle management", "available": true },
+    { "category": "Billing", "feature": "Insurance eligibility verification", "available": true },
+    { "category": "Billing", "feature": "SPRAVATO REMS billing support", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Integrated telehealth", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "ONC certified", "available": true }
+  ],
+  "integrations": [
+    "Labs (Quest, LabCorp)",
+    "Clearinghouses",
+    "Payment processors",
+    "SPRAVATO REMS",
+    "Imaging centers",
+    "HIE networks"
+  ],
+  "pros": [
+    "Dedicated behavioral health workflows and templates",
+    "SPRAVATO REMS integration for billing compliance",
+    "Comprehensive revenue cycle management",
+    "Scalable for multi-provider practices",
+    "Strong reporting and analytics"
+  ],
+  "cons": [
+    "Higher price point than competitors",
+    "Complex pricing structure - requires quote",
+    "Steep learning curve for full functionality",
+    "Setup fees can be significant",
+    "Some users report slow customer support"
+  ],
+  "ideal_for": "Mid-size to large behavioral health practices needing robust billing, RCM, and SPRAVATO workflow support.",
+  "last_verified": "2026-01-25",
+  "data_source": "AdvancedMD.com, Capterra, SelectHub"
+}

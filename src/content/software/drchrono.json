@@ -1,0 +1,75 @@
+{
+  "name": "DrChrono",
+  "slug": "drchrono",
+  "website": "https://www.drchrono.com",
+  "logo": "/images/software/drchrono-logo.png",
+  "software_type": "general_ehr",
+  "description": "All-in-one EHR, practice management, and medical billing solution with mobile-first design, ePrescribe with EPCS, and integrated telehealth for practices of all sizes.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.drchrono.com", "https://www.drchrono.com/plans-and-pricing/"],
+    "notes": "General EHR with Mental and Behavioral Health specialty support. Quote-based pricing. Strong mobile app and API."
+  },
+  "pricing": {
+    "model": "custom",
+    "starting_price": null,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "5 plans: Essentials, Essentials Plus, Advanced, Advanced Plus, Elite. Per-provider pricing requires quote. Add-ons from $20/provider/mo."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": false,
+    "spravato_workflows": false,
+    "patient_rating_scales": false,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Customizable medical templates", "available": true },
+    { "category": "Clinical", "feature": "ePrescribe with EPCS", "available": true },
+    { "category": "Clinical", "feature": "Lab integration (Quest, LabCorp)", "available": true },
+    { "category": "Clinical", "feature": "Medical speech-to-text", "available": true },
+    { "category": "Clinical", "feature": "Drawing and photo tools", "available": true },
+    { "category": "Scheduling", "feature": "Online scheduling widget", "available": true },
+    { "category": "Scheduling", "feature": "Appointment reminders (email/text/phone)", "available": true },
+    { "category": "Scheduling", "feature": "Patient check-in kiosk", "available": true },
+    { "category": "Billing", "feature": "Medical billing and claims", "available": true },
+    { "category": "Billing", "feature": "Revenue cycle management (Elite)", "available": true },
+    { "category": "Billing", "feature": "Insurance eligibility checks", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal and app", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Integrated telehealth", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "ONC certified", "available": true }
+  ],
+  "integrations": [
+    "Quest Diagnostics",
+    "LabCorp",
+    "Box",
+    "Stripe",
+    "Apple Health",
+    "Open API"
+  ],
+  "pros": [
+    "Mobile-first design with native iOS app",
+    "Comprehensive API for custom integrations",
+    "Full revenue cycle management available",
+    "ePrescribe with EPCS controlled substances",
+    "Supports 30+ medical specialties including mental health"
+  ],
+  "cons": [
+    "No ketamine-specific features or workflows",
+    "Pricing requires quote - not transparent",
+    "Per-provider pricing adds up for larger practices",
+    "Some features require higher tier plans",
+    "Learning curve for full feature utilization"
+  ],
+  "ideal_for": "Multi-specialty practices needing a mobile-friendly EHR with strong billing and API capabilities.",
+  "last_verified": "2026-01-25",
+  "data_source": "DrChrono.com"
+}

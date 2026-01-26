@@ -1,0 +1,195 @@
+---
+/**
+ * Category landing page targeting "EHR for therapists" (1,000/mo search volume)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SoftwareCard from '../components/SoftwareCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+
+// Filter and sort for therapist-relevant software
+const sortedSoftware = allSoftware
+  .map((s) => ({
+    ...s.data,
+    ketamineFeatureCount: Object.values(s.data.ketamine_features).filter(Boolean).length,
+    isTherapistFriendly:
+      s.data.pricing.starting_price !== null && s.data.pricing.starting_price < 200,
+  }))
+  .sort((a, b) => {
+    // Prioritize affordable options for solo therapists
+    if (a.isTherapistFriendly && !b.isTherapistFriendly) return -1;
+    if (!a.isTherapistFriendly && b.isTherapistFriendly) return 1;
+    // Then by price (lowest first)
+    const priceA = a.pricing.starting_price ?? 999;
+    const priceB = b.pricing.starting_price ?? 999;
+    return priceA - priceB;
+  });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'EHR for Therapists 2026',
+  description: `Compare ${allSoftware.length} EHR systems designed for therapists. Find affordable practice management software with notes, scheduling, billing, and telehealth.`,
+  url: 'https://ketaminesoftware.com/ehr-for-therapists/',
+};
+---
+
+<BaseLayout
+  title="EHR for Therapists 2026 - Best Practice Management Software"
+  description={`Find the best EHR for therapists in 2026. Compare ${allSoftware.length} practice management systems with therapy notes, scheduling, billing, and telehealth. Prices from $29/mo.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">EHR for Therapists</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+        EHR for Therapists
+      </h1>
+      <p class="mt-6 text-xl text-slate-300">
+        Find the right electronic health records software for your therapy practice. Compare {allSoftware.length} systems built for mental health professionals.
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro Content -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose prose-slate max-w-none">
+        <h2>What Therapists Need in an EHR</h2>
+        <p>
+          As a therapist, your EHR should simplify your practice, not complicate it. Unlike medical EHRs designed for hospitals, therapy practice software focuses on:
+        </p>
+        <ul>
+          <li><strong>Session notes templates</strong> - SOAP, DAP, and BIRP formats designed for talk therapy</li>
+          <li><strong>Simple scheduling</strong> - Online booking, automated reminders, and calendar sync</li>
+          <li><strong>Insurance billing</strong> - Claim submission, superbills, and ERA processing</li>
+          <li><strong>Secure client portal</strong> - Intake forms, consent documents, and messaging</li>
+          <li><strong>Telehealth</strong> - HIPAA-compliant video sessions (essential post-COVID)</li>
+        </ul>
+        <p>
+          We've ranked these EHRs based on ease of use, affordability, and features that matter most to therapists in private practice.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Picks -->
+  <section class="bg-teal-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-bold text-slate-900">Top Picks for Therapists</h2>
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-teal-200 bg-white p-6">
+          <span class="inline-block rounded-full bg-teal-100 px-3 py-1 text-sm font-medium text-teal-700">Best Overall</span>
+          <h3 class="mt-4 text-lg font-semibold text-slate-900">SimplePractice</h3>
+          <p class="mt-2 text-sm text-slate-600">Most popular choice with 250,000+ users. Intuitive interface, great telehealth.</p>
+          <p class="mt-3 text-lg font-semibold text-teal-600">From $49/mo</p>
+          <a href="/software/simplepractice/" class="mt-4 inline-block text-sm text-teal-600 hover:text-teal-700">Read review →</a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <span class="inline-block rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">Best Value</span>
+          <h3 class="mt-4 text-lg font-semibold text-slate-900">TheraNest</h3>
+          <p class="mt-2 text-sm text-slate-600">Most affordable option with AI-enhanced notes. Great for new practices.</p>
+          <p class="mt-3 text-lg font-semibold text-teal-600">From $29/mo</p>
+          <a href="/software/theranest/" class="mt-4 inline-block text-sm text-teal-600 hover:text-teal-700">Read review →</a>
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-white p-6">
+          <span class="inline-block rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">Best for Groups</span>
+          <h3 class="mt-4 text-lg font-semibold text-slate-900">TherapyNotes</h3>
+          <p class="mt-2 text-sm text-slate-600">Robust billing and scheduling. Scales well for group practices.</p>
+          <p class="mt-3 text-lg font-semibold text-teal-600">From $49/mo</p>
+          <a href="/software/therapynotes/" class="mt-4 inline-block text-sm text-teal-600 hover:text-teal-700">Read review →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Software Grid -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h2 class="text-2xl font-bold text-slate-900">All EHR Options for Therapists</h2>
+      <p class="mt-2 text-slate-600">
+        Sorted by price - most affordable first
+      </p>
+
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedSoftware.map((software) => (
+          <SoftwareCard
+            name={software.name}
+            slug={software.slug}
+            description={software.description}
+            logo={software.logo}
+            startingPrice={software.pricing.starting_price}
+            currency={software.pricing.currency}
+            pricingModel={software.pricing.model}
+            hasFreeTrisl={software.pricing.has_free_trial}
+            ketamineFeatureCount={software.ketamineFeatureCount}
+            isKetamineSpecific={software.isTherapistFriendly}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-bold text-slate-900">Common Questions</h2>
+      <div class="mt-8 space-y-6">
+        <div>
+          <h3 class="font-semibold text-slate-900">Do I really need an EHR for my therapy practice?</h3>
+          <p class="mt-2 text-slate-600">
+            If you accept insurance or plan to scale your practice, yes. EHRs streamline billing, reduce paperwork, and help maintain HIPAA compliance. Even cash-pay practices benefit from automated scheduling and telehealth.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">What's the cheapest EHR for therapists?</h3>
+          <p class="mt-2 text-slate-600">
+            TheraNest starts at $29/month and includes the essentials. SimplePractice starts at $49/month with more features. Both offer free trials.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">Is SimplePractice worth the cost?</h3>
+          <p class="mt-2 text-slate-600">
+            SimplePractice is the most popular choice among therapists for good reason - intuitive interface, reliable telehealth, and strong community support. At $49-99/month, most therapists find the time savings worth the investment.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">Can I use a free EHR for my therapy practice?</h3>
+          <p class="mt-2 text-slate-600">
+            Practice Fusion offers a free EHR option, but it's designed for medical practices, not therapy. For therapy-specific workflows, paid options like TheraNest ($29/mo) provide better value.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-slate-900">Compare Side-by-Side</h2>
+      <p class="mt-4 text-slate-600">
+        Not sure which EHR is right for you? Compare any two systems feature-by-feature.
+      </p>
+      <a
+        href="/compare/"
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
+      >
+        Compare EHR Software
+      </a>
+    </div>
+  </section>
+</BaseLayout>

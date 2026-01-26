@@ -1,0 +1,72 @@
+{
+  "name": "Practice Fusion",
+  "slug": "practicefusion",
+  "website": "https://www.practicefusion.com",
+  "logo": "/images/software/practicefusion-logo.png",
+  "software_type": "general_ehr",
+  "description": "Cloud-based EHR offering a simplified pricing model with e-prescribing, lab integrations, and MIPS dashboard access, designed for ambulatory care practices.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.practicefusion.com", "https://www.practicefusion.com/pricing/"],
+    "notes": "General ambulatory EHR. Single-tier pricing model. 2-week free trial available. No mental health-specific features documented."
+  },
+  "pricing": {
+    "model": "per_clinician",
+    "starting_price": 199,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "$199/mo per provider with annual commitment. Includes 3 signing staff + unlimited non-signing staff per provider. 2-week free trial, no credit card required."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": false,
+    "spravato_workflows": false,
+    "patient_rating_scales": false,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Customizable charting templates", "available": true },
+    { "category": "Clinical", "feature": "e-Prescribing (standard and controlled substances)", "available": true },
+    { "category": "Clinical", "feature": "Lab order submission", "available": true },
+    { "category": "Clinical", "feature": "Imaging order submission", "available": true },
+    { "category": "Clinical", "feature": "Chart signing and document approval", "available": true },
+    { "category": "Scheduling", "feature": "Appointment scheduling", "available": true },
+    { "category": "Scheduling", "feature": "Patient reminders", "available": true },
+    { "category": "Billing", "feature": "Integrated billing services (optional)", "available": true },
+    { "category": "Billing", "feature": "MIPS dashboard", "available": true },
+    { "category": "Billing", "feature": "Meaningful Use compliance", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Telehealth integration", "available": false },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "ONC certified", "available": true }
+  ],
+  "integrations": [
+    "Hundreds of lab centers",
+    "Imaging centers",
+    "Pharmacies (e-prescribe)",
+    "Billing services"
+  ],
+  "pros": [
+    "Simple, transparent pricing model",
+    "2-week free trial with no commitment",
+    "Unlimited non-signing staff included",
+    "e-Prescribing for controlled substances included",
+    "Access to extensive lab and imaging network"
+  ],
+  "cons": [
+    "No mental health or ketamine-specific features",
+    "Annual commitment required",
+    "Limited telehealth capabilities",
+    "Less customizable than competitors",
+    "Historically had compliance issues (2020 DOJ settlement)"
+  ],
+  "ideal_for": "Small ambulatory practices seeking straightforward EHR with simple pricing and included e-prescribing.",
+  "last_verified": "2026-01-25",
+  "data_source": "PracticeFusion.com"
+}

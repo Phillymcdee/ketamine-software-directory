@@ -1,0 +1,72 @@
+{
+  "name": "TheraNest",
+  "slug": "theranest",
+  "website": "https://ensorahealth.com/product/mental-health/",
+  "logo": "/images/software/theranest-logo.png",
+  "software_type": "ketamine_compatible",
+  "description": "Mental health practice management software (now part of Ensora Health) built specifically for therapists and behavioral health professionals with smart scheduling, AI-enhanced notes, and integrated billing.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://ensorahealth.com/product/mental-health/", "https://ensorahealth.com/pricing/"],
+    "notes": "TheraNest rebranded to Ensora Health in 2024. G2 Leader in mental health software. HITRUST certified."
+  },
+  "pricing": {
+    "model": "flat",
+    "starting_price": 29,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Starting at $29/mo. Transparent pricing with no hidden fees. Multiple tiers based on practice size and feature needs. RCM Essentials available as add-on."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Dynamic Form Builder (customizable notes)", "available": true },
+    { "category": "Clinical", "feature": "AI Notes Enhancement", "available": true },
+    { "category": "Clinical", "feature": "Treatment planning tools", "available": true },
+    { "category": "Clinical", "feature": "Progress notes templates", "available": true },
+    { "category": "Scheduling", "feature": "Smart scheduling with automated reminders", "available": true },
+    { "category": "Scheduling", "feature": "Client self-scheduling portal", "available": true },
+    { "category": "Scheduling", "feature": "Text, email, and phone reminders", "available": true },
+    { "category": "Billing", "feature": "Secure card payment processing", "available": true },
+    { "category": "Billing", "feature": "Insurance billing", "available": true },
+    { "category": "Billing", "feature": "RCM Essentials (add-on)", "available": true },
+    { "category": "Patient Engagement", "feature": "Client portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Integrated telehealth", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true },
+    { "category": "Compliance", "feature": "HITRUST certified", "available": true }
+  ],
+  "integrations": [
+    "Payment processors",
+    "Calendar sync",
+    "Insurance clearinghouses",
+    "Reminder services"
+  ],
+  "pros": [
+    "Very affordable starting at $29/mo",
+    "Built specifically for therapists and behavioral health",
+    "AI-enhanced documentation features",
+    "HITRUST certified security",
+    "Free trial available"
+  ],
+  "cons": [
+    "No ketamine-specific workflows",
+    "Recently rebranded (TheraNest to Ensora Health)",
+    "RCM features require add-on purchase",
+    "Less robust for multi-specialty practices",
+    "Limited integrations compared to larger EHRs"
+  ],
+  "ideal_for": "Solo therapists and small mental health practices seeking affordable, purpose-built practice management software.",
+  "last_verified": "2026-01-25",
+  "data_source": "EnsoraHealth.com"
+}

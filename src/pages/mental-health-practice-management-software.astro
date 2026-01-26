@@ -1,0 +1,191 @@
+---
+/**
+ * Category landing page targeting "mental health practice management software" (590/mo search volume)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SoftwareCard from '../components/SoftwareCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+
+const sortedSoftware = allSoftware
+  .map((s) => ({
+    ...s.data,
+    ketamineFeatureCount: Object.values(s.data.ketamine_features).filter(Boolean).length,
+    hasBilling: s.data.general_features?.some(
+      (f) => f.category === 'Billing' && f.available
+    ),
+    hasScheduling: s.data.general_features?.some(
+      (f) => f.category === 'Scheduling' && f.available
+    ),
+  }))
+  .sort((a, b) => {
+    // Prioritize software with both billing and scheduling
+    const aScore = (a.hasBilling ? 1 : 0) + (a.hasScheduling ? 1 : 0);
+    const bScore = (b.hasBilling ? 1 : 0) + (b.hasScheduling ? 1 : 0);
+    if (aScore !== bScore) return bScore - aScore;
+    return b.ketamineFeatureCount - a.ketamineFeatureCount;
+  });
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Mental Health Practice Management Software 2026',
+  description: `Compare ${allSoftware.length} practice management systems for mental health practices. Scheduling, billing, EHR, and patient management in one platform.`,
+  url: 'https://ketaminesoftware.com/mental-health-practice-management-software/',
+};
+---
+
+<BaseLayout
+  title="Mental Health Practice Management Software 2026 - Compare Top Solutions"
+  description={`Compare ${allSoftware.length} mental health practice management systems. All-in-one scheduling, billing, EHR, and patient management for therapists and counselors.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Mental Health Practice Management Software</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+        Mental Health Practice Management Software
+      </h1>
+      <p class="mt-6 text-xl text-slate-300">
+        All-in-one solutions combining scheduling, billing, documentation, and patient management for mental health practices.
+      </p>
+    </div>
+  </section>
+
+  <!-- What is Practice Management -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose prose-slate max-w-none">
+        <h2>What is Practice Management Software?</h2>
+        <p>
+          Practice management software handles the business side of running a mental health practice. While EHR focuses on clinical documentation, practice management covers:
+        </p>
+        <ul>
+          <li><strong>Appointment scheduling</strong> - Calendar management, online booking, and automated reminders</li>
+          <li><strong>Billing and revenue</strong> - Insurance claims, payment processing, and financial reporting</li>
+          <li><strong>Patient management</strong> - Contact information, intake forms, and communication</li>
+          <li><strong>Administrative tasks</strong> - Staff scheduling, reporting, and compliance tracking</li>
+        </ul>
+        <p>
+          Most modern mental health software combines EHR and practice management into one platform, eliminating the need for separate systems.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-bold text-slate-900">Core Features Comparison</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 bg-white">
+              <th class="py-3 pr-4 text-left font-semibold text-slate-900">Software</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Online Scheduling</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Insurance Billing</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Client Portal</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Telehealth</th>
+              <th class="pl-4 py-3 text-left font-semibold text-slate-900">Price</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 bg-white">
+            {sortedSoftware.slice(0, 10).map((s) => (
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 pr-4">
+                  <a href={`/software/${s.slug}/`} class="font-medium text-slate-900 hover:text-teal-600">
+                    {s.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('scheduling') && f.available) ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('billing') && f.available) ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('portal') && f.available) ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('telehealth') && f.available) ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="py-3 pl-4 text-slate-600">
+                  {s.pricing.starting_price ? `$${s.pricing.starting_price}/mo` : 'Contact'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Software Grid -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h2 class="text-2xl font-bold text-slate-900">All Practice Management Solutions</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedSoftware.map((software) => (
+          <SoftwareCard
+            name={software.name}
+            slug={software.slug}
+            description={software.description}
+            logo={software.logo}
+            startingPrice={software.pricing.starting_price}
+            currency={software.pricing.currency}
+            pricingModel={software.pricing.model}
+            hasFreeTrisl={software.pricing.has_free_trial}
+            ketamineFeatureCount={software.ketamineFeatureCount}
+            isKetamineSpecific={software.hasBilling && software.hasScheduling}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-slate-900">Ready to Choose?</h2>
+      <p class="mt-4 text-slate-600">
+        Compare any two practice management systems side-by-side.
+      </p>
+      <a
+        href="/compare/"
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
+      >
+        Compare Software
+      </a>
+    </div>
+  </section>
+</BaseLayout>

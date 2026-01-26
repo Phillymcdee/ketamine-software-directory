@@ -1,0 +1,226 @@
+---
+/**
+ * Category landing page targeting "psychiatry practice management software" (170/mo search volume)
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SoftwareCard from '../components/SoftwareCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSoftware = await getCollection('software');
+
+// Sort for psychiatry practice management needs
+const sortedSoftware = allSoftware
+  .map((s) => ({
+    ...s.data,
+    ketamineFeatureCount: Object.values(s.data.ketamine_features).filter(Boolean).length,
+    hasEPrescribe: s.data.general_features?.some(
+      (f) => f.feature.toLowerCase().includes('prescri') && f.available
+    ),
+    hasBilling: s.data.general_features?.some(
+      (f) => f.category === 'Billing' && f.available
+    ),
+    hasScheduling: s.data.general_features?.some(
+      (f) => f.category === 'Scheduling' && f.available
+    ),
+    practiceManagementScore: 0,
+  }))
+  .map((s) => ({
+    ...s,
+    practiceManagementScore:
+      (s.hasEPrescribe ? 2 : 0) +
+      (s.hasBilling ? 1 : 0) +
+      (s.hasScheduling ? 1 : 0) +
+      s.ketamineFeatureCount,
+  }))
+  .sort((a, b) => b.practiceManagementScore - a.practiceManagementScore);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Psychiatry Practice Management Software 2026',
+  description: `Compare ${allSoftware.length} practice management systems for psychiatry practices. Scheduling, billing, e-prescribing, and patient management.`,
+  url: 'https://ketaminesoftware.com/psychiatry-practice-management-software/',
+};
+---
+
+<BaseLayout
+  title="Psychiatry Practice Management Software 2026 - Complete Guide"
+  description={`Compare ${allSoftware.length} practice management systems for psychiatry practices. All-in-one scheduling, billing, e-prescribing (EPCS), and patient management.`}
+  jsonLd={jsonLd}
+>
+  <!-- Breadcrumb -->
+  <nav class="border-b border-slate-200 bg-slate-50 px-4 py-3 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <ol class="flex items-center gap-2 text-sm">
+        <li>
+          <a href="/" class="text-slate-500 hover:text-slate-700">Home</a>
+        </li>
+        <li class="text-slate-400">/</li>
+        <li class="text-slate-900">Psychiatry Practice Management Software</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-slate-900 to-slate-800 px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+        Psychiatry Practice Management Software
+      </h1>
+      <p class="mt-6 text-xl text-slate-300">
+        All-in-one software for running a psychiatry practice: scheduling, billing, e-prescribing, and clinical documentation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Requirements -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <div class="prose prose-slate max-w-none">
+        <h2>Running a Psychiatry Practice</h2>
+        <p>
+          Psychiatry practices face unique operational challenges that require specialized software:
+        </p>
+        <ul>
+          <li><strong>Complex scheduling</strong> - Mix of 15-minute med checks and longer therapy sessions</li>
+          <li><strong>Prior authorizations</strong> - Many psychiatric medications require PA, especially for branded drugs</li>
+          <li><strong>E-prescribing compliance</strong> - EPCS requirements for controlled substances in most states</li>
+          <li><strong>Insurance complexity</strong> - Mental health carve-outs, multiple payer contracts</li>
+          <li><strong>Patient tracking</strong> - Medication adherence, appointment compliance, outcome measures</li>
+        </ul>
+        <p>
+          The best psychiatry practice management software handles all of this while remaining intuitive enough for small practices.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Matrix -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-bold text-slate-900">Feature Comparison</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full border-collapse text-sm">
+          <thead>
+            <tr class="border-b border-slate-200 bg-white">
+              <th class="py-3 pr-4 text-left font-semibold text-slate-900">Software</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Scheduling</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Billing/RCM</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">E-Prescribe</th>
+              <th class="px-4 py-3 text-center font-semibold text-slate-900">Telehealth</th>
+              <th class="pl-4 py-3 text-left font-semibold text-slate-900">Price</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 bg-white">
+            {sortedSoftware.slice(0, 12).map((s) => (
+              <tr class="hover:bg-slate-50">
+                <td class="py-3 pr-4">
+                  <a href={`/software/${s.slug}/`} class="font-medium text-slate-900 hover:text-teal-600">
+                    {s.name}
+                  </a>
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.hasScheduling ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.hasBilling ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.hasEPrescribe ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="px-4 py-3 text-center">
+                  {s.general_features?.some(f => f.feature.toLowerCase().includes('telehealth') && f.available) ? (
+                    <span class="text-teal-600">✓</span>
+                  ) : (
+                    <span class="text-slate-300">-</span>
+                  )}
+                </td>
+                <td class="py-3 pl-4 text-slate-600">
+                  {s.pricing.starting_price ? `$${s.pricing.starting_price}/mo` : 'Contact'}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- All Software Grid -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <h2 class="text-2xl font-bold text-slate-900">All Practice Management Solutions</h2>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {sortedSoftware.map((software) => (
+          <SoftwareCard
+            name={software.name}
+            slug={software.slug}
+            description={software.description}
+            logo={software.logo}
+            startingPrice={software.pricing.starting_price}
+            currency={software.pricing.currency}
+            pricingModel={software.pricing.model}
+            hasFreeTrisl={software.pricing.has_free_trial}
+            ketamineFeatureCount={software.ketamineFeatureCount}
+            isKetamineSpecific={software.hasEPrescribe && software.hasBilling}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-slate-50 px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="text-2xl font-bold text-slate-900">Common Questions</h2>
+      <div class="mt-8 space-y-6">
+        <div>
+          <h3 class="font-semibold text-slate-900">What's the difference between EHR and practice management?</h3>
+          <p class="mt-2 text-slate-600">
+            EHR (Electronic Health Records) focuses on clinical documentation - notes, prescriptions, diagnoses. Practice management handles the business side - scheduling, billing, payments. Most modern psychiatry software combines both.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">Do I need EPCS for my psychiatry practice?</h3>
+          <p class="mt-2 text-slate-600">
+            Yes, most states now require electronic prescribing for controlled substances. Since psychiatrists frequently prescribe Schedule II-V medications (stimulants, benzodiazepines), EPCS capability is essential.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-slate-900">What's the best software for a solo psychiatrist?</h3>
+          <p class="mt-2 text-slate-600">
+            For solo psychiatrists, Valant or SimplePractice offer the best balance of features and price. Both include e-prescribing, scheduling, and billing with reasonable monthly costs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-4 py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="text-2xl font-bold text-slate-900">Compare Solutions</h2>
+      <p class="mt-4 text-slate-600">
+        See detailed side-by-side comparisons of any two systems.
+      </p>
+      <a
+        href="/compare/"
+        class="mt-6 inline-flex items-center justify-center rounded-lg bg-teal-600 px-6 py-3 text-base font-medium text-white hover:bg-teal-700"
+      >
+        Compare Software
+      </a>
+    </div>
+  </section>
+</BaseLayout>

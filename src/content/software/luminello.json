@@ -1,0 +1,70 @@
+{
+  "name": "Luminello",
+  "slug": "luminello",
+  "website": "https://www.simplepractice.com/luminello/",
+  "logo": "/images/software/luminello-logo.png",
+  "software_type": "ketamine_compatible",
+  "description": "Psychiatry-focused EHR (now part of SimplePractice) originally designed for prescribers with medication management, e-prescribing, and psychiatric documentation workflows.",
+  "verification": {
+    "status": "verified",
+    "last_verified": "2026-01-25",
+    "verified_by": "manual",
+    "source_urls": ["https://www.simplepractice.com/luminello/"],
+    "notes": "Luminello was acquired by SimplePractice in 2023. Existing customers transitioning to SimplePractice platform. New customers directed to SimplePractice."
+  },
+  "pricing": {
+    "model": "custom",
+    "starting_price": null,
+    "currency": "USD",
+    "has_free_trial": true,
+    "billing_cycle": "monthly",
+    "notes": "Luminello acquired by SimplePractice. New customers should see SimplePractice pricing (starts at $49/mo). Existing Luminello customers contact support for transition options."
+  },
+  "ketamine_features": {
+    "iv_protocols": false,
+    "im_protocols": false,
+    "outcome_tracking": true,
+    "spravato_workflows": false,
+    "patient_rating_scales": true,
+    "ketamine_consent_forms": false,
+    "treatment_series_tracking": false
+  },
+  "general_features": [
+    { "category": "Clinical", "feature": "Psychiatric documentation templates", "available": true },
+    { "category": "Clinical", "feature": "Medication management", "available": true },
+    { "category": "Clinical", "feature": "e-Prescribing with EPCS", "available": true },
+    { "category": "Clinical", "feature": "Treatment planning", "available": true },
+    { "category": "Clinical", "feature": "Patient measurement tools", "available": true },
+    { "category": "Scheduling", "feature": "Online scheduling", "available": true },
+    { "category": "Scheduling", "feature": "Automated reminders", "available": true },
+    { "category": "Billing", "feature": "Insurance billing", "available": true },
+    { "category": "Billing", "feature": "Credit card processing", "available": true },
+    { "category": "Patient Engagement", "feature": "Patient portal", "available": true },
+    { "category": "Patient Engagement", "feature": "Secure messaging", "available": true },
+    { "category": "Telehealth", "feature": "Video appointments", "available": true },
+    { "category": "Compliance", "feature": "HIPAA compliant", "available": true }
+  ],
+  "integrations": [
+    "SimplePractice",
+    "Pharmacies (e-prescribe)",
+    "Labs",
+    "Payment processors"
+  ],
+  "pros": [
+    "Purpose-built for psychiatry and prescribers",
+    "Strong medication management features",
+    "Now backed by SimplePractice resources",
+    "Psychiatric-specific templates",
+    "Patient outcome tracking tools"
+  ],
+  "cons": [
+    "Acquired by SimplePractice - transitioning platform",
+    "Uncertain future as standalone product",
+    "New customers redirected to SimplePractice",
+    "No ketamine-specific workflows",
+    "Limited availability for new sign-ups"
+  ],
+  "ideal_for": "Psychiatrists and psychiatric nurse practitioners seeking medication-focused EHR (consider SimplePractice for new practices).",
+  "last_verified": "2026-01-25",
+  "data_source": "SimplePractice.com/luminello"
+}

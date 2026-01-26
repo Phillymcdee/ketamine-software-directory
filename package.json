@@ -11,9 +11,13 @@
     "validate:software": "node scripts/validation/validate-software.mjs",
     "validate:reviews": "node scripts/validation/validate-aggregated-reviews.mjs",
     "validate:mappings": "node scripts/validation/validate-vendor-mappings.mjs",
-    "aggregate-reviews": "node scripts/aggregate-reviews.mjs"
+    "aggregate-reviews": "node scripts/aggregate-reviews.mjs",
+    "generate": "node scripts/agents/generate/index.mjs",
+    "generate:dry-run": "node scripts/agents/generate/index.mjs --dry-run",
+    "generate:comparisons": "node scripts/agents/generate/index.mjs --type=comparison"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.7.0",
     "@tailwindcss/typography": "^0.5.19",
