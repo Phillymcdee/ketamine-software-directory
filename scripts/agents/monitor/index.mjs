@@ -31,8 +31,8 @@ const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const DRY_RUN = process.argv.includes('--dry-run');
 const UPTIME_ONLY = process.argv.includes('--uptime-only');
 
-// Apify Google SERP Scraper actor (100% success rate, $0.003/query)
-const SERP_ACTOR = 'alizarin_refrigerator-owner/google-serp-scraper';
+// Apify Google SERP Scraper actor (99.7% success rate, $0.0005/result)
+const SERP_ACTOR = 'scraperlink/google-search-results-serp-scraper';
 
 async function main() {
   console.log('MONITOR Agent starting...');
@@ -159,24 +159,17 @@ async function checkKeywordRankings(keywords, site) {
 
 async function checkSingleKeyword(keyword, site) {
   try {
-    // Call Apify Google SERP Scraper
+    // Call Apify Google SERP Scraper (scraperlink)
     const response = await fetch(`https://api.apify.com/v2/acts/${SERP_ACTOR}/run-sync-get-dataset-items?token=${APIFY_TOKEN}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        queries: [keyword],
-        location: 'United States',
-        language: 'en',
-        device: 'desktop',
-        maxResults: 100,
-        includeAds: false,
-        includePAA: false,
-        includeLocalPack: false,
-        includeFeaturedSnippet: false,
-        includeRelatedSearches: false,
-        demoMode: false  // IMPORTANT: must be false for real results
+        keyword: keyword,
+        country: 'US',
+        limit: '100',
+        include_merged: false
       }),
-      signal: AbortSignal.timeout(120000)  // 2 min timeout
+      signal: AbortSignal.timeout(180000)  // 3 min timeout
     });
 
     if (!response.ok) {
@@ -185,17 +178,31 @@ async function checkSingleKeyword(keyword, site) {
       return { position: null, error: 'API error' };
     }
 
-    const results = await response.json();
+    const pages = await response.json();
 
-    // Find our site in organic results
-    const organicResults = results[0]?.organicResults || results[0]?.organic || [];
-    const ourResult = organicResults.find(r =>
+    // Collect all results from all pages
+    const allResults = [];
+    for (const page of pages) {
+      if (page.results) {
+        // Calculate absolute position (page results are 1-10 per page)
+        const pageOffset = (page.page_number - 1) * 10;
+        page.results.forEach((r, idx) => {
+          allResults.push({
+            ...r,
+            absolutePosition: pageOffset + (r.position || idx + 1)
+          });
+        });
+      }
+    }
+
+    // Find our site in results
+    const ourResult = allResults.find(r =>
       r.url && r.url.includes(site)
     );
 
     if (ourResult) {
       return {
-        position: ourResult.position || ourResult.rank,
+        position: ourResult.absolutePosition,
         url: ourResult.url,
         title: ourResult.title
       };
