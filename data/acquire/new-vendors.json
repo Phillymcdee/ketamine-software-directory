@@ -1,91 +1,5 @@
 [
   {
-    "name": "AdvancedMD",
-    "slug": "advancedmd",
-    "website": "https://www.advancedmd.com",
-    "logo": "/images/software/advancedmd-logo.png",
-    "software_type": "ketamine_compatible",
-    "description": "Cloud-based EHR and practice management for medical practices including behavioral health",
-    "pricing": {
-      "model": "custom",
-      "starting_price": null,
-      "currency": "USD",
-      "has_free_trial": false,
-      "billing_cycle": "monthly",
-      "notes": "Contact for pricing"
-    },
-    "verification": {
-      "status": "needs_review",
-      "last_verified": "2026-01-25",
-      "verified_by": "agent",
-      "source_urls": [
-        "https://www.advancedmd.com"
-      ],
-      "notes": "Auto-discovered. Found 5 psychiatry/behavioral health mentions - compatible with mental health practices"
-    },
-    "ketamine_features": {
-      "iv_protocols": false,
-      "im_protocols": false,
-      "outcome_tracking": false,
-      "spravato_workflows": false,
-      "patient_rating_scales": false,
-      "ketamine_consent_forms": false,
-      "treatment_series_tracking": false
-    },
-    "general_features": [],
-    "integrations": [],
-    "pros": [],
-    "cons": [
-      "Auto-discovered - requires manual verification"
-    ],
-    "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
-    "data_source": "G2 Behavioral Health EHR category"
-  },
-  {
-    "name": "DrChrono",
-    "slug": "drchrono",
-    "website": "https://www.drchrono.com",
-    "logo": "/images/software/drchrono-logo.png",
-    "software_type": "general_ehr",
-    "description": "EHR and medical billing platform with customizable templates for various specialties",
-    "pricing": {
-      "model": "custom",
-      "starting_price": null,
-      "currency": "USD",
-      "has_free_trial": false,
-      "billing_cycle": "monthly",
-      "notes": "Contact for pricing"
-    },
-    "verification": {
-      "status": "needs_review",
-      "last_verified": "2026-01-25",
-      "verified_by": "agent",
-      "source_urls": [
-        "https://www.drchrono.com"
-      ],
-      "notes": "Auto-discovered. No ketamine or psychiatry-specific evidence found"
-    },
-    "ketamine_features": {
-      "iv_protocols": false,
-      "im_protocols": false,
-      "outcome_tracking": false,
-      "spravato_workflows": false,
-      "patient_rating_scales": false,
-      "ketamine_consent_forms": false,
-      "treatment_series_tracking": false
-    },
-    "general_features": [],
-    "integrations": [],
-    "pros": [],
-    "cons": [
-      "Auto-discovered - requires manual verification"
-    ],
-    "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
-    "data_source": "G2 Behavioral Health EHR category"
-  },
-  {
     "name": "Kareo",
     "slug": "kareo",
     "website": "https://www.kareo.com",
@@ -102,7 +16,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.kareo.com"
@@ -125,7 +39,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   },
   {
@@ -145,7 +59,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.nextgen.com"
@@ -168,7 +82,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   },
   {
@@ -188,7 +102,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.athenahealth.com"
@@ -211,93 +125,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
-    "data_source": "G2 Behavioral Health EHR category"
-  },
-  {
-    "name": "TheraNest",
-    "slug": "theranest",
-    "website": "https://www.theranest.com",
-    "logo": "/images/software/theranest-logo.png",
-    "software_type": "ketamine_compatible",
-    "description": "Practice management software for mental health professionals",
-    "pricing": {
-      "model": "custom",
-      "starting_price": null,
-      "currency": "USD",
-      "has_free_trial": false,
-      "billing_cycle": "monthly",
-      "notes": "Contact for pricing"
-    },
-    "verification": {
-      "status": "needs_review",
-      "last_verified": "2026-01-25",
-      "verified_by": "agent",
-      "source_urls": [
-        "https://www.theranest.com"
-      ],
-      "notes": "Auto-discovered. Found 114 psychiatry/behavioral health mentions - compatible with mental health practices"
-    },
-    "ketamine_features": {
-      "iv_protocols": false,
-      "im_protocols": false,
-      "outcome_tracking": false,
-      "spravato_workflows": false,
-      "patient_rating_scales": false,
-      "ketamine_consent_forms": false,
-      "treatment_series_tracking": false
-    },
-    "general_features": [],
-    "integrations": [],
-    "pros": [],
-    "cons": [
-      "Auto-discovered - requires manual verification"
-    ],
-    "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
-    "data_source": "G2 Behavioral Health EHR category"
-  },
-  {
-    "name": "Luminello",
-    "slug": "luminello",
-    "website": "https://luminello.com",
-    "logo": "/images/software/luminello-logo.png",
-    "software_type": "ketamine_compatible",
-    "description": "EHR designed specifically for psychiatrists and psychiatric nurse practitioners",
-    "pricing": {
-      "model": "custom",
-      "starting_price": null,
-      "currency": "USD",
-      "has_free_trial": false,
-      "billing_cycle": "monthly",
-      "notes": "Contact for pricing"
-    },
-    "verification": {
-      "status": "needs_review",
-      "last_verified": "2026-01-25",
-      "verified_by": "agent",
-      "source_urls": [
-        "https://luminello.com"
-      ],
-      "notes": "Auto-discovered. Found 6 psychiatry/behavioral health mentions - compatible with mental health practices"
-    },
-    "ketamine_features": {
-      "iv_protocols": false,
-      "im_protocols": false,
-      "outcome_tracking": false,
-      "spravato_workflows": false,
-      "patient_rating_scales": false,
-      "ketamine_consent_forms": false,
-      "treatment_series_tracking": false
-    },
-    "general_features": [],
-    "integrations": [],
-    "pros": [],
-    "cons": [
-      "Auto-discovered - requires manual verification"
-    ],
-    "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   },
   {
@@ -317,7 +145,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.icanotes.com"
@@ -340,7 +168,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   },
   {
@@ -360,7 +188,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.elationhealth.com"
@@ -383,7 +211,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   },
   {
@@ -403,7 +231,7 @@
     },
     "verification": {
       "status": "needs_review",
-      "last_verified": "2026-01-25",
+      "last_verified": "2026-01-29",
       "verified_by": "agent",
       "source_urls": [
         "https://www.qualifacts.com"
@@ -426,7 +254,7 @@
       "Auto-discovered - requires manual verification"
     ],
     "ideal_for": "Awaiting verification",
-    "last_verified": "2026-01-25",
+    "last_verified": "2026-01-29",
     "data_source": "G2 Behavioral Health EHR category"
   }
 ]
